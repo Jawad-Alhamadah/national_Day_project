@@ -120,9 +120,9 @@ function mousedownHandler (){
         ctx2.beginPath()
     }
 
-canvasSetup_2.addEventListener("mousedown",event=> mousedownHandler()) 
+canvasSetup_2.addEventListener("mousedown",event=> mousedownHandler(event)) 
 
-canvasSetup_2.addEventListener("touchstart",event=> mousedownHandler()) 
+canvasSetup_2.addEventListener("touchstart",event=> mousedownHandler(event)) 
 
 
 
