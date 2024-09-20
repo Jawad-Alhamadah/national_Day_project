@@ -110,11 +110,29 @@ brush_range.addEventListener("mousemove",e=>{
 })
 
 
-function mousedownHandler (){
-    console.log("inside canv click")
+function mousedownHandler (event){
+   
+//   var touch = e.touches[0];
+//   console.log(event.touches[0])
+
     mouseDown=true
+    if(event.touches){
+        const rect = event.target.getBoundingClientRect();
+        const x_rel = event.touches[0].clientX - rect.left;
+        const y_rel = event.touches[0].clientY - rect.top;
+        
+        const x = Math.round((x_rel * event.target.width) / rect.width);
+        const y = Math.round((y_rel * event.target.height) / rect.height);
+
+        guessX = parseInt(x );
+        guessY = parseInt(y);
+    }
+    else{
         guessX = parseInt(event.offsetX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
         guessY = parseInt(event.offsetY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
+    }
+        // guessX = parseInt(event.touches[0].pageX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
+        // guessY = parseInt(event.touches[0].pageY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
         console.log(`coords:${guessX}x${guessY}`);
         ctx2.moveTo(guessX,guessY)
         ctx2.beginPath()
@@ -129,8 +147,22 @@ canvasSetup_2.addEventListener("touchstart",event=> mousedownHandler(event))
 function mousemoveHandle(event){
     
     if(mouseDown){
-        guessX = parseInt(event.offsetX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
-        guessY = parseInt(event.offsetY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
+        if(event.touches){
+            const rect = event.target.getBoundingClientRect();
+            const x_rel = event.touches[0].clientX - rect.left;
+            const y_rel = event.touches[0].clientY - rect.top;
+            
+            const x = Math.round((x_rel * event.target.width) / rect.width);
+            const y = Math.round((y_rel * event.target.height) / rect.height);
+    
+            guessX = parseInt(x );
+            guessY = parseInt(y);
+        }
+        else{
+            guessX = parseInt(event.offsetX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
+            guessY = parseInt(event.offsetY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
+        }
+      
         console.log(`coords:${guessX}x${guessY}`);
        // ctx.strokeRect(guessX,guessY,10,10);
        ctx2.lineTo(guessX, guessY);
@@ -216,8 +248,8 @@ function mouseupHandle(event){
 //         console.log(e)
 //     })
 }
-canvasSetup_2.addEventListener("mouseup",event =>mouseupHandle())
-canvasSetup_2.addEventListener("touchend",event =>mouseupHandle())
+canvasSetup_2.addEventListener("mouseup",event =>mouseupHandle(event))
+canvasSetup_2.addEventListener("touchend",event =>mouseupHandle(event))
 
 window.addEventListener("resize",e=>{
 
@@ -331,3 +363,22 @@ function drawImageScaled(img, ctx) {
     ctx.drawImage(img, 0,0, img.width, img.height,
                        centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
  }
+
+
+
+ // Prevent scrolling when touching the canvas
+document.body.addEventListener("touchstart", function (e) {
+    if (e.target == canvasSetup_2) {
+      e.preventDefault();
+    }
+  }, false);
+  document.body.addEventListener("touchend", function (e) {
+    if (e.target == canvasSetup_2) {
+      e.preventDefault();
+    }
+  }, false);
+  document.body.addEventListener("touchmove", function (e) {
+    if (e.target == canvasSetup_2) {
+      e.preventDefault();
+    }
+  }, false)

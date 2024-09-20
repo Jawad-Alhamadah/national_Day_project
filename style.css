@@ -47,6 +47,7 @@
   
     background-color: rgb(220, 223, 225);
     cursor:crosshair;
+    touch-action: none;
 }
  
 
