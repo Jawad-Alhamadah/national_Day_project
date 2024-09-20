@@ -11,6 +11,9 @@ const colors = document.getElementById("colors")
 const color_picker = document.getElementById("color-picker")
 const brush_range = document.getElementById("brush-size-range")
 let mouseDown = false
+const home_nav_button = document.getElementById("home-nav-btn")
+
+home_nav_button.onclick= ()=> window.location = "home.html"
 
 ctx2.strokeStyle= "black"
 ctx2.strokeStyle= color_picker.value
