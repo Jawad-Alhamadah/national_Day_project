@@ -59,14 +59,28 @@ setTimeout(()=>{
 
 //    ctx.drawImage(img,0,0,canvasSetup.width,canvasSetup.height)
 //    ctx2.drawImage(img,0,0,canvasSetup_2.width,canvasSetup_2.height)
-canvasSetup_2.width=window.innerWidth*0.45
-canvasSetup.width=window.innerWidth*0.45
+    canvasSetup_2.width=window.innerWidth*0.45
+    canvasSetup.width=window.innerWidth*0.45
 
-canvasSetup_2.height=window.innerHeight*0.85
-canvasSetup.height=window.innerHeight*0.85
-   
-   drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
-   drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    canvasSetup_2.height=window.innerHeight*0.85
+    canvasSetup.height=window.innerHeight*0.85
+ 
+    if(window.innerWidth<=650){
+        canvasSetup_2.width=window.innerWidth*0.90
+        canvasSetup.width=window.innerWidth*0.90
+    
+        canvasSetup_2.height=window.innerHeight*0.40
+        canvasSetup.height=window.innerHeight*0.40
+    }
+    
+
+// ctx.drawImage(img, 0,0, img.width, img.height, 0,0,img.width*ratio, img.height*ratio);
+  //  drawImageScaled(img,ctx)
+    // drawImageProp(ctx,img,0,0,canvasSetup.width/2,canvasSetup.height/2,0,0)
+    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width/2,canvasSetup_2.height/2,0,0)
+    drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
+    drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+
 
 },2000)
 
@@ -93,7 +107,7 @@ brush_range.addEventListener("mousemove",e=>{
 })
 
 
-canvasSetup_2.addEventListener("mousedown",event=> {
+function mousedownHandler (){
     console.log("inside canv click")
     mouseDown=true
         guessX = parseInt(event.offsetX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
@@ -102,11 +116,16 @@ canvasSetup_2.addEventListener("mousedown",event=> {
         ctx2.moveTo(guessX,guessY)
         ctx2.beginPath()
     }
-) 
 
-canvasSetup_2.addEventListener("mousemove",event =>{
-    let isLeftClick = event.which == 1 
-    if(isLeftClick && mouseDown){
+canvasSetup_2.addEventListener("mousedown",event=> mousedownHandler()) 
+
+canvasSetup_2.addEventListener("touchstart",event=> mousedownHandler()) 
+
+
+
+function mousemoveHandle(event){
+    
+    if(mouseDown){
         guessX = parseInt(event.offsetX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
         guessY = parseInt(event.offsetY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
         console.log(`coords:${guessX}x${guessY}`);
@@ -117,11 +136,15 @@ canvasSetup_2.addEventListener("mousemove",event =>{
     //    ctx2.fillRect(guessX,guessY,10,10)
     }
 
-})
+}
+
+
+canvasSetup_2.addEventListener("mousemove",event =>mousemoveHandle(event))
+canvasSetup_2.addEventListener("touchmove",event =>mousemoveHandle(event))
 
 
 
-canvasSetup_2.addEventListener("mouseup",event =>{
+function mouseupHandle(event){
     mouseDown=false
   
     
@@ -189,7 +212,9 @@ canvasSetup_2.addEventListener("mouseup",event =>{
 //     .catch(e=>{
 //         console.log(e)
 //     })
-})
+}
+canvasSetup_2.addEventListener("mouseup",event =>mouseupHandle())
+canvasSetup_2.addEventListener("touchend",event =>mouseupHandle())
 
 window.addEventListener("resize",e=>{
 
@@ -224,6 +249,14 @@ window.addEventListener("resize",e=>{
     //  ctx2.drawImage(img,0,0,canvasSetup_2.width,canvasSetup_2.height)
     canvasSetup_2.width=window.innerWidth*0.45
     canvasSetup.width=window.innerWidth*0.45
+
+    if(window.innerWidth<=650){
+        canvasSetup_2.width=window.innerWidth*0.90
+        canvasSetup.width=window.innerWidth*0.90
+    
+        canvasSetup_2.height=window.innerHeight*0.40
+        canvasSetup.height=window.innerHeight*0.40
+    }
 
     drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
     drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
@@ -279,3 +312,19 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
     // fill image in dest. rectangle
     ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
 }
+
+
+
+function drawImageScaled(img, ctx) {
+    var canvas = ctx.canvas ;
+    var hRatio = canvas.width  / img.width    ;
+    var vRatio =  canvas.height / img.height  ;
+    var ratio  = Math.min ( hRatio, vRatio );
+    var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+    var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+  
+
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.drawImage(img, 0,0, img.width, img.height,
+                       centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
+ }
