@@ -1,0 +1,277 @@
+
+
+
+.navbar-bg-darkgreen{
+    background-color:#1d3e03 !important
+}
+
+.navbar-bg-darkgreen a{
+   color: #d8eeb9 !important;
+   font-size: 1.2em;
+   margin-left: 0.5em;
+   padding: 0.7em;
+   transition: 0.5s;
+}
+
+.navbar-bg-darkgreen a:hover{
+ color: green;
+ background-color: #446f08;
+ transform: scale(1.1);
+ }
+/* 
+ .score-img img{
+     height:200px !important;
+     width: 200px !important;
+     border: 2px solid black;
+     
+ } */
+
+ .username-icon img{
+    height:70px !important;
+    width: 70px !important;
+ }
+
+
+ .comment-div{
+    padding-left: 1em;
+ }
+ /* .main-card{
+    width: 80em;
+ }
+ */
+
+ /* .main-color{
+    background-color: #212529 !important;
+   
+
+
+ }
+
+ .secondary-color{
+    background-color: #253c3c !important;
+}
+
+*/
+ .accent-text-color{
+    color: #047622 !important;
+ } 
+
+ .card-body{
+    font-size: 2em;
+    border:5px solid #d8eeb9;
+ }
+
+ .comment{
+    font-size: 0.5em !important;
+ }
+
+ .card{
+    border: 0px;
+ }
+
+
+
+
+
+ @media (max-width:319px) {
+    .main-card{
+        width: 24em;
+     }
+    
+     .score-img img{
+        height:80px !important;
+        width: 80px !important;
+        border: 2px solid black;
+        
+    }
+
+    .card-body{
+        font-size: 1.4em;
+      
+     }
+}
+
+
+ @media (min-width:320px) {
+    .main-card{
+        width: 24em;
+     }
+    
+     .score-img img{
+        height:80px !important;
+        width: 80px !important;
+        border: 2px solid black;
+        
+    }
+
+    .card-body{
+        font-size: 1.4em;
+      
+     }
+}
+
+
+
+ @media (min-width:440px) {
+    .main-card{
+        width: 25em;
+     }
+     .score-img img{
+        height:80px !important;
+        width: 80px !important;
+        border: 2px solid black;
+        
+    }
+
+    .card-body{
+        font-size: 1.4em;
+      
+     }
+
+     .username-icon img{
+        height:60px !important;
+        width: 60px !important;
+     }
+    
+}
+
+
+
+ @media (min-width:500px) {
+    .main-card{
+        width: 30em;
+     }
+     .score-img img{
+        height:110px !important;
+        width: 110px !important;
+        border: 2px solid black;
+        
+    }
+    
+    .card-body{
+        font-size: 1.4em;
+      
+     }
+
+     .username-icon img{
+        height:60px !important;
+        width: 60px !important;
+     }
+    
+}
+
+
+
+ @media (min-width:700px) {
+    .main-card{
+        width: 40em;
+     }
+    
+     .score-img img{
+        height:150px !important;
+        width: 150px !important;
+        border: 2px solid black;
+        
+    }
+
+    .username-icon img{
+        height:100px !important;
+        width: 100px !important;
+     }
+}
+
+
+ @media (min-width:860px) {
+    .main-card{
+        width: 50em;
+     }
+    
+     .score-img img{
+        height:180px !important;
+        width: 180px !important;
+        border: 2px solid black;
+        
+    }
+
+    .username-icon img{
+        height:100px !important;
+        width: 100px !important;
+     }
+}
+
+
+
+
+ @media (min-width:990px) {
+    .main-card{
+        width: 58em;
+     }
+     .score-img img{
+        height:200px !important;
+        width: 200px !important;
+        border: 2px solid black;
+        
+    }
+    
+    .username-icon img{
+        height:100px !important;
+        width: 100px !important;
+        
+     }
+
+     .card-body{
+        font-size: 2em;
+      
+     }
+}
+
+ 
+
+ @media (min-width:1105px) {
+    .main-card{
+        width: 63em;
+     }
+     .score-img img{
+        height:200px !important;
+        width: 200px !important;
+        border: 2px solid black;
+        
+    }
+    
+
+    .username-icon img{
+        height:100px !important;
+        width: 100px !important;
+     }
+
+     .card-body{
+        font-size: 2em;
+      
+     }
+}
+
+
+
+@media (min-width:1300px) {
+    .main-card{
+        width: 80em;
+     }
+     .score-img img{
+        height:200px !important;
+        width: 200px !important;
+        border: 2px solid black;
+        
+    }
+    
+
+    
+ .username-icon img{
+    height:100px !important;
+    width: 100px !important;
+ }
+
+ .card-body{
+    font-size: 2em;
+  
+ }
+}

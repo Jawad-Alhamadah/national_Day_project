@@ -597,11 +597,17 @@ function createHtmlTree() {
     let pray_btn = document.getElementById("pray-btn")
 
     pray_btn.addEventListener("click",e=> {
-        createPrayer("")
+        let a = document.createElement("a")
+       a.setAttribute("href","leaderboard.html")
+       a.click()
+
     })
     
     weather_btn.addEventListener("click",(e)=>{
-        createWeatherPage("","Riyadh")
+       // createWeatherPage("","Riyadh")
+       let a = document.createElement("a")
+       a.setAttribute("href","paint.html")
+       a.click()
     })
     
     pray_btn.addEventListener("mouseover",e=>{

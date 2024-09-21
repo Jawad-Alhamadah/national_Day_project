@@ -13,7 +13,8 @@ const brush_range = document.getElementById("brush-size-range")
 let mouseDown = false
 const home_nav_button = document.getElementById("home-nav-btn")
 const submit_nav_button = document.getElementById("submit-nav-btn")
-
+let mode = "blitz"
+let username= "guest"
 
 
 ctx2.strokeStyle = "black"
@@ -128,11 +129,12 @@ submit_nav_button.addEventListener("click", e => {
                         fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                             method: 'POST',
                             body: JSON.stringify({
-                                username: 'guest',
+                                username: username,
                                 message:result.value,
                                 userId:0,
                                 imgUrl: fileUrl,
-                                accurecy: accurecy
+                                accurecy: accurecy,
+                                mode:mode
                             }),
                             headers: {
                                 'Content-type': 'application/json; charset=UTF-8',
