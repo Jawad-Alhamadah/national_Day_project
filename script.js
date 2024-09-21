@@ -398,7 +398,12 @@ canvasSetup_2.addEventListener("mouseup", event => mouseupHandle(event))
 canvasSetup_2.addEventListener("touchend", event => mouseupHandle(event))
 
 window.addEventListener("resize", e => {
+ 
+    let temp_img =  new Image();
+    temp_img.src = canvasSetup_2.toDataURL('image/png');
 
+
+   
     canvasSetup_2.width = window.innerWidth * 0.45
     canvasSetup.width = window.innerWidth * 0.45
 
@@ -410,8 +415,11 @@ window.addEventListener("resize", e => {
         canvasSetup.height = window.innerHeight * 0.42
     }
 
-    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    temp_img.onload = function (){
+        drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+        drawImageProp(ctx2,temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    }
+   
 
 })
 
