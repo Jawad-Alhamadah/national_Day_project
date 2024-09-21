@@ -1,3 +1,6 @@
+let board = document.getElementById("board-conatiner")
+
+
 function createCard(username,score,imgUrl,message) {
     // Create main card body div
     const cardBody = document.createElement('div');
@@ -39,11 +42,11 @@ function createCard(username,score,imgUrl,message) {
     
     // Create score and image div
     const scoreImgDiv = document.createElement('div');
-    scoreImgDiv.classList.add('col-3', 'col-lg-5', 'score-img');
+    scoreImgDiv.classList.add('col-3', 'col-lg-5', 'score-img',"d-grid","justify-content-center","mb-3");
     
     // Create score text div
     const scoreTextDiv = document.createElement('div');
-    scoreTextDiv.classList.add('accent-text-color');
+    scoreTextDiv.classList.add('accent-text-color',"text-center");
     scoreTextDiv.textContent = score+"/100";
     
     // Create img element for score
@@ -63,8 +66,9 @@ function createCard(username,score,imgUrl,message) {
     // Append row to the card body
     cardBody.appendChild(rowDiv);
     
+    board.appendChild(cardBody)
     // Return the complete card body element
-    return cardBody;
+   // return cardBody;
 }
 
 
@@ -72,6 +76,7 @@ function createCard(username,score,imgUrl,message) {
 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image?mode=blitz")
 .then(res=>res.json())
 .then(data=>{
-    console.log(data)
-    createCard(data.username,data.score,data.imgUrl,data.message)
+    
+     data.map(data=>createCard(data.username,data.accurecy,data.imgUrl,data.message))
+  //  createCard(data.username,data.score,data.imgUrl,data.message)
 })

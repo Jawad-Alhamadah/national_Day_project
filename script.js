@@ -13,6 +13,7 @@ const brush_range = document.getElementById("brush-size-range")
 let mouseDown = false
 const home_nav_button = document.getElementById("home-nav-btn")
 const submit_nav_button = document.getElementById("submit-nav-btn")
+const leaderboard_btn = document.getElementById("leaderboard-btn")
 let mode = "blitz"
 let username= "guest"
 
@@ -113,47 +114,60 @@ submit_nav_button.addEventListener("click", e => {
                 //     imageUrl: result.value.avatar_url
                 //   });
                 // }
-
-
-                canvasSetup_2.toBlob(blob => {
-
-                    const onFileSelected = async event => {
-                        const uploadManager = new Bytescale.UploadManager({
-                            apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
-                        });
-                        const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-                        console.log("Path: "+ filePath)
-                        console.log("Url: "+ fileUrl)
-                        //  alert(`File uploaded:\n${fileUrl}`);
+                if(result.isDismissed && result.dismiss == "cancel"){
+                    Swal.fire({
+                        title: "Post Cancelled",
                        
-                        fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                username: username,
-                                message:result.value,
-                                userId:0,
-                                imgUrl: fileUrl,
-                                accurecy: accurecy,
-                                mode:mode
-                            }),
-                            headers: {
-                                'Content-type': 'application/json; charset=UTF-8',
-                            },
-                        })
-                            .then(res => res.json())
-                            .then(data => { 
-                                console.log(data)
-                                
-                                Swal.fire({
-                                    title: "Image posted To leaderboard!",
-                                    text: "Check out the leaderboard to see your post",
-                                    icon: "success"
-                                  });
-                             })
+                        icon:"error",
+                      
+                        confirmButtonText: "Ok",
+                 
+                    })
 
-                    }
-                    onFileSelected()
-                })
+                }
+                if(result.isConfirmed){
+                    canvasSetup_2.toBlob(blob => {
+
+                        const onFileSelected = async event => {
+                            const uploadManager = new Bytescale.UploadManager({
+                                apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
+                            });
+                            const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
+                            console.log("Path: "+ filePath)
+                            console.log("Url: "+ fileUrl)
+                            //  alert(`File uploaded:\n${fileUrl}`);
+                           
+                            fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    username: username,
+                                    message:result.value,
+                                    userId:0,
+                                    imgUrl: fileUrl,
+                                    accurecy: accurecy,
+                                    mode:mode
+                                }),
+                                headers: {
+                                    'Content-type': 'application/json; charset=UTF-8',
+                                },
+                            })
+                                .then(res => res.json())
+                                .then(data => { 
+                                    console.log(data)
+                                    
+                                    Swal.fire({
+                                        title: "Image posted To leaderboard!",
+                                        text: "Check out the leaderboard to see your post",
+                                        icon: "success"
+                                      });
+                                 })
+    
+                        }
+                        onFileSelected()
+                    })
+                }
+
+               
 
                     // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
                     //     .then(res => res.json())
@@ -485,3 +499,9 @@ document.body.addEventListener("touchmove", function (e) {
         e.preventDefault();
     }
 }, false)
+
+leaderboard_btn.addEventListener("click",e=>{
+    let a = document.createElement("a")
+    a.setAttribute("href","leaderboard.html")
+    a.click()
+})
