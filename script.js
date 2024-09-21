@@ -1,4 +1,4 @@
- 
+
 
 const canvasSetup = document.getElementById("myCanvas");
 const canvasSetup_2 = document.getElementById("myCanvas2");
@@ -6,26 +6,100 @@ const pixelit_canv = document.getElementById("pixelitcanvas")
 const ctx = canvasSetup.getContext("2d");
 const img = document.getElementById("my-img")
 
-const ctx2=  canvasSetup_2.getContext("2d");
+const ctx2 = canvasSetup_2.getContext("2d");
 const colors = document.getElementById("colors")
 const color_picker = document.getElementById("color-picker")
 const brush_range = document.getElementById("brush-size-range")
 let mouseDown = false
 const home_nav_button = document.getElementById("home-nav-btn")
+const submit_nav_button = document.getElementById("submit-nav-btn")
 
-home_nav_button.onclick= ()=> window.location = "home.html"
 
-ctx2.strokeStyle= "black"
-ctx2.strokeStyle= color_picker.value
-color_picker.value= "black"
 
-color_picker.onchange = function(){
-    ctx2.strokeStyle= color_picker.value
+ctx2.strokeStyle = "black"
+ctx2.strokeStyle = color_picker.value
+color_picker.value = "black"
+
+color_picker.onchange = function () {
+    ctx2.strokeStyle = color_picker.value
     console.log(color_picker.value)
 }
 ctx.strokeStyle = "black";
 ctx.lineWidth = 3;
 
+brush_range.value = 1
+
+
+
+
+submit_nav_button.addEventListener("click", e => {
+
+    let counter = 0
+
+    imgData = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
+    imgData2 = ctx2.getImageData(0, 0, canvasSetup_2.width, canvasSetup_2.height);
+
+    for (let i = 0; i < imgData.data.length; i++) {
+        if (imgData.data[i] === imgData2.data[i])
+            counter++
+        else {
+            // counter--
+        }
+    } // <---- measured code goes between startTime and endTime
+    let accurecy = Math.floor(((counter / imgData.data.length) * 100))
+    if (accurecy < 0) accurecy = 0
+    Swal.fire({
+        title: "Your Accurecy is: ",
+        text: accurecy + "/100",
+        icon: accurecy > 50 ? "success" : "error",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#55cc14",
+        cancelButtonText: "Try another image",
+        confirmButtonText: "Post it on the Board"
+    }).then((result) => {
+        console.log(result)
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+
+        if (result.isDismissed) {
+            // Swal.fire({
+            //   title: "Cancelled!",
+            //   text: "Your file has been deleted.",
+            //   icon: "success"
+            // });
+            canvasSetup.classList.add("zero-opacity")
+            canvasSetup_2.classList.add("zero-opacity")
+            img.setAttribute("src", "Pixel.jpg")
+            setTimeout(() => {
+
+                drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+                // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+                canvasSetup.classList.remove("zero-opacity")
+                canvasSetup_2.classList.remove("zero-opacity")
+            }, 1700)
+
+
+        }
+    });
+})
+
+document.getElementById("save-icon").onclick = () => {
+    let a = document.createElement("a")
+    let uri = canvasSetup_2.toDataURL("image/jpeg", 1.0)
+    a.href = uri
+    a.download = Date.now() + "_image.jpeg"
+    a.click()
+}
+
+
+document.getElementById("brush-size").textContent = brush_range.value
+home_nav_button.onclick = () => window.location = "home.html"
 
 const essentialColors = [
     "#FF5733", "#FFBD33", "#DBFF33", "#75FF33", "#33FF57",
@@ -40,261 +114,189 @@ const essentialColors = [
 ];
 
 
-for(let i =0 ; i <40; i ++){
+for (let i = 0; i < 40; i++) {
     let div = document.createElement("div")
-    div.classList.add("color-div","card","d-flex",'align-self-center')
-    div.style.backgroundColor=essentialColors[i]
+    div.classList.add("color-div", "card", "d-flex", 'align-self-center')
+    div.style.backgroundColor = essentialColors[i]
     colors.appendChild(div)
 
-    div.addEventListener("click", e=>{
-        ctx2.strokeStyle= div.style.backgroundColor
-        color_picker.value=ctx2.strokeStyle
+    div.addEventListener("click", e => {
+        ctx2.strokeStyle = div.style.backgroundColor
+        color_picker.value = ctx2.strokeStyle
     })
 }
 
 
-
-
-setTimeout(()=>{
+{
     // if(pixelit_canv.width>canvasSetup.width){
-       
+
     // }
 
-//    ctx.drawImage(img,0,0,canvasSetup.width,canvasSetup.height)
-//    ctx2.drawImage(img,0,0,canvasSetup_2.width,canvasSetup_2.height)
-    canvasSetup_2.width=window.innerWidth*0.45
-    canvasSetup.width=window.innerWidth*0.45
+    //    ctx.drawImage(img,0,0,canvasSetup.width,canvasSetup.height)
+    //    ctx2.drawImage(img,0,0,canvasSetup_2.width,canvasSetup_2.height)
+    canvasSetup_2.width = window.innerWidth * 0.45
+    canvasSetup.width = window.innerWidth * 0.45
 
-    canvasSetup_2.height=window.innerHeight*0.85
-    canvasSetup.height=window.innerHeight*0.85
- 
-    if(window.innerWidth<=650){
-        canvasSetup_2.width=window.innerWidth*0.90
-        canvasSetup.width=window.innerWidth*0.90
-    
-        canvasSetup_2.height=window.innerHeight*0.40
-        canvasSetup.height=window.innerHeight*0.40
+    canvasSetup_2.height = window.innerHeight * 0.85
+    canvasSetup.height = window.innerHeight * 0.85
+
+    if (window.innerWidth <= 650) {
+        canvasSetup_2.width = window.innerWidth * 0.90
+        canvasSetup.width = window.innerWidth * 0.90
+
+        canvasSetup_2.height = window.innerHeight * 0.40
+        canvasSetup.height = window.innerHeight * 0.40
     }
-    
 
-// ctx.drawImage(img, 0,0, img.width, img.height, 0,0,img.width*ratio, img.height*ratio);
-  //  drawImageScaled(img,ctx)
-    // drawImageProp(ctx,img,0,0,canvasSetup.width/2,canvasSetup.height/2,0,0)
-    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width/2,canvasSetup_2.height/2,0,0)
-    drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
-    drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+    //  drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
 
 
-},2000)
-
+}
 guessX = 0; //stores user's click on canvas
 guessY = 0; //stores user's click on canvas
-//canvasSetup.height= window.innerHeight
-// canvasSetup_2.height=window.innerHeight
-
-//  if(window.innerWidth<570){
-//   //  canvasSetup.height= window.innerHeight/4
-//     canvasSetup_2.height=window.innerHeight/4
-//     drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
-//     drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-//  }
 
 let lines = []
 
-// canvasSetup_2.drawImage()
-
-brush_range.addEventListener("mousemove",e=>{
+brush_range.addEventListener("mousemove", e => {
     let brush_size = document.getElementById("brush-size")
-    brush_size.textContent=brush_range.value
+    brush_size.textContent = brush_range.value
     console.log(brush_range.value)
 })
 
 
-function mousedownHandler (event){
-   
-//   var touch = e.touches[0];
-//   console.log(event.touches[0])
+function mousedownHandler(event) {
 
-    mouseDown=true
-    if(event.touches){
+    mouseDown = true
+    if (event.touches) {
         const rect = event.target.getBoundingClientRect();
         const x_rel = event.touches[0].clientX - rect.left;
         const y_rel = event.touches[0].clientY - rect.top;
-        
+
         const x = Math.round((x_rel * event.target.width) / rect.width);
         const y = Math.round((y_rel * event.target.height) / rect.height);
 
-        guessX = parseInt(x );
+        guessX = parseInt(x);
         guessY = parseInt(y);
     }
-    else{
-        guessX = parseInt(event.offsetX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
-        guessY = parseInt(event.offsetY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
+    else {
+        guessX = parseInt(event.offsetX * canvasSetup_2.width / canvasSetup_2.offsetWidth) + 5;
+        guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
     }
-        // guessX = parseInt(event.touches[0].pageX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
-        // guessY = parseInt(event.touches[0].pageY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
-        console.log(`coords:${guessX}x${guessY}`);
-        ctx2.moveTo(guessX,guessY)
-        ctx2.beginPath()
-    }
+    // guessX = parseInt(event.touches[0].pageX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
+    // guessY = parseInt(event.touches[0].pageY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
+    console.log(`coords:${guessX}x${guessY}`);
+    ctx2.moveTo(guessX, guessY)
+    ctx2.beginPath()
+}
 
-canvasSetup_2.addEventListener("mousedown",event=> mousedownHandler(event)) 
+canvasSetup_2.addEventListener("mousedown", event => mousedownHandler(event))
 
-canvasSetup_2.addEventListener("touchstart",event=> mousedownHandler(event)) 
+canvasSetup_2.addEventListener("touchstart", event => mousedownHandler(event))
 
 
 
-function mousemoveHandle(event){
-    
-    if(mouseDown){
-        if(event.touches){
+function mousemoveHandle(event) {
+
+    if (mouseDown) {
+        if (event.touches) {
             const rect = event.target.getBoundingClientRect();
             const x_rel = event.touches[0].clientX - rect.left;
             const y_rel = event.touches[0].clientY - rect.top;
-            
+
             const x = Math.round((x_rel * event.target.width) / rect.width);
             const y = Math.round((y_rel * event.target.height) / rect.height);
-    
-            guessX = parseInt(x );
+
+            guessX = parseInt(x);
             guessY = parseInt(y);
         }
-        else{
-            guessX = parseInt(event.offsetX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
-            guessY = parseInt(event.offsetY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
+        else {
+            guessX = parseInt(event.offsetX * canvasSetup_2.width / canvasSetup_2.offsetWidth) + 5;
+            guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
         }
-      
+
         console.log(`coords:${guessX}x${guessY}`);
-       // ctx.strokeRect(guessX,guessY,10,10);
-       ctx2.lineTo(guessX, guessY);
-      ctx2.lineWidth=10
-       ctx2.stroke();
-    //    ctx2.fillRect(guessX,guessY,10,10)
+        // ctx.strokeRect(guessX,guessY,10,10);
+        ctx2.lineTo(guessX, guessY);
+        ctx2.lineWidth = brush_range.value
+        ctx2.stroke();
+        //    ctx2.fillRect(guessX,guessY,10,10)
     }
 
 }
 
 
-canvasSetup_2.addEventListener("mousemove",event =>mousemoveHandle(event))
-canvasSetup_2.addEventListener("touchmove",event =>mousemoveHandle(event))
+canvasSetup_2.addEventListener("mousemove", event => mousemoveHandle(event))
+canvasSetup_2.addEventListener("touchmove", event => mousemoveHandle(event))
 
 
 
-function mouseupHandle(event){
-    mouseDown=false
-  
-    
-   imgData = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
-   imgData2 = ctx2.getImageData(0, 0, canvasSetup_2.width, canvasSetup_2.height);
+function mouseupHandle(event) {
+    mouseDown = false
 
-    let counter =0;
-   console.log(imgData.data.length)
-   for (let i = 0; i <imgData.data.length; i++){
-        if(imgData.data[i]===imgData2.data[i])
+
+    imgData = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
+    imgData2 = ctx2.getImageData(0, 0, canvasSetup_2.width, canvasSetup_2.height);
+
+    let counter = 0;
+    console.log(imgData.data.length)
+    for (let i = 0; i < imgData.data.length; i++) {
+        if (imgData.data[i] === imgData2.data[i])
             counter++
-        else{
+        else {
             counter--
         }
-   }
-  
-//   canvasSetup_2.toBlob(blob=>{
-
-//     const onFileSelected = async event => {
-//         const uploadManager = new Bytescale.UploadManager({
-//             apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
-//           });
-//           const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-//           console.log(filePath)
-//           alert(`File uploaded:\n${fileUrl}`);
-//     }
-//     onFileSelected()
-   
-
-//   })
-   console.log("counter: " + counter)
-   console.log("Percent: " +((counter/imgData.data.length)*100)+"%" )
-//    canvasSetup_2.toBlob(blob=>{
-//     const formData = new FormData();
-//     formData.append('file', blob, 'image.png');
-//     formData.append("upload_preset","ml_default")
-//     fetch("https://api.cloudinary.com/v1_1/dfyhyddcy/upload",{
-//         method: 'POST',
-//         body:formData ,
-//       headers: {
-//        'Content-type': 'multi-part/form-data',
-//     },
-//       })
-//       .then((response) => response.json())
-//       .then((json) => console.log(json))
-//       .catch(e=>{
-//           console.log(e)
-//       })
-
-
-//    })
- 
-//    fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image/",{
-//     method: 'POST',
-//     body: JSON.stringify({
-//       title: 'john',
-//       data:[]
-//     }),
-//     headers: {
-//       'Content-type': 'application/json; charset=UTF-8',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((json) => console.log(json))
-//     .catch(e=>{
-//         console.log(e)
-//     })
-}
-canvasSetup_2.addEventListener("mouseup",event =>mouseupHandle(event))
-canvasSetup_2.addEventListener("touchend",event =>mouseupHandle(event))
-
-window.addEventListener("resize",e=>{
-
-    // if(window.innerWidth<=575){
-    //     canvasSetup.height= window.innerHeight/4
-    //     canvasSetup_2.height=window.innerHeight/4
-    //     drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
-    //     drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-    //     return 
-    //  }
-
-    //  if(window.innerWidth<=550){
-    //     canvasSetup.height= window.innerHeight/3
-    //     canvasSetup_2.height=window.innerHeight/3
-    //     drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
-    //     drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-    //     return 
-    //  }
- 
-     
-    //  if(window.innerWidth<=510){
-    //     canvasSetup.height= window.innerHeight/2
-    //     canvasSetup_2.height=window.innerHeight/2
-    //     drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
-    //     drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-    //     return 
-    //  }
-
-    // canvasSetup.height= window.innerHeight
-    // canvasSetup_2.height=window.innerHeight
-    //  ctx.drawImage(img,0,0,canvasSetup.width,canvasSetup.height)
-    //  ctx2.drawImage(img,0,0,canvasSetup_2.width,canvasSetup_2.height)
-    canvasSetup_2.width=window.innerWidth*0.45
-    canvasSetup.width=window.innerWidth*0.45
-
-    if(window.innerWidth<=650){
-        canvasSetup_2.width=window.innerWidth*0.90
-        canvasSetup.width=window.innerWidth*0.90
-    
-        canvasSetup_2.height=window.innerHeight*0.40
-        canvasSetup.height=window.innerHeight*0.40
     }
 
-    drawImageProp(ctx,img,0,0,canvasSetup.width,canvasSetup.height,0,0)
-    drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    //   canvasSetup_2.toBlob(blob=>{
+
+    //     const onFileSelected = async event => {
+    //         const uploadManager = new Bytescale.UploadManager({
+    //             apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
+    //           });
+    //           const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
+    //           console.log(filePath)
+    //           alert(`File uploaded:\n${fileUrl}`);
+    //     }
+    //     onFileSelected()
+
+
+    //   })
+ 
+    //    fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image/",{
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       title: 'john',
+    //       data:[]
+    //     }),
+    //     headers: {
+    //       'Content-type': 'application/json; charset=UTF-8',
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((json) => console.log(json))
+    //     .catch(e=>{
+    //         console.log(e)
+    //     })
+}
+canvasSetup_2.addEventListener("mouseup", event => mouseupHandle(event))
+canvasSetup_2.addEventListener("touchend", event => mouseupHandle(event))
+
+window.addEventListener("resize", e => {
+
+    canvasSetup_2.width = window.innerWidth * 0.45
+    canvasSetup.width = window.innerWidth * 0.45
+
+    if (window.innerWidth <= 650) {
+        canvasSetup_2.width = window.innerWidth * 0.90
+        canvasSetup.width = window.innerWidth * 0.90
+
+        canvasSetup_2.height = window.innerHeight * 0.40
+        canvasSetup.height = window.innerHeight * 0.40
+    }
+
+    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
 
 })
 
@@ -326,7 +328,7 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
         cx, cy, cw, ch, ar = 1;
 
     // decide which gap to fill    
-    if (nw < w) ar = w / nw;                             
+    if (nw < w) ar = w / nw;
     if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;  // updated
     nw *= ar;
     nh *= ar;
@@ -345,40 +347,40 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
     if (ch > ih) ch = ih;
 
     // fill image in dest. rectangle
-    ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
+    ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h);
 }
 
 
 
 function drawImageScaled(img, ctx) {
-    var canvas = ctx.canvas ;
-    var hRatio = canvas.width  / img.width    ;
-    var vRatio =  canvas.height / img.height  ;
-    var ratio  = Math.min ( hRatio, vRatio );
-    var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-    var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-  
-
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    ctx.drawImage(img, 0,0, img.width, img.height,
-                       centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
- }
+    var canvas = ctx.canvas;
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    var ratio = Math.min(hRatio, vRatio);
+    var centerShift_x = (canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (canvas.height - img.height * ratio) / 2;
 
 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, img.width, img.height,
+        centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+}
 
- // Prevent scrolling when touching the canvas
+
+
+// Prevent scrolling when touching the canvas
 document.body.addEventListener("touchstart", function (e) {
     if (e.target == canvasSetup_2) {
-      e.preventDefault();
+        e.preventDefault();
     }
-  }, false);
-  document.body.addEventListener("touchend", function (e) {
+}, false);
+document.body.addEventListener("touchend", function (e) {
     if (e.target == canvasSetup_2) {
-      e.preventDefault();
+        e.preventDefault();
     }
-  }, false);
-  document.body.addEventListener("touchmove", function (e) {
+}, false);
+document.body.addEventListener("touchmove", function (e) {
     if (e.target == canvasSetup_2) {
-      e.preventDefault();
+        e.preventDefault();
     }
-  }, false)
+}, false)

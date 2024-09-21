@@ -1,0 +1,177 @@
+
+
+nav{
+    filter: drop-shadow(1px 1px 1px black);
+    padding: 0px !important;
+}
+.weather-title{
+    
+}
+
+.prayer-title{
+    
+}
+*{
+    overflow-x: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.prayer-filter{
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(11, 66, 3);
+    opacity: 80%;
+    position: absolute;
+    top:0px;
+    width: 100%;
+ z-index: -1;
+ border-right: 1px solid white;
+}
+
+
+.weather-filter{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(6 29 104);
+    filter: grayscale(0.3);
+    opacity: 65%;
+    position: absolute;
+    top: 0px;
+ z-index: -1;
+ border-left: 1px solid white;
+
+}
+
+
+
+
+
+
+.prayer {
+    background-image: url("medina.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh;
+    z-index: 0;
+    vertical-align: center;
+    display: flex;
+    align-items: center;
+    
+    
+}
+
+.weather {
+    background-image: url("hill.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+.navbar-bg-brown{
+    background-color:#021919 !important
+}
+
+.navbar-bg-brown a{
+   color: #d8eeb9 !important;
+   font-size: 1.2em;
+   margin-left: 0.5em;
+   padding: 0.7em;
+  
+}
+
+.navbar-bg-brown a:hover{
+ color: green;
+ background-color: #325205;
+ -webkit-box-shadow: inset 0px -1px 14px -1px rgba(4,48,24,1);
+ -moz-box-shadow: inset 0px -1px 14px -1px rgba(4,48,24,1);
+ box-shadow: inset 0px -1px 14px -1px rgba(4,48,24,1)
+ }
+
+
+.bg-signup{
+    background: rgb(241, 238, 238);
+    border: 3px solid rgb(5, 116, 164);
+
+    border-radius: 5px;
+}
+
+.bg-signup h2{
+  color: black !important;
+}
+
+.card{
+    width: 20em;
+    background-color: #d8eeb9;
+}
+
+
+.card span{
+    width: 16em;
+   color: green;
+}
+
+
+.weather-container{
+    
+    color: white;
+  
+    overflow:hidden
+}
+
+.split-container{
+    filter: grayscale(1);
+    transition: 0.5s;
+}
+
+.split-container:hover{
+
+}
+
+ 
+
+.prayer button:hover{
+    transform: scale(1.1);
+    border: 2px solid #bcf751;
+    z-index: 5;
+    filter: grayscale(0);
+    transition: 0.3s;
+}
+
+.weather button:hover{
+    transform: scale(1.1);
+    border: 2px solid #abffff;
+    z-index: 5;
+    filter: grayscale(0);
+    transition: 0.3s;
+}
+
+
+button{
+    transition: 0.3s;
+}
+
+
+.split-container button {
+  font-size: 1.3em;
+  padding: 0.5em;
+  color: white !important;
+  filter: drop-shadow(2px 2px 5px rgb(67, 67, 67));
+}

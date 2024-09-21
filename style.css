@@ -1,10 +1,14 @@
 
 
+
+
 @media (max-width:650px) {
     .canvas-container{
         display:grid !important;
     }
     
+
+  
 }
 @media (max-width:767px) {
    #colors{
@@ -17,6 +21,8 @@
         height:13vh !important;
      
     }
+   
+        
     
 }  
 
@@ -28,8 +34,22 @@
     
     }
 
-  
 }
+
+
+
+
+
+@media(max-width:1000px) {
+    
+    input[type='range']{
+        accent-color: rgb(73, 156, 1); 
+        width: 9.5em;
+        }
+
+}
+
+
 
 
 *{
@@ -40,16 +60,22 @@
 #myCanvas{
   
     background-color: rgb(244, 242, 242);
+    transition: 1s;
 }
 
 
 #myCanvas2{
   
     background-color: rgb(220, 223, 225);
-    cursor:crosshair;
+    cursor: url('bcursor2.png'), auto;
     touch-action: none;
+    transition: 1s;
 }
  
+.zero-opacity{
+    opacity: 0;
+    transform: translateY(-1vh);
+}
 
 #myCanvas:hover{
   
@@ -70,6 +96,8 @@ body{
     /* overflow: hidden; */
     height: 95vh;
     background-color: #122600;
+    font-family: fantasy;
+   
 
 }
 
@@ -93,11 +121,19 @@ canvas{
 .color-div{
 
     border: 2px solid black;
-    background-color: blue;
+    
      
     margin:0px;
     border-radius: 5px;
+    cursor: url('bcursor2.png'), auto;
 }
+
+.color-div:active{
+    filter: brightness(0.5);
+
+}
+
+ 
 
 .card{
     width: 1.5em;
@@ -143,21 +179,49 @@ canvas{
     transform: scale(1.4);
     color: rgb(255, 255, 255) !important;
     background-color: rgb(106, 153, 18);
-    font-weight: 700;
+    font-weight: 500;
+    z-index: 5;
  
 }
 
 
-
-#tools{
-   
+.share-button:hover::after{
   
-  border-radius: 9px;
+ /* content:url("world-flag.png");
+display: flex;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 0px;
+    top:0px */
+
 }
 
+#tools {
+   
+    font-size: 1em;
+    border-radius: 9px;
 
-  input[type='range']{ accent-color: rgb(73, 156, 1); }
+  }
+
+  #tools img{
+    width: 30px;
+    height: 30px;
+    filter: hue-rotate(223deg);;
+    
+  }
+  input[type='range']{
+     accent-color: rgb(73, 156, 1); 
+    
+    }
 
   #brush-size{
     font-size: 1.2em !important;
   }
+
+  #save-icon{
+    cursor: pointer;
+  }
+
+
+  
