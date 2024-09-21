@@ -22,7 +22,7 @@ color_picker.value = "black"
 
 color_picker.onchange = function () {
     ctx2.strokeStyle = color_picker.value
-    console.log(color_picker.value)
+   // console.log(color_picker.value)
 }
 ctx.strokeStyle = "black";
 ctx.lineWidth = 3;
@@ -39,13 +39,23 @@ submit_nav_button.addEventListener("click", e => {
     imgData = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
     imgData2 = ctx2.getImageData(0, 0, canvasSetup_2.width, canvasSetup_2.height);
 
-    for (let i = 0; i < imgData.data.length; i++) {
-        if (imgData.data[i] === imgData2.data[i])
+    // for (let i = 0; i < imgData.data.length; i++) {
+    //     if (imgData.data[i] === imgData2.data[i])
+    //         counter++
+    //     else {
+    //         // counter--
+    //     }
+    // } 
+
+
+    for (let i = 2; i < imgData.data.length; i++) {
+        let isRedAcc = Math.abs((imgData.data[i] - imgData2.data[i])) < 15
+        let isBlueAcc = Math.abs((imgData.data[i - 1] - imgData2.data[i - 1])) < 15
+        let isGreebAcc = Math.abs((imgData.data[i - 2] - imgData2.data[i - 2])) < 15
+        if (isRedAcc && isBlueAcc && isGreebAcc)
             counter++
-        else {
-            // counter--
-        }
-    } // <---- measured code goes between startTime and endTime
+
+    }
     let accurecy = Math.floor(((counter / imgData.data.length) * 100))
     if (accurecy < 0) accurecy = 0
     Swal.fire({
@@ -61,32 +71,119 @@ submit_nav_button.addEventListener("click", e => {
         console.log(result)
         if (result.isConfirmed) {
             Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-            });
-        }
+                imageUrl: "naDay.jpg",
+                imageWidth: 300,
+                imageHeight: 300,
+                title: "Write a comment: ",
+                color: "green",
+                "font-weight": "500",
+                input: "textarea",
+                inputAttributes: {
+                    autocapitalize: "off"
+                },
+                showCancelButton: true,
+                confirmButtonText: "post Art",
+                showLoaderOnConfirm: true,
+                // preConfirm: async (login) => {
+                //   try {
+                //     const githubUrl = `
+                //       https://api.github.com/users/${login}
+                //     `;
+                //     const response = await fetch(githubUrl);
+                //     if (!response.ok) {
+                //       return Swal.showValidationMessage(`
+                //         ${JSON.stringify(await response.json())}
+                //       `);
+                //     }
+                //     return response.json();
+                //   } catch (error) {
+                //     Swal.showValidationMessage(`
+                //       Request failed: ${error}
+                //     `);
+                //   }
+                // },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                // console.log(result)
+                // console.log(result.value)
+                // if (result.isConfirmed) {
+                //   Swal.fire({
+                //     title: `${result.value.login}'s avatar`,
+                //     imageUrl: result.value.avatar_url
+                //   });
+                // }
 
-        if (result.isDismissed) {
-            // Swal.fire({
-            //   title: "Cancelled!",
-            //   text: "Your file has been deleted.",
-            //   icon: "success"
-            // });
-            canvasSetup.classList.add("zero-opacity")
-            canvasSetup_2.classList.add("zero-opacity")
-            img.setAttribute("src", "Pixel.jpg")
-            setTimeout(() => {
 
-                drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-                // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-                canvasSetup.classList.remove("zero-opacity")
-                canvasSetup_2.classList.remove("zero-opacity")
-            }, 1700)
+                canvasSetup_2.toBlob(blob => {
+
+                    const onFileSelected = async event => {
+                        const uploadManager = new Bytescale.UploadManager({
+                            apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
+                        });
+                        const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
+                        console.log("Path: "+ filePath)
+                        console.log("Url: "+ fileUrl)
+                        //  alert(`File uploaded:\n${fileUrl}`);
+                       
+                        fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                username: 'guest',
+                                message:result.value,
+                                userId:0,
+                                imgUrl: fileUrl,
+                                accurecy: accurecy
+                            }),
+                            headers: {
+                                'Content-type': 'application/json; charset=UTF-8',
+                            },
+                        })
+                            .then(res => res.json())
+                            .then(data => { 
+                                console.log(data)
+                                
+                                Swal.fire({
+                                    title: "Image posted To leaderboard!",
+                                    text: "Check out the leaderboard to see your post",
+                                    icon: "success"
+                                  });
+                             })
+
+                    }
+                    onFileSelected()
+                })
+
+                    // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
+                    //     .then(res => res.json())
+                    //     .then(data => { console.log(data) })
+
+                    // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
+                    //     .then(res => res.json())
+                    //     .then(data => { console.log(data) })
+                });
+            }
+
+        if (result.isDismissed && result.dismiss == "cancel") {
+                // Swal.fire({
+                //   title: "Cancelled!",
+                //   text: "Your file has been deleted.",
+                //   icon: "success"
+                // });
+                canvasSetup.classList.add("zero-opacity")
+                canvasSetup_2.classList.add("zero-opacity")
+                img.setAttribute("src", "Pixel.jpg")
+                setTimeout(() => {
+
+                    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+                    ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height)
+                    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+                    canvasSetup.classList.remove("zero-opacity")
+                    canvasSetup_2.classList.remove("zero-opacity")
+                }, 1700)
 
 
-        }
-    });
+            }
+        });
 })
 
 document.getElementById("save-icon").onclick = () => {
@@ -144,12 +241,14 @@ for (let i = 0; i < 40; i++) {
         canvasSetup_2.width = window.innerWidth * 0.90
         canvasSetup.width = window.innerWidth * 0.90
 
-        canvasSetup_2.height = window.innerHeight * 0.40
-        canvasSetup.height = window.innerHeight * 0.40
+        canvasSetup_2.height = window.innerHeight * 0.42
+        canvasSetup.height = window.innerHeight * 0.42
     }
 
+
     drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-    //  drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height)
+    //   drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
 
 
 }
@@ -161,7 +260,7 @@ let lines = []
 brush_range.addEventListener("mousemove", e => {
     let brush_size = document.getElementById("brush-size")
     brush_size.textContent = brush_range.value
-    console.log(brush_range.value)
+    // console.log(brush_range.value)
 })
 
 
@@ -185,7 +284,7 @@ function mousedownHandler(event) {
     }
     // guessX = parseInt(event.touches[0].pageX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
     // guessY = parseInt(event.touches[0].pageY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
-    console.log(`coords:${guessX}x${guessY}`);
+    // console.log(`coords:${guessX}x${guessY}`);
     ctx2.moveTo(guessX, guessY)
     ctx2.beginPath()
 }
@@ -215,7 +314,7 @@ function mousemoveHandle(event) {
             guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
         }
 
-        console.log(`coords:${guessX}x${guessY}`);
+       // console.log(`coords:${guessX}x${guessY}`);
         // ctx.strokeRect(guessX,guessY,10,10);
         ctx2.lineTo(guessX, guessY);
         ctx2.lineWidth = brush_range.value
@@ -239,7 +338,7 @@ function mouseupHandle(event) {
     imgData2 = ctx2.getImageData(0, 0, canvasSetup_2.width, canvasSetup_2.height);
 
     let counter = 0;
-    console.log(imgData.data.length)
+   // console.log(imgData.data.length)
     for (let i = 0; i < imgData.data.length; i++) {
         if (imgData.data[i] === imgData2.data[i])
             counter++
@@ -262,7 +361,7 @@ function mouseupHandle(event) {
 
 
     //   })
- 
+
     //    fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image/",{
     //     method: 'POST',
     //     body: JSON.stringify({
@@ -291,8 +390,8 @@ window.addEventListener("resize", e => {
         canvasSetup_2.width = window.innerWidth * 0.90
         canvasSetup.width = window.innerWidth * 0.90
 
-        canvasSetup_2.height = window.innerHeight * 0.40
-        canvasSetup.height = window.innerHeight * 0.40
+        canvasSetup_2.height = window.innerHeight * 0.42
+        canvasSetup.height = window.innerHeight * 0.42
     }
 
     drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)

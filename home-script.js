@@ -1,33 +1,12 @@
 let signup_nav = document.getElementById("signup-nav")
 let all_content = document.getElementById("all-content-container")
 let login_nav =document.getElementById("nav-login")
-let prayer_times = document.getElementById("prayer_times")
+// let prayer_times = document.getElementById("prayer_times")
 
 
-let weather_nav = document.getElementById("weather-nav")
+// let weather_nav = document.getElementById("weather-nav")
 let weather_btn = document.getElementById("weather-btn")
 let pray_btn = document.getElementById("pray-btn")
-let home_nav = document.getElementById("home-nav")
-
-
-weather_nav.addEventListener("click", e=>{
-   createWeatherPage("","Riyadh")
-})
-
-
-prayer_times.addEventListener("click", e=>{
-    createPrayer("")  
-})
-
-
-
-
-home_nav.addEventListener("click",e=>{
-//    createHomePage()
-all_content.innerHTML=""
-createHtmlTree()
-})
-
 
 function signup_page(){
     all_content.innerHTML=""
@@ -184,19 +163,6 @@ function signup_page(){
 
 
     })
-    // <div class="row g-0 justify-content-center">
-    //         <div class="signup col-5 bg-signup justify-content-center d-flex row mt-5  justify-content-center">
-    //             <h2 class="text-white mt-5 mb-5">Sign Up sheet</h2>
-    //             <input type="email" name="email" id="email" class="col-7 mt-2" placeholder="email">
-    //             <input type="email" name=""      id="re-email" class="col-7 mt-2" placeholder="re type email">
-    //             <input type="password" name=""      id="password" class="col-7 mt-2" placeholder="password">
-    //             <input type="password" name=""      id="re-password" class="col-7 mt-2" placeholder="re type password">
-    //             <input type="username" name=""      id="username" class="col-7 mt-2 mb-4" placeholder="username">
-    //             <button class="offset-3 btn btn-secondary col-3 mt-3 mb-3">Sign-Up</button>
-
-    //         </div>
-    //     </div>
-
 
 }
 
@@ -524,8 +490,8 @@ function createHomePage (){
 
     button_paryer.classList.add(..."prayer-title btn btn-success".split(" "))
 
-    button_weth.innerText="Know the Weather"
-    button_paryer.innerText="Pray on Time"
+    button_weth.innerText="play"
+    button_paryer.innerText="Leaderboard"
 
     button_weth.classList.add(..."weather-title btn btn-info".split(" "))
 
@@ -568,12 +534,12 @@ function createHtmlTree() {
 
     
     const mainDiv = document.createElement('div');
-    mainDiv.className = 'row g-0';
+    mainDiv.className = 'row g-0 d-lg-flex d-md-flex d-sm-flex d-grid';
     mainDiv.style.width="100%"
-
+    
     // Create the first split container
     const praySplitContainer = document.createElement('div');
-    praySplitContainer.className = 'split-container col-6';
+    praySplitContainer.className = 'split-container col-12 col-sm-6 col-md-6 col-lg-6';
     praySplitContainer.id = 'pray-split-container';
 
     const prayRow = document.createElement('div');
@@ -588,7 +554,7 @@ function createHtmlTree() {
     const prayButton = document.createElement('button');
     prayButton.className = 'prayer-title btn btn-success col-5';
     prayButton.id = 'pray-btn';
-    prayButton.textContent = 'Pray on Time';
+    prayButton.textContent = 'Leaderboard';
 
     // Append children for the prayer section
     prayerDiv.appendChild(prayerFilter);
@@ -599,7 +565,7 @@ function createHtmlTree() {
 
     // Create the second split container
     const weatherSplitContainer = document.createElement('div');
-    weatherSplitContainer.className = 'split-container col-6';
+    weatherSplitContainer.className = 'split-container col-12 col-sm-6 col-md-6 col-lg-6';
     weatherSplitContainer.id = 'weather-split-container';
 
     const weatherRow = document.createElement('div');
@@ -614,7 +580,7 @@ function createHtmlTree() {
     const weatherButton = document.createElement('button');
     weatherButton.className = 'weather-title btn btn-info col-5';
     weatherButton.id = 'weather-btn';
-    weatherButton.textContent = 'Check the Weather';
+    weatherButton.textContent = 'Play';
 
     // Append children for the weather section
     weatherDiv.appendChild(weatherFilter);
@@ -641,10 +607,10 @@ function createHtmlTree() {
     pray_btn.addEventListener("mouseover",e=>{
        
         let cont = document.getElementById("pray-split-container")
-        cont.style.border="2px solid white"
+ 
         cont.style.transform ="scale(1.1)"
        
-       cont.style.zIndex="z-index: 5"
+       cont.style.zIndex=" 5"
        cont.style.filter="grayscale(0)"
        
     })
@@ -665,10 +631,10 @@ function createHtmlTree() {
     weather_btn.addEventListener("mouseover",e=>{
        
         let cont = document.getElementById("weather-split-container")
-        cont.style.border="2px solid white"
+      
         cont.style.transform ="scale(1.1)"
        
-       cont.style.zIndex="z-index: 5"
+       cont.style.zIndex="5"
        cont.style.filter="grayscale(0)"
        
     })
@@ -676,7 +642,7 @@ function createHtmlTree() {
     pray_btn.addEventListener("mouseleave",e=>{
        
         let cont = document.getElementById("pray-split-container")
-        cont.style.border="0px solid white"
+      
         cont.style.transform ="scale(1)"
        
        cont.style.zIndex=""

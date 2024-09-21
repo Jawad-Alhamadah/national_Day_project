@@ -59,14 +59,14 @@
 
 #myCanvas{
   
-    background-color: rgb(244, 242, 242);
+    background-color: rgb(255, 255, 255);
     transition: 1s;
 }
 
 
 #myCanvas2{
   
-    background-color: rgb(220, 223, 225);
+    background-color: rgb(255, 255, 255);
     cursor: url('bcursor2.png'), auto;
     touch-action: none;
     transition: 1s;
@@ -112,7 +112,7 @@ body{
 
  
 canvas{
-    border: 5px solid black;
+    border: 2px solid black;
     margin: 0px;
     padding: 0px;
     border-radius: 3px;
@@ -221,7 +221,16 @@ display: flex;
 
   #save-icon{
     cursor: pointer;
+    transition: 0.5s;
+  }
+
+  #save-icon:hover{
+   transform: scale(1.5);
   }
 
 
-  
+
+
+  .swal2-title{
+    font-weight: 500 !important;
+  }
