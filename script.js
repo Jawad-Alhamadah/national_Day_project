@@ -263,8 +263,8 @@ for (let i = 0; i < 40; i++) {
 
 
     drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-    ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height)
-    //   drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    //ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height)
+       drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
 
 
 }
@@ -415,10 +415,11 @@ window.addEventListener("resize", e => {
         canvasSetup.height = window.innerHeight * 0.42
     }
 
-    temp_img.onload = function (){
+    
         drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-        drawImageProp(ctx2,temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-    }
+        // drawImageProp(ctx2,temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+       // ctx2.drawImage(temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height)
+ 
    
 
 })

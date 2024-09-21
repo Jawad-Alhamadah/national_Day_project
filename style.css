@@ -234,3 +234,8 @@ display: flex;
   .swal2-title{
     font-weight: 500 !important;
   }
+
+  .swal2-container{
+    height: 60%;
+    overflow-y: none;
+  }
