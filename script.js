@@ -72,6 +72,12 @@ submit_nav_button.addEventListener("click", e => {
     }).then((result) => {
         console.log(result)
         if (result.isConfirmed) {
+
+            let temp_img =  new Image();
+            temp_img.src = canvasSetup_2.toDataURL('image/png');
+           
+ 
+        
             Swal.fire({
                 imageUrl: "naDay.jpg",
                 imageWidth: 300,
@@ -114,6 +120,7 @@ submit_nav_button.addEventListener("click", e => {
                 //     imageUrl: result.value.avatar_url
                 //   });
                 // }
+                ctx2.drawImage(temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height)
                 if(result.isDismissed && result.dismiss == "cancel"){
                     Swal.fire({
                         title: "Post Cancelled",
@@ -399,10 +406,7 @@ canvasSetup_2.addEventListener("touchend", event => mouseupHandle(event))
 
 window.addEventListener("resize", e => {
  
-    let temp_img =  new Image();
-    temp_img.src = canvasSetup_2.toDataURL('image/png');
-
-
+   
    
     canvasSetup_2.width = window.innerWidth * 0.45
     canvasSetup.width = window.innerWidth * 0.45
