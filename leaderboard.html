@@ -15,9 +15,12 @@
          
           <div class="navbar-collapse"  >
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#" id="nav-login">Login</a>
 
+              <a class="nav-link active" aria-current="page" href="index.html" id="nav-login">Home</a>
+              <a class="nav-link active" aria-current="page" href="#" id="nav-login">Login</a>
               <a class="nav-link" href="#" id="signup-nav">Signup</a>
+              <a class="nav-link" href="#" id="play-btn" >play</a>
+
             </div>
           </div>
         </div>
@@ -25,20 +28,24 @@
 
 
       <div class="row g-0 justify-content-center" >
-        <div class="card text-center main-card mt-5" id="board-conatiner">
+        <div class="card text-center main-card mt-5" >
             <div class="card-header secondary-color">
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">Blitz</a>
+                  <a class="nav-link" id="blitz-btn">Blitz</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">for fun</a>
+                  <a class="nav-link" id="prompt-btn">prompt</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Guest</a>
+                  <a class="nav-link " id="normal-btn">normal</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="recent-btn">recent</a>
+                  </li>
               </ul>
             </div>
+            <div id="board-conatiner"></div>
             <!-- <div class="card-body secondary-color">
                 <div class="row g-0 d-flex align-items-center">
                     <div class="col-2 col-lg-2 username-icon ">

@@ -1,236 +1,161 @@
-
-
-
-
-@media (max-width:650px) {
-    .canvas-container{
-        display:grid !important;
-    }
-    
-
-  
-}
-@media (max-width:767px) {
-   #colors{
-        display: none !important;
-    } 
-
-    .footer{
-
-       
-        height:13vh !important;
-     
-    }
-   
-        
-    
-}  
-
-@media(max-width:850px) {
-    
-    .card{
-        width: 1.3em !important;
-        height:1.3em !important;
-    
-    }
-
+nav {
+  filter: drop-shadow(1px 1px 1px black);
+  padding: 0px !important;
 }
 
-
-
-
-
-@media(max-width:1000px) {
-    
-    input[type='range']{
-        accent-color: rgb(73, 156, 1); 
-        width: 9.5em;
-        }
-
+* {
+  overflow-x: none;
+  padding: 0px;
+  margin: 0px;
 }
 
+.leaderboard-filter {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(11, 66, 3);
+  opacity: 80%;
+  position: absolute;
 
-
-
-*{
-    margin: 0px;
-    padding: 0px
+  top: 0px;
+  width: 100%;
+  z-index: -1;
 }
 
-#myCanvas{
-  
-    background-color: rgb(255, 255, 255);
-    transition: 1s;
+.play-filter {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(6 29 104);
+  filter: grayscale(0.3);
+  opacity: 65%;
+  position: absolute;
+  top: 0px;
+  z-index: -1;
 }
 
-
-#myCanvas2{
-  
-    background-color: rgb(255, 255, 255);
-    cursor: url('bcursor2.png'), auto;
-    touch-action: none;
-    transition: 1s;
-}
- 
-.zero-opacity{
-    opacity: 0;
-    transform: translateY(-1vh);
-}
-
-#myCanvas:hover{
-  
-    
+.leaderboard {
+  background-image: url("flag.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 100vh;
+  z-index: 0;
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+  border: 3px solid black;
 }
 
+.play {
+  background-image: url("img1.png");
+  background-size: cover;
 
-.footer{
-
-    width: 100%;
-
-    background-color: rgb(4, 69, 4);
-    color: white;
-    border-bottom: 2px solid black !important;
+  position: relative;
+  height: 100vh;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  border: 3px solid black;
 }
 
-body{
-    /* overflow: hidden; */
-    height: 95vh;
-    background-color: #122600;
-    font-family: fantasy;
-   
-
+.navbar-bg-brown {
+  background-color: #021919 !important;
 }
 
-.hidden{
-    display: none;
+.navbar-bg-brown a {
+  color: #d8eeb9 !important;
+  font-size: 1.2em;
+  margin-left: 0.5em;
+  padding: 0.7em;
 }
 
-.canv-container{
-
-
+.navbar-bg-brown a:hover {
+  color: green;
+  background-color: #325205;
+  -webkit-box-shadow: inset 0px -1px 14px -1px rgba(4, 48, 24, 1);
+  -moz-box-shadow: inset 0px -1px 14px -1px rgba(4, 48, 24, 1);
+  box-shadow: inset 0px -1px 14px -1px rgba(4, 48, 24, 1);
 }
 
- 
-canvas{
-    border: 2px solid black;
-    margin: 0px;
-    padding: 0px;
-    border-radius: 3px;
+.bg-signup {
+  background: rgb(241, 238, 238);
+  border: 3px solid rgb(5, 116, 164);
+
+  border-radius: 5px;
 }
 
-.color-div{
-
-    border: 2px solid black;
-    
-     
-    margin:0px;
-    border-radius: 5px;
-    cursor: url('bcursor2.png'), auto;
+.bg-signup h2 {
+  color: black !important;
 }
 
-.color-div:active{
-    filter: brightness(0.5);
-
+.card {
+  width: 20em;
+  background-color: #d8eeb9;
 }
 
- 
-
-.card{
-    width: 1.5em;
-    height:1.5em;
-    margin: 0px;
+.card span {
+  width: 16em;
+  color: green;
 }
 
-#colors{
- height: 60%;
+.play-container {
+  color: white;
+
+  overflow: hidden;
 }
 
-
-
-.share-button{
-
+.split-container {
+  filter: grayscale(1);
+  transition: 0.5s;
 }
 
-.share-button:hover{
-    background-color: rgb(83, 0, 0) !important;
-   animation: rainbow 2s normal none infinite ;
+.leaderboard button:hover {
+  transform: scale(1.1);
+  border: 2px solid #bcf751;
+  z-index: 5;
+  filter: grayscale(0);
+  transition: 0.3s;
 }
 
-@keyframes rainbow {
-    0%   {filter: hue-rotate(360deg);}
-  
-   100% {filter: hue-rotate(0deg);}
+.play button:hover {
+  transform: scale(1.1);
+  border: 2px solid #abffff;
+  z-index: 5;
+  filter: grayscale(0);
+  transition: 0.3s;
+}
+
+button {
+  transition: 0.3s;
+}
+
+.split-container button {
+  font-size: 1.3em;
+  padding: 0.5em;
+  color: white !important;
+  filter: drop-shadow(2px 2px 5px rgb(67, 67, 67));
+}
+
+@media (max-width: 576px) {
+  .leaderboard {
+    background-image: url("flag.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 47vh;
+    z-index: 0;
+    vertical-align: center;
+    display: flex;
+    align-items: center;
   }
 
-
-.side-btn{
-    width: 8em;
-    margin: 0.1em;
-
-    background-color: transparent;
-    border: 2px solid rgb(172, 201, 12) !important;
-    color: rgb(172, 201, 12) !important;;
-    transition: 0.5s;
-    font-weight: 500;
-    font-size: 0.9em;
+  .play {
+    background-image: url("img1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 47vh;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+  }
 }
-
-.side-btn:hover{
-    transform: scale(1.4);
-    color: rgb(255, 255, 255) !important;
-    background-color: rgb(106, 153, 18);
-    font-weight: 500;
-    z-index: 5;
- 
-}
-
-
-.share-button:hover::after{
-  
- /* content:url("world-flag.png");
-display: flex;
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    right: 0px;
-    top:0px */
-
-}
-
-#tools {
-   
-    font-size: 1em;
-    border-radius: 9px;
-
-  }
-
-  #tools img{
-    width: 30px;
-    height: 30px;
-    filter: hue-rotate(223deg);;
-    
-  }
-  input[type='range']{
-     accent-color: rgb(73, 156, 1); 
-    
-    }
-
-  #brush-size{
-    font-size: 1.2em !important;
-  }
-
-  #save-icon{
-    cursor: pointer;
-    transition: 0.5s;
-  }
-
-  #save-icon:hover{
-   transform: scale(1.5);
-  }
-
-
-
-
-  .swal2-title{
-    font-weight: 500 !important;
-  }

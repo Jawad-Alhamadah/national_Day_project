@@ -1,0 +1,34 @@
+
+
+.card{
+    width: 50em;
+    border: 4px solid rgb(216, 238, 185) ;
+    background-color: beige;
+}
+
+body{
+    height: 100vh;
+    background-image: url("bg3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.choice-btn{
+    background-color:  rgb(216, 238, 185);
+    color: green;
+    border: 4px solid rgb(112, 108, 24);
+    font-size: 1.3em;
+    font-weight: 600
+
+
+}
+
+.choice-btn:hover {
+    background-color:  rgb(94, 135, 37);
+    color: white
+
+}
+
+.navbar{
+    background-color: beige !important;
+}
