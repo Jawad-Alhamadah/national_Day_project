@@ -46,7 +46,7 @@ nav {
 }
 
 .play {
-  background-image: url("img1.png");
+  background-image: url("PaintDemo.png");
   background-size: cover;
 
   position: relative;
@@ -149,7 +149,7 @@ button {
   }
 
   .play {
-    background-image: url("img1.png");
+    background-image: url("PaintDemo.png");
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;

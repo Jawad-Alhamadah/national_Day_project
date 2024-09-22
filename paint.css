@@ -1,236 +1,237 @@
-
-
-
-
-@media (max-width:650px) {
-    .canvas-container{
-        display:grid !important;
-    }
-    
-
-  
+@media (max-width: 650px) {
+  .canvas-container {
+    display: grid !important;
+  }
 }
-@media (max-width:767px) {
-   #colors{
-        display: none !important;
-    } 
+@media (max-width: 767px) {
+  #colors {
+    display: none !important;
+  }
 
-    .footer{
-
-       
-        height:13vh !important;
-     
-    }
-   
-        
-    
-}  
-
-@media(max-width:850px) {
-    
-    .card{
-        width: 1.3em !important;
-        height:1.3em !important;
-    
-    }
-
+  .footer {
+    height: 13vh !important;
+  }
 }
 
-
-
-
-
-@media(max-width:1000px) {
-    
-    input[type='range']{
-        accent-color: rgb(73, 156, 1); 
-        width: 9.5em;
-        }
-
+@media (max-width: 850px) {
+  .card {
+    width: 1.3em !important;
+    height: 1.3em !important;
+  }
 }
 
-
-
-
-*{
-    margin: 0px;
-    padding: 0px
+@media (max-width: 1000px) {
+  input[type="range"] {
+    accent-color: rgb(73, 156, 1);
+    width: 9.5em;
+  }
 }
 
-#myCanvas{
-  
-    background-color: rgb(255, 255, 255);
-    transition: 1s;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-
-#myCanvas2{
-  
-    background-color: rgb(255, 255, 255);
-    cursor: url('bcursor2.png'), auto;
-    touch-action: none;
-    transition: 1s;
-}
- 
-.zero-opacity{
-    opacity: 0;
-    transform: translateY(-1vh);
+#myCanvas {
+  background-color: rgb(255, 255, 255);
+  transition: 1s;
 }
 
-#myCanvas:hover{
-  
-    
+#myCanvas2 {
+  background-color: rgb(255, 255, 255);
+  cursor: url("bcursor2.png"), auto;
+  touch-action: none;
+  transition: 1s;
 }
 
-
-.footer{
-
-    width: 100%;
-
-    background-color: rgb(4, 69, 4);
-    color: white;
-    border-bottom: 2px solid black !important;
+.zero-opacity {
+  opacity: 0;
+  transform: translateY(-1vh);
 }
 
-body{
-    /* overflow: hidden; */
-    height: 95vh;
-    background-color: #122600;
-    font-family: fantasy;
-   
-
+#myCanvas:hover {
 }
 
-.hidden{
-    display: none;
+.footer {
+  width: 100%;
+
+  background-color: rgb(4, 69, 4);
+  color: white;
+  border-bottom: 2px solid black !important;
 }
 
-.canv-container{
-
-
+body {
+  /* overflow: hidden; */
+  height: 95vh;
+  background-color: #122600;
+  font-family: fantasy;
 }
 
- 
-canvas{
-    border: 2px solid black;
-    margin: 0px;
-    padding: 0px;
-    border-radius: 3px;
+.hidden {
+  display: none;
 }
 
-.color-div{
-
-    border: 2px solid black;
-    
-     
-    margin:0px;
-    border-radius: 5px;
-    cursor: url('bcursor2.png'), auto;
+.canv-container {
 }
 
-.color-div:active{
-    filter: brightness(0.5);
-
+canvas {
+  border: 2px solid black;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 3px;
 }
 
- 
+.color-div {
+  border: 2px solid black;
 
-.card{
-    width: 1.5em;
-    height:1.5em;
-    margin: 0px;
+  margin: 0px;
+  border-radius: 5px;
+  cursor: url("bcursor2.png"), auto;
 }
 
-#colors{
- height: 60%;
+.color-div:active {
+  filter: brightness(0.5);
 }
 
-
-
-.share-button{
-
+.card {
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0px;
 }
 
-.share-button:hover{
-    background-color: rgb(83, 0, 0) !important;
-   animation: rainbow 2s normal none infinite ;
+#colors {
+  height: 60%;
+}
+
+.share-button {
+}
+
+.share-button:hover {
+  background-color: rgb(83, 0, 0) !important;
+  animation: rainbow 2s normal none infinite;
 }
 
 @keyframes rainbow {
-    0%   {filter: hue-rotate(360deg);}
-  
-   100% {filter: hue-rotate(0deg);}
+  0% {
+    filter: hue-rotate(360deg);
   }
 
-
-.side-btn{
-    width: 8em;
-    margin: 0.1em;
-
-    background-color: transparent;
-    border: 2px solid rgb(172, 201, 12) !important;
-    color: rgb(172, 201, 12) !important;;
-    transition: 0.5s;
-    font-weight: 500;
-    font-size: 0.9em;
+  100% {
+    filter: hue-rotate(0deg);
+  }
 }
 
-.side-btn:hover{
-    transform: scale(1.4);
-    color: rgb(255, 255, 255) !important;
-    background-color: rgb(106, 153, 18);
-    font-weight: 500;
-    z-index: 5;
- 
+.side-btn {
+  width: 8em;
+  margin: 0.1em;
+
+  background-color: transparent;
+  border: 2px solid rgb(172, 201, 12) !important;
+  color: rgb(172, 201, 12) !important;
+  transition: 0.5s;
+  font-weight: 500;
+  font-size: 0.9em;
 }
 
+.side-btn:hover {
+  transform: scale(1.4);
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(106, 153, 18);
+  font-weight: 500;
+  z-index: 5;
+}
 
-.share-button:hover::after{
-  
- /* content:url("world-flag.png");
+.share-button:hover::after {
+  /* content:url("world-flag.png");
 display: flex;
     height: 20px;
     width: 20px;
     position: absolute;
     right: 0px;
     top:0px */
-
 }
 
 #tools {
-   
-    font-size: 1em;
-    border-radius: 9px;
+  font-size: 1em;
+  border-radius: 9px;
+}
 
+#tools img {
+  width: 30px;
+  height: 30px;
+  filter: hue-rotate(223deg);
+}
+input[type="range"] {
+  accent-color: rgb(73, 156, 1);
+}
+
+#brush-size {
+  font-size: 1.2em !important;
+}
+
+#save-icon {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#save-icon:hover {
+  transform: scale(1.5);
+}
+
+.swal2-title {
+  font-weight: 500 !important;
+}
+
+
+#time {
+  color: rgb(233, 17, 6);
+  font-size: 1.7em;
+  font-weight: 600;
+}
+
+#color-picker {
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 0px solid black;
+}
+
+@keyframes rainbow_border {
+  0% {
+    border: 2px solid rgb(255, 128, 0);
   }
-
-  #tools img{
-    width: 30px;
-    height: 30px;
-    filter: hue-rotate(223deg);;
-    
+  10% {
+    border: 2px solid rgb(255, 238, 0);
   }
-  input[type='range']{
-     accent-color: rgb(73, 156, 1); 
-    
-    }
-
-  #brush-size{
-    font-size: 1.2em !important;
+  20% {
+    border: 2px solid rgb(157, 255, 0);
   }
-
-  #save-icon{
-    cursor: pointer;
-    transition: 0.5s;
+  30% {
+    border: 2px solid rgb(17, 255, 0);
   }
-
-  #save-icon:hover{
-   transform: scale(1.5);
+  40% {
+    border: 2px solid rgb(0, 255, 123);
   }
-
-
-
-
-  .swal2-title{
-    font-weight: 500 !important;
+  50% {
+    border: 2px solid rgb(0, 255, 225);
   }
+  60% {
+    border: 2px solid rgb(0, 213, 255);
+  }
+  70% {
+    border: 2px solid rgb(0, 34, 255);
+  }
+  80% {
+    border: 2px solid rgb(128, 0, 255);
+  }
+  90% {
+    border: 2px solid rgb(255, 0, 230);
+  }
+  100% {
+    border: 2px solid rgb(255, 0, 0);
+  }
+}
+
+.rainbow-border {
+  animation: rainbow_border 2s normal none infinite;
+  border: 2px solid rgb(255, 0, 0);
+}

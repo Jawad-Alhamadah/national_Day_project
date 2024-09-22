@@ -14,8 +14,8 @@ const essentialColors = [
 
 const draw_prompts = ["King Abdullah", "Prince Mohammed bin Salman","a Saudi Guy", "Arabic Coffee","Al Madinah"
                       ," 100 Riyal Note", "a Camel",`the first thing you think of when you hear "national day"`, "Palm tree and dates",
-                      "Riyadh traffic",'Mecca',"Riyadh Tower","Saudis Celebrating national day", "Saudi Pilots flying"
-                      ,"The saudi national Football team Victory ","A Women carrying the Saudi flag"
+                      "Riyadh traffic",'Mecca',"Riyadh Tower","Saudis Celebrating national day", "Saudi Pilots flying a plane"
+                      ,"The saudi national Football team Victory ","A Women carrying the Saudi flag","Draw the Logo of your Faviorate Saudi company"
 ]
 
 
@@ -35,7 +35,8 @@ let mouseDown = false
 const home_nav_button = document.getElementById("home-nav-btn")
 const submit_nav_button = document.getElementById("submit-nav-btn")
 const leaderboard_btn = document.getElementById("leaderboard-btn")
- 
+var minutes =5;
+var seconds =0;
 
 
 let guessX = 0;  
@@ -47,7 +48,6 @@ let lines = []
 
 let mode = localStorage.getItem("mode")
 let username= localStorage.getItem("username")
-localStorage.setItem("blitz_count",0)
 
 function start(){
   //  localStorage.setItem("mode","prompt")
@@ -57,6 +57,7 @@ function start(){
     color_picker.value = "black"
     
     color_picker.onchange = ()=> ctx2.strokeStyle = color_picker.value
+    color_picker.onclick = () => color_picker.classList.remove("rainbow-border")
 
     ctx.strokeStyle = "black";
     ctx.lineWidth = 3;
@@ -311,6 +312,9 @@ function postImage(accurecy) {
     
                     drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
                     ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height);
+                    ctx2.fillStyle="white"
+                    ctx2.fillRect(0,0, canvasSetup_2.width,canvasSetup_2.height)
+                    ctx2.fill()
                     // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
                     canvasSetup.classList.remove("zero-opacity");
                     canvasSetup_2.classList.remove("zero-opacity");
@@ -432,6 +436,9 @@ function postImage(accurecy) {
     
                     drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
                     ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height);
+                    ctx2.fillStyle="white"
+                    ctx2.fillRect(0,0, canvasSetup_2.width,canvasSetup_2.height)
+                    ctx2.fill()
                     // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
                     canvasSetup.classList.remove("zero-opacity");
                     canvasSetup_2.classList.remove("zero-opacity");
@@ -444,7 +451,120 @@ function postImage(accurecy) {
 
 
     }
-    if(localStorage.getItem("mode")==="prompt"){}
+    if(localStorage.getItem("mode")==="prompt"){
+        Swal.fire({
+            title: "nice",
+            icon:"success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#55cc14",
+            cancelButtonText: "Try Another Prompt",
+            confirmButtonText: "Post it on the Board"
+        }).then((result) => {
+            console.log(result);
+            if (result.isConfirmed) {
+    
+                let temp_img = new Image();
+                temp_img.src = canvasSetup_2.toDataURL('image/png');
+    
+                Swal.fire({
+                    imageUrl: "naDay.jpg",
+                    imageWidth: 300,
+                    imageHeight: 300,
+                    title: "Write a comment: ",
+                    color: "green",
+                    "font-weight": "500",
+                    input: "textarea",
+                    inputAttributes: {
+                        autocapitalize: "off"
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: "post Art",
+                    showLoaderOnConfirm: true,
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then((result) => {
+                 
+                    ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
+                    if (result.isDismissed && result.dismiss == "cancel") {
+                        Swal.fire({
+                            title: "Post Cancelled",
+                            icon: "error",
+                            confirmButtonText: "Ok",
+                        });
+                    }
+                    if (result.isConfirmed) {
+                        canvasSetup_2.toBlob(blob => {
+    
+                            const onFileSelected = async (event) => {
+                                const uploadManager = new Bytescale.UploadManager({
+                                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
+                                });
+                                const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
+                                console.log("Path: " + filePath);
+                                console.log("Url: " + fileUrl);
+                                //  alert(`File uploaded:\n${fileUrl}`);
+                                fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
+                                    method: 'POST',
+                                    body: JSON.stringify({
+                                        username: username,
+                                        message: result.value,
+                                        userId: 0,
+                                        imgUrl: fileUrl,
+                                        accurecy: accurecy,
+                                        mode: mode
+                                    }),
+                                    headers: {
+                                        'Content-type': 'application/json; charset=UTF-8',
+                                    },
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        console.log(data);
+    
+                                        Swal.fire({
+                                            title: "Image posted To leaderboard!",
+                                            text: "Check out the leaderboard to see your post",
+                                            icon: "success"
+                                        });
+                                    });
+    
+                            };
+                            onFileSelected();
+                        });
+                    }
+
+                });
+            }
+    
+            if (result.isDismissed && result.dismiss == "cancel") {
+                // Swal.fire({
+                //   title: "Cancelled!",
+                //   text: "Your file has been deleted.",
+                //   icon: "success"
+                // });
+                let random_img = Math.floor(Math.random()*draw_prompts.length)
+                Swal.fire("Draw "+ draw_prompts[random_img]);
+                canvasSetup.classList.add("zero-opacity");
+                canvasSetup_2.classList.add("zero-opacity");
+                img.setAttribute("src", "Pixel.jpg");
+                setTimeout(() => {
+    
+                    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
+                    ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height);
+   
+                    ctx2.fillStyle="white"
+                    ctx2.fillRect(0,0, canvasSetup_2.width,canvasSetup_2.height)
+                    ctx2.fill()
+                    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+                    canvasSetup.classList.remove("zero-opacity");
+                    canvasSetup_2.classList.remove("zero-opacity");
+                }, 1700);
+    
+    
+            }
+        });
+
+    }
 
 
 
@@ -570,8 +690,6 @@ canvasSetup_2.addEventListener("touchend", event => mouseupHandle(event))
 
 window.addEventListener("resize", e => {
  
-   
-   
     canvasSetup_2.width = window.innerWidth * 0.45
     canvasSetup.width = window.innerWidth * 0.45
 
@@ -582,13 +700,9 @@ window.addEventListener("resize", e => {
         canvasSetup_2.height = window.innerHeight * 0.42
         canvasSetup.height = window.innerHeight * 0.42
     }
-
-    
         drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
         // drawImageProp(ctx2,temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
        // ctx2.drawImage(temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height)
- 
-   
 
 })
 

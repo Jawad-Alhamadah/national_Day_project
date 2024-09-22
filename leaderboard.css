@@ -318,3 +318,6 @@
  }
 
  
+ .nav-tabs .nav-item{
+    cursor: pointer;
+ }
