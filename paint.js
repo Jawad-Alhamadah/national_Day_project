@@ -254,6 +254,10 @@ function postImage(accurecy) {
                 }).then((result) => {
 
                     ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
+                    if(window.width<400){
+                        setTimeout(()=>ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height),1000)
+                    }
+                   
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
                             title: "Post Cancelled",
