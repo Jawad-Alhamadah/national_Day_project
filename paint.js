@@ -38,27 +38,27 @@ const time_span = document.getElementById("time")
 const another_btn = document.getElementById("another-btn")
 const dropper_btn = document.getElementById("dropper")
 const user_span = document.getElementById("user-span")
-let color_dropper=false
+let color_dropper = false
 let brush = true
 user_span.textContent = localStorage.getItem('username')
 
-dropper_btn.addEventListener("click",e=>{
-   if(color_dropper){
-    color_dropper=false
-    brush=true
-    dropper_btn.classList.remove("dropper-pressed")
+dropper_btn.addEventListener("click", e => {
+    if (color_dropper) {
+        color_dropper = false
+        brush = true
+        dropper_btn.classList.remove("dropper-pressed")
 
-   }else{
-   
-        color_dropper=true
-        brush=false
+    } else {
+
+        color_dropper = true
+        brush = false
         dropper_btn.classList.add("dropper-pressed")
-    
-       }
-   
+
+    }
+
 })
 
-canvasSetup.style.backgroundColor="black"
+canvasSetup.style.backgroundColor = "black"
 
 
 another_btn.addEventListener("click", e => {
@@ -88,8 +88,7 @@ setInterval(() => {
 
         seconds--
         if (minutes <= 0 && seconds <= 0 && !timed_out) {
-            // minutes = 0
-            // seconds = 0
+
             time_span.innerText = "0:00"
             submit_nav_button.click()
             timed_out = true
@@ -118,7 +117,7 @@ let mode = localStorage.getItem("mode")
 let username = localStorage.getItem("username")
 
 function start() {
-   
+
     time_span.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     ctx2.strokeStyle = "black"
     ctx2.strokeStyle = color_picker.value
@@ -188,14 +187,8 @@ function start() {
 
     }
 
-    // localStorage.setItem("username","guest")
-
     clearCanvas(canvasSetup_2.width, canvasSetup_2.height, ctx2);
-   // drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-   
- drawImageScaled(img, ctx)
-//  drawImageScaled(img, ctx2)
-
+    drawImageScaled(img, ctx)
 
 }
 
@@ -239,8 +232,6 @@ brush_range.addEventListener("mousemove", e => {
     let brush_size = document.getElementById("brush-size")
     brush_size.textContent = brush_range.value
 
-
-    // console.log(brush_range.value)
 })
 
 
@@ -298,12 +289,11 @@ function postImage(accurecy) {
 
                             const onFileSelected = async (event) => {
                                 const uploadManager = new Bytescale.UploadManager({
-                                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
+                                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
                                 console.log("Path: " + filePath);
                                 console.log("Url: " + fileUrl);
-                                //  alert(`File uploaded:\n${fileUrl}`);
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -335,13 +325,6 @@ function postImage(accurecy) {
                     }
 
 
-
-                    // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
-                    //     .then(res => res.json())
-                    //     .then(data => { console.log(data) })
-                    // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
-                    //     .then(res => res.json())
-                    //     .then(data => { console.log(data) })
                 });
             }
 
@@ -391,9 +374,6 @@ function postImage(accurecy) {
 
                     ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
 
-                    if (window.width < 400) {
-                        setTimeout(() => ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height), 1000)
-                    }
 
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
@@ -408,12 +388,11 @@ function postImage(accurecy) {
 
                             const onFileSelected = async (event) => {
                                 const uploadManager = new Bytescale.UploadManager({
-                                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
+                                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
                                 console.log("Path: " + filePath);
                                 console.log("Url: " + fileUrl);
-                                //  alert(`File uploaded:\n${fileUrl}`);
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -445,13 +424,6 @@ function postImage(accurecy) {
                     }
 
 
-
-                    // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
-                    //     .then(res => res.json())
-                    //     .then(data => { console.log(data) })
-                    // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
-                    //     .then(res => res.json())
-                    //     .then(data => { console.log(data) })
                 });
             }
 
@@ -461,10 +433,7 @@ function postImage(accurecy) {
                 minutes = 5
                 seconds = 0
                 time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
-
-
                 renewCanvas();
-
 
             }
 
@@ -473,7 +442,6 @@ function postImage(accurecy) {
                 minutes = 5
                 seconds = 0
                 time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
-
                 renewCanvas()
 
 
@@ -517,11 +485,6 @@ function postImage(accurecy) {
                 }).then((result) => {
 
                     ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
-
-                    if (window.width < 400) {
-                        setTimeout(() => ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height), 1000)
-                    }
-
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
                             title: "Post Cancelled",
@@ -534,12 +497,11 @@ function postImage(accurecy) {
 
                             const onFileSelected = async (event) => {
                                 const uploadManager = new Bytescale.UploadManager({
-                                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
+                                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
                                 console.log("Path: " + filePath);
                                 console.log("Url: " + fileUrl);
-                                //  alert(`File uploaded:\n${fileUrl}`);
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -585,13 +547,11 @@ function postImage(accurecy) {
     }
 
 
-
-
 }
 
 
-function randomImg(){
-    let random = Math.floor(( Math.random() *18 )) +1
+function randomImg() {
+    let random = Math.floor((Math.random() * 18)) + 1
     console.log(random)
 
     img.setAttribute("src", `rand${random}.png`);
@@ -601,23 +561,17 @@ function renewCanvas() {
     if (localStorage.getItem("mode") === "prompt") {
         let random_img = Math.floor(Math.random() * draw_prompts.length)
         Swal.fire("Draw " + draw_prompts[random_img]);
-        //renewCanvas()
 
     }
     canvasSetup.classList.add("zero-opacity");
     canvasSetup_2.classList.add("zero-opacity");
 
-    //img.setAttribute("src", "Pixel.jpg");
     randomImg()
     setTimeout(() => {
 
-       // drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
-       
         clearCanvas(canvasSetup_2.width, canvasSetup_2.height, ctx2);
         drawImageScaled(img, ctx)
-    //    drawImageScaled(img, ctx2)
 
-        
         canvasSetup.classList.remove("zero-opacity");
         canvasSetup_2.classList.remove("zero-opacity");
     }, 1700);
@@ -648,39 +602,33 @@ function mousedownHandler(event) {
         guessX = parseInt(event.offsetX * canvasSetup_2.width / canvasSetup_2.offsetWidth) + 5;
         guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
     }
-    // guessX = parseInt(event.touches[0].pageX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
-    // guessY = parseInt(event.touches[0].pageY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
-    // console.log(`coords:${guessX}x${guessY}`);
 
-    if(color_dropper){
+    if (color_dropper) {
         let img_data = ctx2.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
-        let pixel = getPixel(img_data,guessX,guessY)
-        ctx2.strokeStyle=`rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
-        color_picker.value=ctx2.strokeStyle
-        color_dropper=false;
-        brush=true
+        let pixel = getPixel(img_data, guessX, guessY)
+        ctx2.strokeStyle = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
+        color_picker.value = ctx2.strokeStyle
+        color_dropper = false;
+        brush = true
         dropper_btn.classList.remove("dropper-pressed")
 
     }
-    else{
+    else {
 
         ctx2.moveTo(guessX, guessY)
         ctx2.beginPath()
     }
-    
+
 }
 
 canvasSetup_2.addEventListener("mousedown", event => mousedownHandler(event))
-
 canvasSetup_2.addEventListener("touchstart", event => mousedownHandler(event))
-
-
 
 function mousemoveHandle(event) {
 
-  
-    user_span.style.left = event.clientX+30 +"px"
-    user_span.style.top =  event.clientY+30+"px"
+
+    user_span.style.left = event.clientX + 30 + "px"
+    user_span.style.top = event.clientY + 30 + "px"
 
     if (mouseDown) {
         if (event.touches) {
@@ -699,17 +647,14 @@ function mousemoveHandle(event) {
             guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
         }
 
-        // console.log(`coords:${guessX}x${guessY}`);
-        // ctx.strokeRect(guessX,guessY,10,10);
         ctx2.lineTo(guessX, guessY);
         ctx2.lineWidth = brush_range.value
         ctx2.stroke();
-        //    ctx2.fillRect(guessX,guessY,10,10)
     }
 
 }
 
-canvasSetup.addEventListener("mousedown",event=>{
+canvasSetup.addEventListener("mousedown", event => {
 
     if (event.touches) {
         const rect = event.target.getBoundingClientRect();
@@ -727,17 +672,17 @@ canvasSetup.addEventListener("mousedown",event=>{
         guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
     }
 
-    if(color_dropper){
+    if (color_dropper) {
         let img_data = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
-        let pixel = getPixel(img_data,guessX,guessY)
-        ctx2.strokeStyle=`rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
-        color_picker.value=ctx2.strokeStyle
-        color_dropper=false;
-        brush=true
+        let pixel = getPixel(img_data, guessX, guessY)
+        ctx2.strokeStyle = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
+        color_picker.value = ctx2.strokeStyle
+        color_dropper = false;
+        brush = true
         dropper_btn.classList.remove("dropper-pressed")
 
     }
-    
+
 })
 
 canvasSetup_2.addEventListener("mousemove", event => mousemoveHandle(event))
@@ -753,7 +698,6 @@ function mouseupHandle(event) {
     imgData2 = ctx2.getImageData(0, 0, canvasSetup_2.width, canvasSetup_2.height);
 
     let counter = 0;
-    // console.log(imgData.data.length)
     for (let i = 0; i < imgData.data.length; i++) {
         if (imgData.data[i] === imgData2.data[i])
             counter++
@@ -762,36 +706,6 @@ function mouseupHandle(event) {
         }
     }
 
-    //   canvasSetup_2.toBlob(blob=>{
-
-    //     const onFileSelected = async event => {
-    //         const uploadManager = new Bytescale.UploadManager({
-    //             apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
-    //           });
-    //           const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-    //           console.log(filePath)
-    //           alert(`File uploaded:\n${fileUrl}`);
-    //     }
-    //     onFileSelected()
-
-
-    //   })
-
-    //    fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image/",{
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       title: 'john',
-    //       data:[]
-    //     }),
-    //     headers: {
-    //       'Content-type': 'application/json; charset=UTF-8',
-    //     },
-    //   })
-    //     .then((response) => response.json())
-    //     .then((json) => console.log(json))
-    //     .catch(e=>{
-    //         console.log(e)
-    //     })
 }
 canvasSetup_2.addEventListener("mouseup", event => mouseupHandle(event))
 canvasSetup_2.addEventListener("touchend", event => mouseupHandle(event))
@@ -808,9 +722,9 @@ window.addEventListener("resize", e => {
         canvasSetup_2.height = window.innerHeight * 0.42
         canvasSetup.height = window.innerHeight * 0.42
     }
-   // drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-   drawImageScaled(img, ctx)
-//  drawImageScaled(img, ctx2)
+
+    drawImageScaled(img, ctx)
+
 
 })
 
@@ -824,11 +738,9 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
         h = ctx.canvas.height;
     }
 
-    // default offset is center
     offsetX = typeof offsetX === "number" ? offsetX : 0.5;
     offsetY = typeof offsetY === "number" ? offsetY : 0.5;
 
-    // keep bounds [0.0, 1.0]
     if (offsetX < 0) offsetX = 0;
     if (offsetY < 0) offsetY = 0;
     if (offsetX > 1) offsetX = 1;
@@ -837,35 +749,30 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
     var iw = img.width,
         ih = img.height,
         r = Math.min(w / iw, h / ih),
-        nw = iw * r,   // new prop. width
-        nh = ih * r,   // new prop. height
+        nw = iw * r,
+        nh = ih * r,
         cx, cy, cw, ch, ar = 1;
 
-    // decide which gap to fill    
+
     if (nw < w) ar = w / nw;
-    if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;  // updated
+    if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;
     nw *= ar;
     nh *= ar;
 
-    // calc source rectangle
     cw = iw / (nw / w);
     ch = ih / (nh / h);
 
     cx = (iw - cw) * offsetX;
     cy = (ih - ch) * offsetY;
 
-    // make sure source rectangle is valid
     if (cx < 0) cx = 0;
     if (cy < 0) cy = 0;
     if (cw > iw) cw = iw;
     if (ch > ih) ch = ih;
 
-    // fill image in dest. rectangle
     ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h);
 }
 
-
-// Prevent scrolling when touching the canvas
 document.body.addEventListener("touchstart", function (e) {
     if (e.target == canvasSetup_2) {
         e.preventDefault();
@@ -890,28 +797,26 @@ leaderboard_btn.addEventListener("click", e => {
 
 randomImg()
 
-setTimeout(()=>{
+setTimeout(() => {
     start()
-},1000)
-
-
+}, 1000)
 
 
 function drawImageScaled(img, ctx) {
-    var canvas = ctx.canvas ;
-    var hRatio = canvas.width  / img.width    ;
-    var vRatio =  canvas.height / img.height  ;
-    var ratio  = Math.min ( hRatio, vRatio );
-    var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-    var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    ctx.drawImage(img, 0,0, img.width, img.height,
-                       centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
- }
+    var canvas = ctx.canvas;
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    var ratio = Math.min(hRatio, vRatio);
+    var centerShift_x = (canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, img.width, img.height,
+        centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+}
 
 
- 
- function getPixel(imageData, x, y) {
+
+function getPixel(imageData, x, y) {
     index = (x + y * imageData.width) * 4
     return [imageData.data[index + 0], imageData.data[index + 1], imageData.data[index + 2], imageData.data[index + 3]]
-  }
+}

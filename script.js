@@ -2,14 +2,10 @@ let signup_nav = document.getElementById("signup-nav")
 let all_content = document.getElementById("all-content-container")
 let login_nav =document.getElementById("nav-login")
  
-
-
 function homePage() {
     localStorage.clear()
     localStorage.setItem("username","guest")
     all_content.innerHTML=""
-
-    
 
     let mainDiv = document.createElement('div');
     let leaderboardSplitContainer = document.createElement('div');
@@ -55,14 +51,12 @@ function homePage() {
     playButton.id = 'play-btn';
     playButton.textContent = 'Play';
 
-    // Append children for the play section
     playDiv.appendChild(playFilter);
     playDiv.appendChild(playButton);
     playRow.appendChild(playDiv);
     playSplitContainer.appendChild(playRow);
     mainDiv.appendChild(playSplitContainer);
     all_content.appendChild(mainDiv);
-
 
     let play_btn = document.getElementById("play-btn")
     let leaderboard_btn = document.getElementById("leaderboard-btn")

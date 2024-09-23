@@ -1,175 +1,135 @@
-
-
-
-.sign-card{
-    color: rgb(1, 138, 1);
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: 600;
+.sign-card {
+  color: rgb(1, 138, 1);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 600;
 }
 
-.bg-green{
-    background-color: rgb(216, 238, 185)
+.bg-green {
+  background-color: rgb(216, 238, 185);
 }
 
-@media(min-width:100px){
-    .sign-card{
-        width: 27em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-         font-size: 0.6em;
-    }
-     
+@media (min-width: 100px) {
+  .sign-card {
+    width: 27em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 0.6em;
+  }
 }
 
-
-
-@media(min-width:400px){
-    .sign-card{
-        width: 28em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-         font-size: 0.8em;
-    }
-     
+@media (min-width: 400px) {
+  .sign-card {
+    width: 28em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 0.8em;
+  }
 }
 
-
-
-
-@media(min-width:460px){
-    .sign-card{
-        width: 30em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-         font-size: 0.8em;
-    }
-     
+@media (min-width: 460px) {
+  .sign-card {
+    width: 30em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 0.8em;
+  }
 }
 
-
-
-@media(min-width:520px){
-    .sign-card{
-        width: 32em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-         font-size: 0.8em;
-    }
-     
+@media (min-width: 520px) {
+  .sign-card {
+    width: 32em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 0.8em;
+  }
 }
 
-
-
-@media(min-width:620px){
-    .sign-card{
-        width: 35em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-         font-size: 0.8em;
-    }
-     
+@media (min-width: 620px) {
+  .sign-card {
+    width: 35em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 0.8em;
+  }
 }
 
-
-@media(min-width:720px){
-    .sign-card{
-        width: 35em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-        font-size: 1em;
-    }
-     
+@media (min-width: 720px) {
+  .sign-card {
+    width: 35em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 1em;
+  }
 }
 
-
-
-
-@media(min-width:820px){
-    .sign-card{
-        width: 40em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-        font-size: 1em;
-    }
-     
+@media (min-width: 820px) {
+  .sign-card {
+    width: 40em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 1em;
+  }
 }
 
-
-
-@media(min-width:920px){
-    .sign-card{
-        width: 50em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-        font-size: 1em;
-    }
-     
+@media (min-width: 920px) {
+  .sign-card {
+    width: 50em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 1em;
+  }
 }
 
-
-
-@media(min-width:1300px){
-    .sign-card{
-        width: 40em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color:  #f7f7f7;;
-        font-size: 1em;
-    }
-     
+@media (min-width: 1300px) {
+  .sign-card {
+    width: 40em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: #f7f7f7;
+    font-size: 1em;
+  }
 }
 
-
- 
-
-body{
-    height: 100vh;
- 
+body {
+  height: 100vh;
 }
 
-.choice-btn{
-    background-color:  rgb(216, 238, 185);
-    color: green;
-    border: 4px solid rgb(112, 108, 24);
-    font-size: 1.3em;
-    font-weight: 600
-
-
+.choice-btn {
+  background-color: rgb(216, 238, 185);
+  color: green;
+  border: 4px solid rgb(112, 108, 24);
+  font-size: 1.3em;
+  font-weight: 600;
 }
 
 .choice-btn:hover {
-    background-color:  rgb(94, 135, 37);
-    color: white
-
+  background-color: rgb(94, 135, 37);
+  color: white;
 }
 
-.navbar{
-    background-color: rgb(216, 238, 185) !important
+.navbar {
+  background-color: rgb(216, 238, 185) !important;
 }
 
-.btn-warning{
-    background-color: #f8fd61 !important;
-    border: 0px !important;
-
-
+.btn-warning {
+  background-color: #f8fd61 !important;
+  border: 0px !important;
 }
 
-.btn-warning:hover{
-    background-color: #dfb613 !important;
-    border: 0px !important;
-
+.btn-warning:hover {
+  background-color: #dfb613 !important;
+  border: 0px !important;
 }
 
 input {
-    background-color: transparent;
-    border: 0px;
-    border:1px groove green !important;
-    
+  background-color: transparent;
+  border: 0px;
+  border: 1px groove green !important;
 }
 
-.main-container{
-    margin-top: 3em;
+.main-container {
+  margin-top: 3em;
 }
 
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }

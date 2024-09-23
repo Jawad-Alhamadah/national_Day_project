@@ -14,7 +14,7 @@ let nav_login = document.getElementById('nav-login')
 username_btn.textContent = localStorage.getItem("username")
 
 console.log(localStorage.getItem("username"))
-if (localStorage.getItem("username")==="guest"){
+if (localStorage.getItem("username") === "guest") {
 
     username_btn.classList.add("hidden")
     logout_btn.classList.add("hidden")
@@ -22,7 +22,7 @@ if (localStorage.getItem("username")==="guest"){
     signup_nav.classList.remove("hidden")
     nav_login.classList.remove("hidden")
 }
-else if(localStorage.getItem("username")!==undefined){
+else if (localStorage.getItem("username") !== undefined) {
 
     username_btn.classList.remove("hidden")
     logout_btn.classList.remove("hidden")
@@ -31,10 +31,10 @@ else if(localStorage.getItem("username")!==undefined){
     nav_login.classList.add("hidden")
 }
 
-logout_btn.addEventListener("click",e=>{
+logout_btn.addEventListener("click", e => {
     e.preventDefault()
     localStorage.clear()
-    localStorage.setItem("username","guest")
+    localStorage.setItem("username", "guest")
 
     username_btn.textContent = localStorage.getItem("username")
     username_btn.classList.add("hidden")
@@ -44,30 +44,18 @@ logout_btn.addEventListener("click",e=>{
 
 })
 
-
-
-
-mirror_btn.addEventListener("click", e=>{
+mirror_btn.addEventListener("click", e => {
     e.preventDefault()
-    // let a = document.createElement("a")
-    // a.setAttribute("href","")
-    // a.click()
-    localStorage.setItem("mode","mirror")
-    window.location="paint.html"
+    localStorage.setItem("mode", "mirror")
+    window.location = "paint.html"
 })
-prompt_btn.addEventListener("click", e=>{
+prompt_btn.addEventListener("click", e => {
     e.preventDefault()
-    // let a = document.createElement("a")
-    // a.setAttribute("href","")
-    // a.click()
-    localStorage.setItem("mode","prompt")
-    window.location="paint.html"
+    localStorage.setItem("mode", "prompt")
+    window.location = "paint.html"
 })
-quickdraw_btn.addEventListener("click", e=>{
+quickdraw_btn.addEventListener("click", e => {
     e.preventDefault()
-    // let a = document.createElement("a")
-    // a.setAttribute("href","")
-    // a.click()
-    localStorage.setItem("mode","quickdraw")
-    window.location="paint.html"
+    localStorage.setItem("mode", "quickdraw")
+    window.location = "paint.html"
 })

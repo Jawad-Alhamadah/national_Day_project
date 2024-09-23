@@ -86,20 +86,20 @@ signup_btn.addEventListener("click", e => {
         });
         return
     }
-    //Error checking.............................
+
     fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users?username=${usernameInput.value}`)
         .then(res => res.json())
         .then(data => {
             console.log("data" + data)
             console.log(data)
             console.log(data.length <= 0)
-            if (data.length <= 0 || data==="Not found") {
+            if (data.length <= 0 || data === "Not found") {
                 fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users?email=${emailInput.value}`)
                     .then(res_in => res_in.json())
                     .then(data_in => {
                         console.log("data_in")
                         console.log("data_in" + data_in)
-                        if (data_in.length <= 0 || data_in==="Not found") {
+                        if (data_in.length <= 0 || data_in === "Not found") {
                             fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users`, {
                                 method: "POST",
                                 body: JSON.stringify({
@@ -114,15 +114,15 @@ signup_btn.addEventListener("click", e => {
                                 .then(res_in_2 => res_in_2.json())
                                 .then(data_in_2 => {
                                     console.log("data_in_2" + data_in_2)
-                                   localStorage.setItem("username", data_in_2.username)
-                                   localStorage.setItem("email", data_in_2.email)
-                                   localStorage.setItem("user_id", data_in_2.id)
+                                    localStorage.setItem("username", data_in_2.username)
+                                    localStorage.setItem("email", data_in_2.email)
+                                    localStorage.setItem("user_id", data_in_2.id)
 
                                     Swal.fire({
                                         icon: "success",
                                         title: "SignUp Successful!",
 
-                                    }).then(res =>document.getElementById("pickmode").click())
+                                    }).then(res => document.getElementById("pickmode").click())
 
 
                                 })
@@ -141,7 +141,7 @@ signup_btn.addEventListener("click", e => {
 
                 return
             }
-            else{
+            else {
 
                 Swal.fire({
                     icon: "error",
@@ -150,7 +150,7 @@ signup_btn.addEventListener("click", e => {
                 });
                 return
             }
-           
+
 
         })
 
@@ -158,59 +158,59 @@ signup_btn.addEventListener("click", e => {
 
 })
 
-login_btn.addEventListener("click",e=>{
+login_btn.addEventListener("click", e => {
     e.preventDefault()
-    
-   if(login_password.value.length<=0){
-    Swal.fire({
-        icon: "error",
-        title: "Login failed",
-        text: "Password field is empty",
-    });
-    return
 
-   }
+    if (login_password.value.length <= 0) {
+        Swal.fire({
+            icon: "error",
+            title: "Login failed",
+            text: "Password field is empty",
+        });
+        return
 
-   if(login_username.value.length<=0){
-    Swal.fire({
-        icon: "error",
-        title: "Login failed",
-        text: "Email field is empty",
-    });
-    return
+    }
 
-   }
+    if (login_username.value.length <= 0) {
+        Swal.fire({
+            icon: "error",
+            title: "Login failed",
+            text: "Email field is empty",
+        });
+        return
+
+    }
 
     fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users?username=${login_username.value}`)
-   .then(res =>res.json())
-   .then(data=>{
-    console.log(data)
-        if(data ===undefined || data =="Not found" || data.length<=0){
-            Swal.fire({
-                icon: "error",
-                title: "Login failed",
-                text: "User not found",
-            });
-            return
-        
-         }
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if (data === undefined || data == "Not found" || data.length <= 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Login failed",
+                    text: "User not found",
+                });
+                return
 
-         if(data[0].password!==login_password.value){
-            Swal.fire({
-                icon: "error",
-                title: "incorrect password",
-               
-            });
-            return
+            }
 
-         }
-        
-        localStorage.setItem("username", data[0].username)
-        localStorage.setItem("email", data[0].email)
-        localStorage.setItem("user_id", data[0].id)
-        play_btn.click()
-        
-   })
+            if (data[0].password !== login_password.value) {
+                Swal.fire({
+                    icon: "error",
+                    title: "incorrect password",
+
+                });
+                return
+
+            }
+
+            localStorage.setItem("username", data[0].username)
+            localStorage.setItem("email", data[0].email)
+            localStorage.setItem("user_id", data[0].id)
+            play_btn.click()
+
+        })
 
 })
 

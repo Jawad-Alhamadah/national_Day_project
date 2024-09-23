@@ -1,149 +1,114 @@
-
-
-
-
-
-@media(min-width:100px){
-    .card{
-        width: 27em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-         font-size: 0.6em;
-    }
-     
-}
-
-
-
-@media(min-width:400px){
-    .card{
-        width: 28em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-         font-size: 0.8em;
-    }
-     
-}
-
-
-
-
-@media(min-width:460px){
-    .card{
-        width: 30em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-         font-size: 0.8em;
-    }
-     
-}
-
-
-
-@media(min-width:520px){
-    .card{
-        width: 32em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-         font-size: 0.8em;
-    }
-     
-}
-
-
-
-@media(min-width:620px){
-    .card{
-        width: 35em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-         font-size: 0.8em;
-    }
-     
-}
-
-
-@media(min-width:720px){
-    .card{
-        width: 35em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-        font-size: 1em;
-    }
-     
-}
-
-
-
-
-@media(min-width:820px){
-    .card{
-        width: 40em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-        font-size: 1em;
-    }
-     
-}
-
-
-
-@media(min-width:920px){
-    .card{
-        width: 50em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-        font-size: 1em;
-    }
-     
-}
-
-
-
-@media(min-width:1300px){
-    .card{
-        width: 50em !important;
-        border: 4px solid rgb(216, 238, 185) ;
-        background-color: beige;
-        font-size: 1em;
-    }
-     
-}
-
-
-.card{
-    width: 50em;
-    border: 4px solid rgb(216, 238, 185) ;
+@media (min-width: 100px) {
+  .card {
+    width: 27em !important;
+    border: 4px solid rgb(216, 238, 185);
     background-color: beige;
+    font-size: 0.6em;
+  }
 }
 
-body{
-    height: 100vh;
-    background-image: url("bg3.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+@media (min-width: 400px) {
+  .card {
+    width: 28em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 0.8em;
+  }
 }
 
-.choice-btn{
-    background-color:  rgb(216, 238, 185);
-    color: green;
-    border: 4px solid rgb(112, 108, 24);
-    font-size: 1.3em;
-    font-weight: 600
+@media (min-width: 460px) {
+  .card {
+    width: 30em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 0.8em;
+  }
+}
 
+@media (min-width: 520px) {
+  .card {
+    width: 32em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 0.8em;
+  }
+}
 
+@media (min-width: 620px) {
+  .card {
+    width: 35em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 0.8em;
+  }
+}
+
+@media (min-width: 720px) {
+  .card {
+    width: 35em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 820px) {
+  .card {
+    width: 40em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 920px) {
+  .card {
+    width: 50em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 1300px) {
+  .card {
+    width: 50em !important;
+    border: 4px solid rgb(216, 238, 185);
+    background-color: beige;
+    font-size: 1em;
+  }
+}
+
+.card {
+  width: 50em;
+  border: 4px solid rgb(216, 238, 185);
+  background-color: beige;
+}
+
+body {
+  height: 100vh;
+  background-image: url("bg3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.choice-btn {
+  background-color: rgb(216, 238, 185);
+  color: green;
+  border: 4px solid rgb(112, 108, 24);
+  font-size: 1.3em;
+  font-weight: 600;
 }
 
 .choice-btn:hover {
-    background-color:  rgb(94, 135, 37);
-    color: white
-
+  background-color: rgb(94, 135, 37);
+  color: white;
 }
 
-.navbar{
-    background-color: beige !important;
+.navbar {
+  background-color: beige !important;
 }
 
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }

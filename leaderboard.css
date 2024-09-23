@@ -1,31 +1,30 @@
-.hidden{
-   display: none;
+.hidden {
+  display: none;
 }
 
-
-.comment{
-    border: 2px solid #c7ca6c;
+.comment {
+  border: 2px solid #c7ca6c;
   background-color: #f4ffe4;
   border-radius: 5px;
 }
 
-.navbar-bg-darkgreen{
-    background-color:#1d3e03 !important
+.navbar-bg-darkgreen {
+  background-color: #1d3e03 !important;
 }
 
-.navbar-bg-darkgreen a{
-   color: #d8eeb9 !important;
-   font-size: 1.2em;
-   margin-left: 0.5em;
-   padding: 0.7em;
-   transition: 0.5s;
+.navbar-bg-darkgreen a {
+  color: #d8eeb9 !important;
+  font-size: 1.2em;
+  margin-left: 0.5em;
+  padding: 0.7em;
+  transition: 0.5s;
 }
 
-.navbar-bg-darkgreen a:hover{
- color: green;
- background-color: #446f08;
- transform: scale(1.1);
- }
+.navbar-bg-darkgreen a:hover {
+  color: green;
+  background-color: #446f08;
+  transform: scale(1.1);
+}
 /* 
  .score-img img{
      height:200px !important;
@@ -34,21 +33,20 @@
      
  } */
 
- .username-icon img{
-    height:50px !important;
-    width: 50px !important;
- }
+.username-icon img {
+  height: 50px !important;
+  width: 50px !important;
+}
 
-
- .comment-div{
-    padding-left: 1em;
- }
- /* .main-card{
+.comment-div {
+  padding-left: 1em;
+}
+/* .main-card{
     width: 80em;
  }
  */
 
- /* .main-color{
+/* .main-color{
     background-color: #212529 !important;
    
 
@@ -60,266 +58,224 @@
 }
 
 */
- .accent-text-color{
-    color: #047622 !important;
- } 
-
- .card-body{
-    font-size: 2em;
-    border:5px solid #d8eeb9;
-    margin: 0px !important;
-    padding: 0px !important;
- }
-
- .comment{
-    font-size: 0.5em !important;
- }
-
- .card{
-    border: 0px;
- }
-
-
-
-
-
- @media (max-width:320px) {
-    .main-card{
-        width: 19em;
-     }
-    
-     .score-img img{
-        height:50px !important;
-        width:50px !important;
-        border: 2px solid black;
-        
-    }
-
-    .card-body{
-        font-size: 1em;
-      
-     }
+.accent-text-color {
+  color: #047622 !important;
 }
 
-
- @media (min-width:320px) {
-    .main-card{
-        width: 20em;
-     }
-    
-     .score-img img{
-        height:80px !important;
-        width: 80px !important;
-        border: 2px solid black;
-        
-    }
-
-    .card-body{
-        font-size: 1em;
-      
-     }
+.card-body {
+  font-size: 2em;
+  border: 5px solid #d8eeb9;
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
-
-
- @media (min-width:440px) {
-    .main-card{
-        width: 25em;
-     }
-     .score-img img{
-        height:70px !important;
-        width: 70px !important;
-        border: 2px solid black;
-        
-    }
-
-    .card-body{
-        font-size: 1.2em;
-      
-     }
-
-     .username-icon img{
-        height:60px !important;
-        width: 60px !important;
-     }
-    
+.comment {
+  font-size: 0.5em !important;
 }
 
-
-
- @media (min-width:500px) {
-    .main-card{
-        width: 30em;
-     }
-     .score-img img{
-        height:70px !important;
-        width: 70px !important;
-        border: 2px solid black;
-        
-    }
-    
-    .card-body{
-        font-size: 1.4em;
-      
-     }
-
-     .username-icon img{
-        height:60px !important;
-        width: 60px !important;
-     }
-    
+.card {
+  border: 0px;
 }
 
+@media (max-width: 320px) {
+  .main-card {
+    width: 19em;
+  }
 
+  .score-img img {
+    height: 50px !important;
+    width: 50px !important;
+    border: 2px solid black;
+  }
 
- @media (min-width:700px) {
-    .main-card{
-        width: 40em;
-     }
-    
-     .score-img img{
-        height:100px !important;
-        width: 100px !important;
-        border: 2px solid black;
-        
-    }
-
-    .username-icon img{
-        height:100px !important;
-        width: 100px !important;
-     }
-
-     .card-body{
-        font-size: 1.7em;
-      
-     }
+  .card-body {
+    font-size: 1em;
+  }
 }
 
+@media (min-width: 320px) {
+  .main-card {
+    width: 20em;
+  }
 
- @media (min-width:860px) {
-    .main-card{
-        width: 50em;
-     }
-    
-     .score-img img{
-        height:120px !important;
-        width: 120px !important;
-        border: 2px solid black;
-        
-    }
+  .score-img img {
+    height: 80px !important;
+    width: 80px !important;
+    border: 2px solid black;
+  }
 
-    .username-icon img{
-        height:100px !important;
-        width: 100px !important;
-     }
-
-     .card-body{
-        font-size: 1.9em;
-      
-     }
+  .card-body {
+    font-size: 1em;
+  }
 }
 
+@media (min-width: 440px) {
+  .main-card {
+    width: 25em;
+  }
+  .score-img img {
+    height: 70px !important;
+    width: 70px !important;
+    border: 2px solid black;
+  }
 
+  .card-body {
+    font-size: 1.2em;
+  }
 
-
- @media (min-width:990px) {
-    .main-card{
-        width: 58em;
-     }
-     .score-img img{
-        height:120px !important;
-        width: 120px !important;
-        border: 2px solid black;
-        
-    }
-    
-    .username-icon img{
-        height:100px !important;
-        width: 100px !important;
-        
-     }
-
-     .card-body{
-        font-size: 2em;
-      
-     }
-
-
+  .username-icon img {
+    height: 60px !important;
+    width: 60px !important;
+  }
 }
 
- 
+@media (min-width: 500px) {
+  .main-card {
+    width: 30em;
+  }
+  .score-img img {
+    height: 70px !important;
+    width: 70px !important;
+    border: 2px solid black;
+  }
 
- @media (min-width:1105px) {
-    .main-card{
-        width: 63em;
-     }
-     .score-img img{
-        height:120px !important;
-        width: 120px !important;
-        border: 2px solid black;
-        
-    }
-    
+  .card-body {
+    font-size: 1.4em;
+  }
 
-    .username-icon img{
-        height:100px !important;
-        width: 100px !important;
-     }
-
-     .card-body{
-        font-size: 2.4em;
-      
-     }
+  .username-icon img {
+    height: 60px !important;
+    width: 60px !important;
+  }
 }
 
+@media (min-width: 700px) {
+  .main-card {
+    width: 40em;
+  }
 
-
-@media (min-width:1300px) {
-    .main-card{
-        width: 80em;
-     }
-     .score-img img{
-        height:120px !important;
-        width: 120px !important;
-        border: 2px solid black;
-        
-    }
-    
-
-    
- .username-icon img{
-    height:100px !important;
+  .score-img img {
+    height: 100px !important;
     width: 100px !important;
- }
+    border: 2px solid black;
+  }
 
- .card-body{
+  .username-icon img {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .card-body {
+    font-size: 1.7em;
+  }
+}
+
+@media (min-width: 860px) {
+  .main-card {
+    width: 50em;
+  }
+
+  .score-img img {
+    height: 120px !important;
+    width: 120px !important;
+    border: 2px solid black;
+  }
+
+  .username-icon img {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .card-body {
+    font-size: 1.9em;
+  }
+}
+
+@media (min-width: 990px) {
+  .main-card {
+    width: 58em;
+  }
+  .score-img img {
+    height: 120px !important;
+    width: 120px !important;
+    border: 2px solid black;
+  }
+
+  .username-icon img {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .card-body {
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 1105px) {
+  .main-card {
+    width: 63em;
+  }
+  .score-img img {
+    height: 120px !important;
+    width: 120px !important;
+    border: 2px solid black;
+  }
+
+  .username-icon img {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .card-body {
+    font-size: 2.4em;
+  }
+}
+
+@media (min-width: 1300px) {
+  .main-card {
+    width: 80em;
+  }
+  .score-img img {
+    height: 120px !important;
+    width: 120px !important;
+    border: 2px solid black;
+  }
+
+  .username-icon img {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .card-body {
     font-size: 2.6em;
-  
- }
+  }
 }
 
-
-.nav-tabs a{
-    text-decoration: none;
-    color: #8aa762;
+.nav-tabs a {
+  text-decoration: none;
+  color: #8aa762;
 }
-.nav-tabs a:hover{
-   color: #d8eeb9;
-   cursor: 1;
+.nav-tabs a:hover {
+  color: #d8eeb9;
+  cursor: 1;
 }
 
-.main-card{
-    padding: 0px;
-    margin: 0px;
- }
+.main-card {
+  padding: 0px;
+  margin: 0px;
+}
 
- .card-body{
-    margin-top: 0.2em !important;
-    background: rgb(231,249,244);
-    background: linear-gradient(135deg, rgb(255, 255, 255) 60%, rgb(216, 238, 185) 60%, rgb(216, 238, 185) 98%);
- }
+.card-body {
+  margin-top: 0.2em !important;
+  background: rgb(231, 249, 244);
+  background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255) 60%,
+    rgb(216, 238, 185) 60%,
+    rgb(216, 238, 185) 98%
+  );
+}
 
- 
- .nav-tabs .nav-item{
-    cursor: pointer;
- }
+.nav-tabs .nav-item {
+  cursor: pointer;
+}

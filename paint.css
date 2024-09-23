@@ -1,8 +1,7 @@
-#user-span{
+#user-span {
   position: fixed;
   z-index: 10;
 }
-
 
 @media (max-width: 650px) {
   .canvas-container {
@@ -138,7 +137,6 @@ canvas {
   transition: 0.5s;
   font-weight: 500;
   font-size: 0.9em;
-  
 }
 
 .side-btn:hover {
@@ -147,17 +145,10 @@ canvas {
   background-color: rgb(106, 153, 18);
   font-weight: 500;
   z-index: 5;
-  
 }
 
 .share-button:hover::after {
-  /* content:url("world-flag.png");
-display: flex;
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    right: 0px;
-    top:0px */
+
 }
 
 #tools {
@@ -190,7 +181,6 @@ input[type="range"] {
 .swal2-title {
   font-weight: 500 !important;
 }
-
 
 #time {
   color: rgb(233, 17, 6);
@@ -245,13 +235,12 @@ input[type="range"] {
   border: 2px solid rgb(255, 0, 0);
 }
 
-
-.dropper-btn{
+.dropper-btn {
   background-color: rgb(208, 187, 24);
   color: black;
   padding: 2px;
 }
-.dropper-pressed{
+.dropper-pressed {
   background-color: rgb(169, 93, 6);
   color: black;
   border: 2px solid blue;

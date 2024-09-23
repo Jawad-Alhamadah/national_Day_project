@@ -180,13 +180,3 @@ function createCard(username, score, imgUrl, message, mode,isRecent) {
     board.appendChild(cardBody)
 
 }
-
-
-
-// fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image?")
-// .then(res=>res.json())
-// .then(data=>{
-//     console.log(data)
-//      data.map(data=>createCard(data.username,data.accurecy,data.imgUrl,data.message))
-//   //  createCard(data.username,data.score,data.imgUrl,data.message)
-// })
