@@ -165,3 +165,11 @@ input {
     border:1px groove green !important;
     
 }
+
+.main-container{
+    margin-top: 3em;
+}
+
+.hidden{
+    display: none;
+}

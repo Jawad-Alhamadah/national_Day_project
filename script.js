@@ -2,13 +2,14 @@ let signup_nav = document.getElementById("signup-nav")
 let all_content = document.getElementById("all-content-container")
 let login_nav =document.getElementById("nav-login")
  
-localStorage.setItem("username","guest")
 
 
 function homePage() {
-
- 
+    localStorage.clear()
+    localStorage.setItem("username","guest")
     all_content.innerHTML=""
+
+    
 
     let mainDiv = document.createElement('div');
     let leaderboardSplitContainer = document.createElement('div');

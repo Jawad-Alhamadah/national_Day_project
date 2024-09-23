@@ -5,6 +5,50 @@ let mirror_btn = document.getElementById("mirror-btn")
 let recent_btn = document.getElementById("recent-btn")
 let play_btn = document.getElementById("play-btn")
 
+let logout_btn = document.getElementById("log-out")
+let username_btn = document.getElementById("username")
+
+let signup_nav = document.getElementById('signup-nav')
+let nav_login = document.getElementById('nav-login')
+
+
+
+username_btn.textContent = localStorage.getItem("username")
+
+if (localStorage.getItem("username")==="guest"){
+
+    username_btn.classList.add("hidden")
+    logout_btn.classList.add("hidden")
+    
+    signup_nav.classList.remove("hidden")
+    nav_login.classList.remove("hidden")
+}
+else if(localStorage.getItem("username")!==undefined){
+
+    username_btn.classList.remove("hidden")
+    logout_btn.classList.remove("hidden")
+
+    signup_nav.classList.add("hidden")
+    nav_login.classList.add("hidden")
+}
+
+
+
+logout_btn.addEventListener("click",e=>{
+    e.preventDefault()
+    localStorage.clear()
+    localStorage.setItem("username","guest")
+
+    username_btn.classList.remove("hidden")
+    logout_btn.classList.remove("hidden")
+
+    signup_nav.classList.add("hidden")
+    nav_login.classList.add("hidden")
+
+})
+
+
+
 
 play_btn.addEventListener("click", e => {
     let a = document.createElement("a")
