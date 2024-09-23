@@ -15,7 +15,7 @@ const essentialColors = [
 const draw_prompts = ["King Abdullah", "Prince Mohammed bin Salman", "a Saudi Guy", "Arabic Coffee", "Al Madinah"
     , " 100 Riyal Note", "a Camel", `the first thing you think of when you hear "national day"`, "Palm tree and dates",
     "Riyadh traffic", 'Mecca', "Riyadh Tower", "Saudis Celebrating national day", "Saudi Pilots flying a plane"
-    , "The Saudi national Football team Win ","Fireworks in the Capital","Giant Truck with Giant Flags", "A Women carrying the Saudi flag", "Draw the Logo of your Favorite Saudi company"
+    , "The Saudi national Football team Win ", "Fireworks in the Capital", "Giant Truck with Giant Flags", "A Women carrying the Saudi flag", "Draw the Logo of your Favorite Saudi company"
 ]
 
 
@@ -36,8 +36,9 @@ const leaderboard_btn = document.getElementById("leaderboard-btn")
 const time_span = document.getElementById("time")
 
 const another_btn = document.getElementById("another-btn")
+canvasSetup.style.backgroundColor="black"
 
-another_btn.addEventListener("click",e=>{
+another_btn.addEventListener("click", e => {
     minutes = 5;
     seconds = 0;
     time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
@@ -63,25 +64,25 @@ setInterval(() => {
         time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
 
         seconds--
-        if (minutes <=0 && seconds <=0 && !timed_out) {
+        if (minutes <= 0 && seconds <= 0 && !timed_out) {
             // minutes = 0
             // seconds = 0
             time_span.innerText = "0:00"
             submit_nav_button.click()
-            timed_out=true
+            timed_out = true
             console.log("triggered once")
 
         }
 
-        if (seconds <0 && minutes > 0) {
+        if (seconds < 0 && minutes > 0) {
             seconds = 59
             minutes--
 
 
         }
 
-        if(seconds<0){
-            seconds=0
+        if (seconds < 0) {
+            seconds = 0
         }
     }
 
@@ -94,7 +95,7 @@ let mode = localStorage.getItem("mode")
 let username = localStorage.getItem("username")
 
 function start() {
-
+   
     time_span.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     ctx2.strokeStyle = "black"
     ctx2.strokeStyle = color_picker.value
@@ -142,7 +143,7 @@ function start() {
         canvasSetup.style.display = "none"
         canvasSetup_2.width = window.innerWidth * 0.90
         canvasSetup_2.height = window.innerHeight * 0.85
-        another_btn.textContent="Another Prompt"
+        another_btn.textContent = "Another Prompt"
         let random_img = Math.floor(Math.random() * draw_prompts.length)
         Swal.fire("Draw " + draw_prompts[random_img]);
 
@@ -151,14 +152,14 @@ function start() {
     if (localStorage.getItem("mode") === "mirror") {
 
         time_span.classList.add("hidden")
-        Swal.fire("Draw the image accurately ");
+        Swal.fire("Draw the image accurately");
     }
 
     if (localStorage.getItem("mode") === "quickdraw") {
         time_span.classList.remove("hidden")
         Swal.fire("Draw the image quickly! you only have 5 minutes")
             .then(res => {
-                
+
 
             });
 
@@ -166,10 +167,11 @@ function start() {
 
     // localStorage.setItem("username","guest")
 
-    clearCanvas(canvasSetup_2.width, canvasSetup_2.height,ctx2);
-    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-    //ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height)
-    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    clearCanvas(canvasSetup_2.width, canvasSetup_2.height, ctx2);
+   // drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+   
+ drawImageScaled(img, ctx)
+//  drawImageScaled(img, ctx2)
 
 
 }
@@ -254,16 +256,14 @@ function postImage(accurecy) {
                 }).then((result) => {
 
                     ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
-                    if(window.width<400){
-                        setTimeout(()=>ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height),1000)
+                    if (window.width < 400) {
+                        setTimeout(() => ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height), 1000)
                     }
-                   
+
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
                             title: "Post Cancelled",
-
                             icon: "error",
-
                             confirmButtonText: "Ok",
                         });
 
@@ -555,10 +555,15 @@ function postImage(accurecy) {
 }
 
 
+function randomImg(){
+    let random = Math.floor(( Math.random() *18 )) +1
+    console.log(random)
 
+    img.setAttribute("src", `rand${random}.png`);
+}
 function renewCanvas() {
 
-    if(localStorage.getItem("mode")==="prompt"){
+    if (localStorage.getItem("mode") === "prompt") {
         let random_img = Math.floor(Math.random() * draw_prompts.length)
         Swal.fire("Draw " + draw_prompts[random_img]);
         //renewCanvas()
@@ -566,13 +571,18 @@ function renewCanvas() {
     }
     canvasSetup.classList.add("zero-opacity");
     canvasSetup_2.classList.add("zero-opacity");
-    img.setAttribute("src", "Pixel.jpg");
+
+    //img.setAttribute("src", "Pixel.jpg");
+    randomImg()
     setTimeout(() => {
 
-        drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
-        clearCanvas(canvasSetup_2.width, canvasSetup_2.height,ctx2);
+       // drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
        
-        // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+        clearCanvas(canvasSetup_2.width, canvasSetup_2.height, ctx2);
+        drawImageScaled(img, ctx)
+    //    drawImageScaled(img, ctx2)
+
+        
         canvasSetup.classList.remove("zero-opacity");
         canvasSetup_2.classList.remove("zero-opacity");
     }, 1700);
@@ -714,9 +724,9 @@ window.addEventListener("resize", e => {
         canvasSetup_2.height = window.innerHeight * 0.42
         canvasSetup.height = window.innerHeight * 0.42
     }
-    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-    // drawImageProp(ctx2,temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-    // ctx2.drawImage(temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height)
+   // drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+   drawImageScaled(img, ctx)
+//  drawImageScaled(img, ctx2)
 
 })
 
@@ -794,5 +804,23 @@ leaderboard_btn.addEventListener("click", e => {
     a.click()
 })
 
+randomImg()
 
-start()
+setTimeout(()=>{
+    start()
+},1000)
+
+
+
+
+function drawImageScaled(img, ctx) {
+    var canvas = ctx.canvas ;
+    var hRatio = canvas.width  / img.width    ;
+    var vRatio =  canvas.height / img.height  ;
+    var ratio  = Math.min ( hRatio, vRatio );
+    var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+    var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.drawImage(img, 0,0, img.width, img.height,
+                       centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
+ }

@@ -6,9 +6,9 @@ let recent_btn = document.getElementById("recent-btn")
 let play_btn = document.getElementById("play-btn")
 
 
-play_btn.addEventListener("click" , e=>{
+play_btn.addEventListener("click", e => {
     let a = document.createElement("a")
-    a.setAttribute("href","pickmode.html")
+    a.setAttribute("href", "pickmode.html")
     a.click()
 })
 quickdraw_btn.addEventListener("click", e => {
@@ -84,56 +84,43 @@ recent_btn.click()
 function createCard(username, score, imgUrl, message, mode) {
 
     const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body', 'secondary-color');
-
     const rowDiv = document.createElement('div');
-    rowDiv.classList.add('row', 'g-0', 'd-flex', 'align-items-center', "pt-2");
-
-
     const usernameIconDiv = document.createElement('div');
-    usernameIconDiv.classList.add('col-2', 'username-icon');
-
     const usernameImg = document.createElement('img');
+    const commentDiv = document.createElement('div');
+    const usernameTextDiv = document.createElement('div');
+    const commentTextDiv = document.createElement('div');
+    const scoreImgDiv = document.createElement('div');
+    const scoreTextDiv = document.createElement('div');
+    const scoreImg = document.createElement('img');
+
+    cardBody.classList.add('card-body', 'secondary-color');
+    rowDiv.classList.add('row', 'g-0', 'd-flex', 'align-items-center', "pt-2");
+    usernameIconDiv.classList.add('col-2', 'username-icon');
+    commentDiv.classList.add('col-4', 'comment-div');
+    usernameTextDiv.classList.add('col-12', 'text-start', 'accent-text-color');
+    commentTextDiv.classList.add('col-12', 'text-start', 'accent-text-color', 'comment', "mt-2");
+    scoreImgDiv.classList.add("col-4", "col-sm-2", "col-md-2", "col-lg-2", 'score-img', "d-grid", "justify-content-center", "pb-2");
+    scoreTextDiv.classList.add('accent-text-color', "text-center", 'col-2', 'col-sm-4', 'col-md-4', 'col-lg-4',
+        "d-flex", "justify-content-lg-end", "justify-content-md-end",
+        "justify-content-sm-end", "justify-content-center"
+    );
+
+
+
     usernameImg.src = 'saudi-arabia.png';
     usernameImg.alt = '';
-
-    usernameIconDiv.appendChild(usernameImg);
-
-
-    const commentDiv = document.createElement('div');
-    commentDiv.classList.add('col-4', 'comment-div');
-
-
-    const usernameTextDiv = document.createElement('div');
-    usernameTextDiv.classList.add('col-12', 'text-start', 'accent-text-color');
-    usernameTextDiv.textContent = username + (mode === "none" ? "" : "-" + mode) 
-
-
-    const commentTextDiv = document.createElement('div');
-    commentTextDiv.classList.add('col-12', 'text-start', 'accent-text-color', 'comment' ,"mt-2");
-    commentTextDiv.textContent = message;
-
-
-    commentDiv.appendChild(usernameTextDiv);
-    commentDiv.appendChild(commentTextDiv);
-
-
-    const scoreImgDiv = document.createElement('div');
-    scoreImgDiv.classList.add( "col-4","col-sm-2","col-md-2","col-lg-2", 'score-img', "d-grid", "justify-content-center", "pb-2");
-
-
-    const scoreTextDiv = document.createElement('div');
-    scoreTextDiv.classList.add('accent-text-color', "text-center",'col-2','col-sm-4','col-md-4','col-lg-4',
-                               "d-flex", "justify-content-lg-end", "justify-content-md-end",
-                               "justify-content-sm-end","justify-content-center"
-                            );
-    scoreTextDiv.textContent = mode === "prompt" ? "" :  score + "/100";
-
-
-    const scoreImg = document.createElement('img');
     scoreImg.src = imgUrl;
     scoreImg.alt = 'art image';
 
+
+    usernameTextDiv.textContent = username + (mode === "none" ? "" : "-" + mode)
+    commentTextDiv.textContent = message;
+    scoreTextDiv.textContent = mode === "prompt" ? "" : score + "/100";
+
+    usernameIconDiv.appendChild(usernameImg);
+    commentDiv.appendChild(usernameTextDiv);
+    commentDiv.appendChild(commentTextDiv);
 
     scoreImgDiv.appendChild(scoreImg);
 

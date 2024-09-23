@@ -42,6 +42,7 @@
   cursor: url("bcursor2.png"), auto;
   touch-action: none;
   transition: 1s;
+  /* image-rendering: pixelated !important; */
 }
 
 .zero-opacity {
