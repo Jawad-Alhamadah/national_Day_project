@@ -39,13 +39,15 @@ logout_btn.addEventListener("click",e=>{
     localStorage.clear()
     localStorage.setItem("username","guest")
 
-    username_btn.classList.remove("hidden")
-    logout_btn.classList.remove("hidden")
-
-    signup_nav.classList.add("hidden")
-    nav_login.classList.add("hidden")
+    username_btn.textContent = localStorage.getItem("username")
+    username_btn.classList.add("hidden")
+    logout_btn.classList.add("hidden")
+    signup_nav.classList.remove("hidden")
+    nav_login.classList.remove("hidden")
 
 })
+
+
 
 
 
@@ -63,7 +65,7 @@ quickdraw_btn.addEventListener("click", e => {
         .then(data => {
             console.log(data)
 
-            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "none"))
+            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "quickdraw"))
             quickdraw_btn.classList.add("active")
             prompt_btn.classList.remove("active")
             mirror_btn.classList.remove("active")
@@ -79,7 +81,7 @@ prompt_btn.addEventListener("click", e => {
         .then(data => {
             console.log(data)
 
-            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "none"))
+            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "prompt"))
             quickdraw_btn.classList.remove("active")
             prompt_btn.classList.add("active")
             mirror_btn.classList.remove("active")
@@ -95,7 +97,7 @@ mirror_btn.addEventListener("click", e => {
         .then(data => {
             console.log(data)
 
-            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "none"))
+            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "mirror"))
             quickdraw_btn.classList.remove("active")
             prompt_btn.classList.remove("active")
             mirror_btn.classList.add("active")
@@ -111,7 +113,7 @@ recent_btn.addEventListener("click", e => {
         .then(data => {
             console.log(data)
             data.sort((a, b) => b.id - a.id)
-            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, item.mode))
+            data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, item.mode,"recent"))
 
             quickdraw_btn.classList.remove("active")
             prompt_btn.classList.remove("active")
@@ -125,7 +127,7 @@ recent_btn.click()
 
 
 
-function createCard(username, score, imgUrl, message, mode) {
+function createCard(username, score, imgUrl, message, mode,isRecent) {
 
     const cardBody = document.createElement('div');
     const rowDiv = document.createElement('div');
@@ -158,7 +160,7 @@ function createCard(username, score, imgUrl, message, mode) {
     scoreImg.alt = 'art image';
 
 
-    usernameTextDiv.textContent = username + (mode === "none" ? "" : "-" + mode)
+    usernameTextDiv.textContent = username + (isRecent === undefined ? "" : "-" + mode)
     commentTextDiv.textContent = message;
     scoreTextDiv.textContent = mode === "prompt" ? "" : score + "/100";
 

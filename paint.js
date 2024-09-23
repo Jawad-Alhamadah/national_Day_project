@@ -36,7 +36,28 @@ const leaderboard_btn = document.getElementById("leaderboard-btn")
 const time_span = document.getElementById("time")
 
 const another_btn = document.getElementById("another-btn")
+const dropper_btn = document.getElementById("dropper")
+let color_dropper=false
+let brush = true
+
+dropper_btn.addEventListener("click",e=>{
+   if(color_dropper){
+    color_dropper=false
+    brush=true
+    dropper_btn.classList.remove("dropper-pressed")
+
+   }else{
+   
+        color_dropper=true
+        brush=false
+        dropper_btn.classList.add("dropper-pressed")
+    
+       }
+   
+})
+
 canvasSetup.style.backgroundColor="black"
+
 
 another_btn.addEventListener("click", e => {
     minutes = 5;
@@ -616,8 +637,23 @@ function mousedownHandler(event) {
     // guessX = parseInt(event.touches[0].pageX*canvasSetup_2.width/canvasSetup_2.offsetWidth)+5;
     // guessY = parseInt(event.touches[0].pageY*canvasSetup_2.height/canvasSetup_2.offsetHeight)+5;
     // console.log(`coords:${guessX}x${guessY}`);
-    ctx2.moveTo(guessX, guessY)
-    ctx2.beginPath()
+
+    if(color_dropper){
+        let img_data = ctx2.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
+        let pixel = getPixel(img_data,guessX,guessY)
+        ctx2.strokeStyle=`rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
+        color_picker.value=ctx2.strokeStyle
+        color_dropper=false;
+        brush=true
+        dropper_btn.classList.remove("dropper-pressed")
+
+    }
+    else{
+
+        ctx2.moveTo(guessX, guessY)
+        ctx2.beginPath()
+    }
+    
 }
 
 canvasSetup_2.addEventListener("mousedown", event => mousedownHandler(event))
@@ -655,6 +691,36 @@ function mousemoveHandle(event) {
 
 }
 
+canvasSetup.addEventListener("mousedown",event=>{
+
+    if (event.touches) {
+        const rect = event.target.getBoundingClientRect();
+        const x_rel = event.touches[0].clientX - rect.left;
+        const y_rel = event.touches[0].clientY - rect.top;
+
+        const x = Math.round((x_rel * event.target.width) / rect.width);
+        const y = Math.round((y_rel * event.target.height) / rect.height);
+
+        guessX = parseInt(x);
+        guessY = parseInt(y);
+    }
+    else {
+        guessX = parseInt(event.offsetX * canvasSetup_2.width / canvasSetup_2.offsetWidth) + 5;
+        guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
+    }
+
+    if(color_dropper){
+        let img_data = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
+        let pixel = getPixel(img_data,guessX,guessY)
+        ctx2.strokeStyle=`rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
+        color_picker.value=ctx2.strokeStyle
+        color_dropper=false;
+        brush=true
+        dropper_btn.classList.remove("dropper-pressed")
+
+    }
+    
+})
 
 canvasSetup_2.addEventListener("mousemove", event => mousemoveHandle(event))
 canvasSetup_2.addEventListener("touchmove", event => mousemoveHandle(event))
@@ -824,3 +890,10 @@ function drawImageScaled(img, ctx) {
     ctx.drawImage(img, 0,0, img.width, img.height,
                        centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
  }
+
+
+ 
+ function getPixel(imageData, x, y) {
+    index = (x + y * imageData.width) * 4
+    return [imageData.data[index + 0], imageData.data[index + 1], imageData.data[index + 2], imageData.data[index + 3]]
+  }
