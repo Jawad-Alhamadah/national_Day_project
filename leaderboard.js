@@ -64,7 +64,7 @@ quickdraw_btn.addEventListener("click", e => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-
+            data.sort((a,b)=> b.accurecy - a.accurecy )
             data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "quickdraw"))
             quickdraw_btn.classList.add("active")
             prompt_btn.classList.remove("active")

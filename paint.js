@@ -511,7 +511,8 @@ function postImage(accurecy) {
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
 
-                    ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
+                    setTimeout(()=>{ ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height)},1000)
+                   
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
                             title: "Post Cancelled",
@@ -668,7 +669,7 @@ canvasSetup_2.addEventListener("touchstart", event => mousedownHandler(event))
 
 function mousemoveHandle(event) {
 
-    console.log(event)
+  
     user_span.style.left = event.clientX+30 +"px"
     user_span.style.top =  event.clientY+30+"px"
 
