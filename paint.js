@@ -37,8 +37,10 @@ const time_span = document.getElementById("time")
 
 const another_btn = document.getElementById("another-btn")
 const dropper_btn = document.getElementById("dropper")
+const user_span = document.getElementById("user-span")
 let color_dropper=false
 let brush = true
+user_span.textContent = localStorage.getItem('username')
 
 dropper_btn.addEventListener("click",e=>{
    if(color_dropper){
@@ -236,6 +238,8 @@ submit_nav_button.addEventListener("click", e => {
 brush_range.addEventListener("mousemove", e => {
     let brush_size = document.getElementById("brush-size")
     brush_size.textContent = brush_range.value
+
+
     // console.log(brush_range.value)
 })
 
@@ -663,6 +667,10 @@ canvasSetup_2.addEventListener("touchstart", event => mousedownHandler(event))
 
 
 function mousemoveHandle(event) {
+
+    console.log(event)
+    user_span.style.left = event.clientX+30 +"px"
+    user_span.style.top =  event.clientY+30+"px"
 
     if (mouseDown) {
         if (event.touches) {
