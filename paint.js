@@ -12,13 +12,11 @@ const essentialColors = [
 ];
 
 
-const draw_prompts = ["King Abdullah", "Prince Mohammed bin Salman","a Saudi Guy", "Arabic Coffee","Al Madinah"
-                      ," 100 Riyal Note", "a Camel",`the first thing you think of when you hear "national day"`, "Palm tree and dates",
-                      "Riyadh traffic",'Mecca',"Riyadh Tower","Saudis Celebrating national day", "Saudi Pilots flying a plane"
-                      ,"The saudi national Football team Victory ","A Women carrying the Saudi flag","Draw the Logo of your Faviorate Saudi company"
+const draw_prompts = ["King Abdullah", "Prince Mohammed bin Salman", "a Saudi Guy", "Arabic Coffee", "Al Madinah"
+    , " 100 Riyal Note", "a Camel", `the first thing you think of when you hear "national day"`, "Palm tree and dates",
+    "Riyadh traffic", 'Mecca', "Riyadh Tower", "Saudis Celebrating national day", "Saudi Pilots flying a plane"
+    , "The Saudi national Football team Win ","Fireworks in the Capital","Giant Truck with Giant Flags", "A Women carrying the Saudi flag", "Draw the Logo of your Favorite Saudi company"
 ]
-
-
 
 
 const canvasSetup = document.getElementById("myCanvas");
@@ -35,34 +33,80 @@ let mouseDown = false
 const home_nav_button = document.getElementById("home-nav-btn")
 const submit_nav_button = document.getElementById("submit-nav-btn")
 const leaderboard_btn = document.getElementById("leaderboard-btn")
-var minutes =5;
-var seconds =0;
+const time_span = document.getElementById("time")
+
+const another_btn = document.getElementById("another-btn")
+
+another_btn.addEventListener("click",e=>{
+    minutes = 5;
+    seconds = 0;
+    time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+    renewCanvas()
 
 
-let guessX = 0;  
-let guessY = 0;  
+})
+
+
+let init_time = Date.now()
+var minutes = 5;
+var seconds = 0;
+
+let guessX = 0;
+let guessY = 0;
 
 let lines = []
+let timed_out = false
+
+setInterval(() => {
+    if (Date.now() - init_time > 1000) {
+        init_time = Date.now()
+        time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+
+        seconds--
+        if (minutes <=0 && seconds <=0 && !timed_out) {
+            // minutes = 0
+            // seconds = 0
+            time_span.innerText = "0:00"
+            submit_nav_button.click()
+            timed_out=true
+            console.log("triggered once")
+
+        }
+
+        if (seconds <0 && minutes > 0) {
+            seconds = 59
+            minutes--
+
+
+        }
+
+        if(seconds<0){
+            seconds=0
+        }
+    }
+
+}, 100)
+
 
 
 
 let mode = localStorage.getItem("mode")
-let username= localStorage.getItem("username")
+let username = localStorage.getItem("username")
 
-function start(){
-  //  localStorage.setItem("mode","prompt")
-   
+function start() {
+
+    time_span.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     ctx2.strokeStyle = "black"
     ctx2.strokeStyle = color_picker.value
     color_picker.value = "black"
-    
-    color_picker.onchange = ()=> ctx2.strokeStyle = color_picker.value
+
+    color_picker.onchange = () => ctx2.strokeStyle = color_picker.value
     color_picker.onclick = () => color_picker.classList.remove("rainbow-border")
 
     ctx.strokeStyle = "black";
     ctx.lineWidth = 3;
     brush_range.value = 1
-    
+
 
     for (let i = 0; i < 40; i++) {
         let div = document.createElement("div")
@@ -77,57 +121,58 @@ function start(){
     }
 
 
-    
+
     canvasSetup_2.width = window.innerWidth * 0.45
     canvasSetup.width = window.innerWidth * 0.45
-    
+
     canvasSetup_2.height = window.innerHeight * 0.85
     canvasSetup.height = window.innerHeight * 0.85
-    
+
     if (window.innerWidth <= 650) {
         canvasSetup_2.width = window.innerWidth * 0.90
         canvasSetup.width = window.innerWidth * 0.90
-    
+
         canvasSetup_2.height = window.innerHeight * 0.42
         canvasSetup.height = window.innerHeight * 0.42
     }
 
+    if (localStorage.getItem("mode") === "prompt") {
 
-
-
-
-    if(  localStorage.getItem("mode")==="prompt" ){
-        canvasSetup.style.display="none"
+        time_span.classList.add("hidden")
+        canvasSetup.style.display = "none"
         canvasSetup_2.width = window.innerWidth * 0.90
         canvasSetup_2.height = window.innerHeight * 0.85
-        let random_img = Math.floor(Math.random()*draw_prompts.length)
-        Swal.fire("Draw "+ draw_prompts[random_img]);
+        another_btn.textContent="Another Prompt"
+        let random_img = Math.floor(Math.random() * draw_prompts.length)
+        Swal.fire("Draw " + draw_prompts[random_img]);
+
     }
 
-    if(  localStorage.getItem("mode")==="normal" ){
+    if (localStorage.getItem("mode") === "mirror") {
 
-        
+        time_span.classList.add("hidden")
         Swal.fire("Draw the image accurately ");
     }
 
-    if(  localStorage.getItem("mode")==="blitz" ){
-        Swal.fire("Draw the next 3 images. You have 5 minutes per image");
+    if (localStorage.getItem("mode") === "quickdraw") {
+        time_span.classList.remove("hidden")
+        Swal.fire("Draw the image quickly! you only have 5 minutes")
+            .then(res => {
+                
+
+            });
 
     }
 
     // localStorage.setItem("username","guest")
-   
-    
-    ctx2.fillStyle="white"
-    ctx2.fillRect(0,0, canvasSetup_2.width,canvasSetup_2.height)
-    ctx2.fill()
-    
+
+    clearCanvas(canvasSetup_2.width, canvasSetup_2.height,ctx2);
     drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-        //ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height)
-          // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-    
-    
-    }
+    //ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height)
+    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+
+
+}
 
 document.getElementById("save-icon").onclick = () => {
     let a = document.createElement("a")
@@ -140,8 +185,6 @@ document.getElementById("save-icon").onclick = () => {
 
 document.getElementById("brush-size").textContent = brush_range.value
 home_nav_button.onclick = () => window.location = "index.html"
-
-
 
 
 submit_nav_button.addEventListener("click", e => {
@@ -161,8 +204,6 @@ submit_nav_button.addEventListener("click", e => {
     }
     let accurecy = Math.floor(((counter / imgData.data.length) * 100))
     if (accurecy < 0) accurecy = 0
-  
-    
     postImage(accurecy);
 
 
@@ -177,7 +218,7 @@ brush_range.addEventListener("mousemove", e => {
 
 
 function postImage(accurecy) {
-    if(localStorage.getItem("mode")==="normal"){
+    if (localStorage.getItem("mode") === "mirror") {
         Swal.fire({
             title: "Your Accurecy is: ",
             text: accurecy + "/100",
@@ -190,10 +231,10 @@ function postImage(accurecy) {
         }).then((result) => {
             console.log(result);
             if (result.isConfirmed) {
-    
+
                 let temp_img = new Image();
                 temp_img.src = canvasSetup_2.toDataURL('image/png');
-    
+
                 Swal.fire({
                     imageUrl: "naDay.jpg",
                     imageWidth: 300,
@@ -208,48 +249,24 @@ function postImage(accurecy) {
                     showCancelButton: true,
                     confirmButtonText: "post Art",
                     showLoaderOnConfirm: true,
-                    // preConfirm: async (login) => {
-                    //   try {
-                    //     const githubUrl = `
-                    //       https://api.github.com/users/${login}
-                    //     `;
-                    //     const response = await fetch(githubUrl);
-                    //     if (!response.ok) {
-                    //       return Swal.showValidationMessage(`
-                    //         ${JSON.stringify(await response.json())}
-                    //       `);
-                    //     }
-                    //     return response.json();
-                    //   } catch (error) {
-                    //     Swal.showValidationMessage(`
-                    //       Request failed: ${error}
-                    //     `);
-                    //   }
-                    // },
+
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
-                    // console.log(result)
-                    // console.log(result.value)
-                    // if (result.isConfirmed) {
-                    //   Swal.fire({
-                    //     title: `${result.value.login}'s avatar`,
-                    //     imageUrl: result.value.avatar_url
-                    //   });
-                    // }
+
                     ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
                             title: "Post Cancelled",
-    
+
                             icon: "error",
-    
+
                             confirmButtonText: "Ok",
                         });
-    
+
                     }
                     if (result.isConfirmed) {
                         canvasSetup_2.toBlob(blob => {
-    
+
                             const onFileSelected = async (event) => {
                                 const uploadManager = new Bytescale.UploadManager({
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
@@ -275,21 +292,21 @@ function postImage(accurecy) {
                                     .then(res => res.json())
                                     .then(data => {
                                         console.log(data);
-    
+
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
                                             text: "Check out the leaderboard to see your post",
                                             icon: "success"
                                         });
                                     });
-    
+
                             };
                             onFileSelected();
                         });
                     }
-    
-    
-    
+
+
+
                     // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
                     //     .then(res => res.json())
                     //     .then(data => { console.log(data) })
@@ -298,35 +315,16 @@ function postImage(accurecy) {
                     //     .then(data => { console.log(data) })
                 });
             }
-    
+
             if (result.isDismissed && result.dismiss == "cancel") {
-                // Swal.fire({
-                //   title: "Cancelled!",
-                //   text: "Your file has been deleted.",
-                //   icon: "success"
-                // });
-                canvasSetup.classList.add("zero-opacity");
-                canvasSetup_2.classList.add("zero-opacity");
-                img.setAttribute("src", "Pixel.jpg");
-                setTimeout(() => {
-    
-                    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
-                    ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height);
-                    ctx2.fillStyle="white"
-                    ctx2.fillRect(0,0, canvasSetup_2.width,canvasSetup_2.height)
-                    ctx2.fill()
-                    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-                    canvasSetup.classList.remove("zero-opacity");
-                    canvasSetup_2.classList.remove("zero-opacity");
-                }, 1700);
-    
-    
+
+                renewCanvas();
             }
         });
 
     }
 
-    if(localStorage.getItem("mode")==="blitz"){
+    if (localStorage.getItem("mode") === "quickdraw") {
 
         Swal.fire({
             title: "Your Accurecy is: ",
@@ -340,10 +338,10 @@ function postImage(accurecy) {
         }).then((result) => {
             console.log(result);
             if (result.isConfirmed) {
-    
+
                 let temp_img = new Image();
                 temp_img.src = canvasSetup_2.toDataURL('image/png');
-    
+
                 Swal.fire({
                     imageUrl: "naDay.jpg",
                     imageWidth: 300,
@@ -358,10 +356,10 @@ function postImage(accurecy) {
                     showCancelButton: true,
                     confirmButtonText: "post Art",
                     showLoaderOnConfirm: true,
-                  
+
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
-                    
+
                     ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
@@ -369,11 +367,11 @@ function postImage(accurecy) {
                             icon: "error",
                             confirmButtonText: "Ok",
                         });
-    
+
                     }
                     if (result.isConfirmed) {
                         canvasSetup_2.toBlob(blob => {
-    
+
                             const onFileSelected = async (event) => {
                                 const uploadManager = new Bytescale.UploadManager({
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
@@ -399,21 +397,21 @@ function postImage(accurecy) {
                                     .then(res => res.json())
                                     .then(data => {
                                         console.log(data);
-    
+
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
                                             text: "Check out the leaderboard to see your post",
                                             icon: "success"
                                         });
                                     });
-    
+
                             };
                             onFileSelected();
                         });
                     }
-    
-    
-    
+
+
+
                     // fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
                     //     .then(res => res.json())
                     //     .then(data => { console.log(data) })
@@ -422,39 +420,39 @@ function postImage(accurecy) {
                     //     .then(data => { console.log(data) })
                 });
             }
-    
+
+
             if (result.isDismissed && result.dismiss == "cancel") {
-                // Swal.fire({
-                //   title: "Cancelled!",
-                //   text: "Your file has been deleted.",
-                //   icon: "success"
-                // });
-                canvasSetup.classList.add("zero-opacity");
-                canvasSetup_2.classList.add("zero-opacity");
-                img.setAttribute("src", "Pixel.jpg");
-                setTimeout(() => {
-    
-                    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
-                    ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height);
-                    ctx2.fillStyle="white"
-                    ctx2.fillRect(0,0, canvasSetup_2.width,canvasSetup_2.height)
-                    ctx2.fill()
-                    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-                    canvasSetup.classList.remove("zero-opacity");
-                    canvasSetup_2.classList.remove("zero-opacity");
-                }, 1700);
-    
-    
+
+                minutes = 5
+                seconds = 0
+                time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+
+
+                renewCanvas();
+
+
+            }
+
+            if (result.isDismissed && localStorage.getItem("mode") === "quickdraw" && minutes === 0 && seconds === 0) {
+
+                minutes = 5
+                seconds = 0
+                time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+
+                renewCanvas()
+
+
             }
         });
 
 
 
     }
-    if(localStorage.getItem("mode")==="prompt"){
+    if (localStorage.getItem("mode") === "prompt") {
         Swal.fire({
             title: "nice",
-            icon:"success",
+            icon: "success",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#55cc14",
@@ -463,10 +461,10 @@ function postImage(accurecy) {
         }).then((result) => {
             console.log(result);
             if (result.isConfirmed) {
-    
+
                 let temp_img = new Image();
                 temp_img.src = canvasSetup_2.toDataURL('image/png');
-    
+
                 Swal.fire({
                     imageUrl: "naDay.jpg",
                     imageWidth: 300,
@@ -483,7 +481,7 @@ function postImage(accurecy) {
                     showLoaderOnConfirm: true,
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
-                 
+
                     ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
                     if (result.isDismissed && result.dismiss == "cancel") {
                         Swal.fire({
@@ -494,7 +492,7 @@ function postImage(accurecy) {
                     }
                     if (result.isConfirmed) {
                         canvasSetup_2.toBlob(blob => {
-    
+
                             const onFileSelected = async (event) => {
                                 const uploadManager = new Bytescale.UploadManager({
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5" // This is your API key.
@@ -520,14 +518,14 @@ function postImage(accurecy) {
                                     .then(res => res.json())
                                     .then(data => {
                                         console.log(data);
-    
+
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
                                             text: "Check out the leaderboard to see your post",
                                             icon: "success"
                                         });
                                     });
-    
+
                             };
                             onFileSelected();
                         });
@@ -535,32 +533,13 @@ function postImage(accurecy) {
 
                 });
             }
-    
+
             if (result.isDismissed && result.dismiss == "cancel") {
-                // Swal.fire({
-                //   title: "Cancelled!",
-                //   text: "Your file has been deleted.",
-                //   icon: "success"
-                // });
-                let random_img = Math.floor(Math.random()*draw_prompts.length)
-                Swal.fire("Draw "+ draw_prompts[random_img]);
-                canvasSetup.classList.add("zero-opacity");
-                canvasSetup_2.classList.add("zero-opacity");
-                img.setAttribute("src", "Pixel.jpg");
-                setTimeout(() => {
-    
-                    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
-                    ctx2.clearRect(0, 0, canvasSetup_2.width, canvasSetup_2.height);
-   
-                    ctx2.fillStyle="white"
-                    ctx2.fillRect(0,0, canvasSetup_2.width,canvasSetup_2.height)
-                    ctx2.fill()
-                    // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-                    canvasSetup.classList.remove("zero-opacity");
-                    canvasSetup_2.classList.remove("zero-opacity");
-                }, 1700);
-    
-    
+
+                let random_img = Math.floor(Math.random() * draw_prompts.length)
+                Swal.fire("Draw " + draw_prompts[random_img]);
+                renewCanvas()
+
             }
         });
 
@@ -569,6 +548,37 @@ function postImage(accurecy) {
 
 
 
+}
+
+
+
+function renewCanvas() {
+
+    if(localStorage.getItem("mode")==="prompt"){
+        let random_img = Math.floor(Math.random() * draw_prompts.length)
+        Swal.fire("Draw " + draw_prompts[random_img]);
+        //renewCanvas()
+
+    }
+    canvasSetup.classList.add("zero-opacity");
+    canvasSetup_2.classList.add("zero-opacity");
+    img.setAttribute("src", "Pixel.jpg");
+    setTimeout(() => {
+
+        drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0);
+        clearCanvas(canvasSetup_2.width, canvasSetup_2.height,ctx2);
+       
+        // drawImageProp(ctx2,img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+        canvasSetup.classList.remove("zero-opacity");
+        canvasSetup_2.classList.remove("zero-opacity");
+    }, 1700);
+}
+
+function clearCanvas(width, height, ctx) {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, width, height);
+    ctx.fill();
 }
 
 function mousedownHandler(event) {
@@ -621,7 +631,7 @@ function mousemoveHandle(event) {
             guessY = parseInt(event.offsetY * canvasSetup_2.height / canvasSetup_2.offsetHeight) + 5;
         }
 
-       // console.log(`coords:${guessX}x${guessY}`);
+        // console.log(`coords:${guessX}x${guessY}`);
         // ctx.strokeRect(guessX,guessY,10,10);
         ctx2.lineTo(guessX, guessY);
         ctx2.lineWidth = brush_range.value
@@ -645,7 +655,7 @@ function mouseupHandle(event) {
     imgData2 = ctx2.getImageData(0, 0, canvasSetup_2.width, canvasSetup_2.height);
 
     let counter = 0;
-   // console.log(imgData.data.length)
+    // console.log(imgData.data.length)
     for (let i = 0; i < imgData.data.length; i++) {
         if (imgData.data[i] === imgData2.data[i])
             counter++
@@ -689,7 +699,7 @@ canvasSetup_2.addEventListener("mouseup", event => mouseupHandle(event))
 canvasSetup_2.addEventListener("touchend", event => mouseupHandle(event))
 
 window.addEventListener("resize", e => {
- 
+
     canvasSetup_2.width = window.innerWidth * 0.45
     canvasSetup.width = window.innerWidth * 0.45
 
@@ -700,9 +710,9 @@ window.addEventListener("resize", e => {
         canvasSetup_2.height = window.innerHeight * 0.42
         canvasSetup.height = window.innerHeight * 0.42
     }
-        drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
-        // drawImageProp(ctx2,temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
-       // ctx2.drawImage(temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height)
+    drawImageProp(ctx, img, 0, 0, canvasSetup.width, canvasSetup.height, 0, 0)
+    // drawImageProp(ctx2,temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height,0,0)
+    // ctx2.drawImage(temp_img,0,0,canvasSetup_2.width,canvasSetup_2.height)
 
 })
 
@@ -757,23 +767,6 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
 }
 
 
-
-function drawImageScaled(img, ctx) {
-    var canvas = ctx.canvas;
-    var hRatio = canvas.width / img.width;
-    var vRatio = canvas.height / img.height;
-    var ratio = Math.min(hRatio, vRatio);
-    var centerShift_x = (canvas.width - img.width * ratio) / 2;
-    var centerShift_y = (canvas.height - img.height * ratio) / 2;
-
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, img.width, img.height,
-        centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
-}
-
-
-
 // Prevent scrolling when touching the canvas
 document.body.addEventListener("touchstart", function (e) {
     if (e.target == canvasSetup_2) {
@@ -791,9 +784,9 @@ document.body.addEventListener("touchmove", function (e) {
     }
 }, false)
 
-leaderboard_btn.addEventListener("click",e=>{
+leaderboard_btn.addEventListener("click", e => {
     let a = document.createElement("a")
-    a.setAttribute("href","leaderboard.html")
+    a.setAttribute("href", "leaderboard.html")
     a.click()
 })
 
