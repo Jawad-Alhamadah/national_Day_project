@@ -90,15 +90,12 @@ signup_btn.addEventListener("click", e => {
     fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users?username=${usernameInput.value}`)
         .then(res => res.json())
         .then(data => {
-            console.log("data" + data)
-            console.log(data)
-            console.log(data.length <= 0)
+           
             if (data.length <= 0 || data === "Not found") {
                 fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users?email=${emailInput.value}`)
                     .then(res_in => res_in.json())
                     .then(data_in => {
-                        console.log("data_in")
-                        console.log("data_in" + data_in)
+                       
                         if (data_in.length <= 0 || data_in === "Not found") {
                             fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users`, {
                                 method: "POST",
@@ -113,7 +110,7 @@ signup_btn.addEventListener("click", e => {
                             })
                                 .then(res_in_2 => res_in_2.json())
                                 .then(data_in_2 => {
-                                    console.log("data_in_2" + data_in_2)
+                                    
                                     localStorage.setItem("username", data_in_2.username)
                                     localStorage.setItem("email", data_in_2.email)
                                     localStorage.setItem("user_id", data_in_2.id)
@@ -184,7 +181,7 @@ login_btn.addEventListener("click", e => {
     fetch(`https://66ed37a9380821644cdbfeb4.mockapi.io/users?username=${login_username.value}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+           
             if (data === undefined || data == "Not found" || data.length <= 0) {
                 Swal.fire({
                     icon: "error",

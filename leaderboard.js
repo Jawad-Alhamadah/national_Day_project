@@ -63,7 +63,7 @@ quickdraw_btn.addEventListener("click", e => {
     fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image?mode=quickdraw")
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+           
             data.sort((a,b)=> b.accurecy - a.accurecy )
             data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "quickdraw"))
             quickdraw_btn.classList.add("active")
@@ -79,7 +79,7 @@ prompt_btn.addEventListener("click", e => {
     fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image?mode=prompt")
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+           
 
             data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "prompt"))
             quickdraw_btn.classList.remove("active")
@@ -95,7 +95,7 @@ mirror_btn.addEventListener("click", e => {
     fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image?mode=mirror")
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            
 
             data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, "mirror"))
             quickdraw_btn.classList.remove("active")
@@ -111,7 +111,7 @@ recent_btn.addEventListener("click", e => {
     fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image")
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            
             data.sort((a, b) => b.id - a.id)
             data.map(item => createCard(item.username, item.accurecy, item.imgUrl, item.message, item.mode,"recent"))
 

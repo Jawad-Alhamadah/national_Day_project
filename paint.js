@@ -92,7 +92,7 @@ setInterval(() => {
             time_span.innerText = "0:00"
             submit_nav_button.click()
             timed_out = true
-            console.log("triggered once")
+            
 
         }
 
@@ -247,7 +247,7 @@ function postImage(accurecy) {
             cancelButtonText: "Try another image",
             confirmButtonText: "Post it on the Board"
         }).then((result) => {
-            console.log(result);
+           
             if (result.isConfirmed) {
 
                 let temp_img = new Image();
@@ -292,8 +292,7 @@ function postImage(accurecy) {
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-                                console.log("Path: " + filePath);
-                                console.log("Url: " + fileUrl);
+                                
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -310,7 +309,7 @@ function postImage(accurecy) {
                                 })
                                     .then(res => res.json())
                                     .then(data => {
-                                        console.log(data);
+                                       
 
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
@@ -348,7 +347,7 @@ function postImage(accurecy) {
             cancelButtonText: "Try another image",
             confirmButtonText: "Post it on the Board"
         }).then((result) => {
-            console.log(result);
+           
             if (result.isConfirmed) {
 
                 let temp_img = new Image();
@@ -391,8 +390,7 @@ function postImage(accurecy) {
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-                                console.log("Path: " + filePath);
-                                console.log("Url: " + fileUrl);
+                                
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -409,7 +407,7 @@ function postImage(accurecy) {
                                 })
                                     .then(res => res.json())
                                     .then(data => {
-                                        console.log(data);
+                                       
 
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
@@ -461,7 +459,7 @@ function postImage(accurecy) {
             cancelButtonText: "Try Another Prompt",
             confirmButtonText: "Post it on the Board"
         }).then((result) => {
-            console.log(result);
+           
             if (result.isConfirmed) {
 
                 let temp_img = new Image();
@@ -500,8 +498,7 @@ function postImage(accurecy) {
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-                                console.log("Path: " + filePath);
-                                console.log("Url: " + fileUrl);
+                                
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -518,7 +515,7 @@ function postImage(accurecy) {
                                 })
                                     .then(res => res.json())
                                     .then(data => {
-                                        console.log(data);
+                                       
 
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
@@ -552,7 +549,7 @@ function postImage(accurecy) {
 
 function randomImg() {
     let random = Math.floor((Math.random() * 18)) + 1
-    console.log(random)
+    
 
     img.setAttribute("src", `rand${random}.png`);
 }
