@@ -3,17 +3,15 @@
 }
 
 .comment {
-  border: 2px solid #c7ca6c;
-  background-color: #f4ffe4;
-  border-radius: 5px;
+  font-size: 2em !important;
 }
 
 .navbar-bg-darkgreen {
-  background-color: #1d3e03 !important;
+  background-color: #090909 !important;
 }
 
 .navbar-bg-darkgreen a {
-  color: #d8eeb9 !important;
+  color: #000000 !important;
   font-size: 1.2em;
   margin-left: 0.5em;
   padding: 0.7em;
@@ -25,13 +23,11 @@
   background-color: #446f08;
   transform: scale(1.1);
 }
-/* 
+
  .score-img img{
-     height:200px !important;
-     width: 200px !important;
-     border: 2px solid black;
+
      
- } */
+ }
 
 .username-icon img {
   height: 50px !important;
@@ -59,18 +55,21 @@
 
 */
 .accent-text-color {
-  color: #047622 !important;
+  color: #80db0a !important;
+  padding-right: 5px;
 }
 
 .card-body {
   font-size: 2em;
-  border: 5px solid #d8eeb9;
+  border: 2px solid #006502;
   margin: 0px !important;
   padding: 0px !important;
 }
 
 .comment {
-  font-size: 0.5em !important;
+  font-size: 0.7em !important;
+  font-weight: 500;
+  color: #6cb00e !important;
 }
 
 .card {
@@ -236,8 +235,8 @@
     width: 80em;
   }
   .score-img img {
-    height: 120px !important;
-    width: 120px !important;
+    height: 190px !important;
+    width: 190px !important;
     border: 2px solid black;
   }
 
@@ -267,15 +266,71 @@
 
 .card-body {
   margin-top: 0.2em !important;
-  background: rgb(231, 249, 244);
+
   background: linear-gradient(
     135deg,
-    rgb(255, 255, 255) 60%,
-    rgb(216, 238, 185) 60%,
-    rgb(216, 238, 185) 98%
+    rgb(0, 0, 0) 60%,
+    rgb(0, 91, 14)  60%,
+    rgb(0, 91, 14) 98%
   );
 }
 
 .nav-tabs .nav-item {
   cursor: pointer;
 }
+body{
+  background-color: #0a1501;
+}
+
+
+#board-conatiner{
+  background-color: #0a1501 !important;
+}
+
+.card-header{
+  background-color: #101010 !important;;
+  border: 2px solid green;
+}
+
+.nav-tabs .active{
+  background-color: rgb(0, 59, 0) !important;
+  color: #9be412 !important;
+  transform: scale(1.1) translateY(-5px);
+  border: 3px solid #63cf0a !important;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 600;
+
+}
+
+.nav-tabs .nav-link:not(.active):hover{
+  transform: scale(1.2) !important;
+  outline : 3px solid #63cf0a !important;
+  background-color: #2f5f07 !important;
+  transition: 0.4s  !important;
+  border: none !important;
+}
+
+
+.card-body{
+  margin-top: 1em !important;
+  
+}
+
+.navbar{
+  background-color: #000000 !important;
+  color: #9be412 !important;
+  box-shadow: 2px 2px green;
+}
+
+.navbar a{
+  color: #9be412 !important;
+  font-size: 1.3em;
+  margin-left: 15px !important;
+}
+.navbar a:hover{
+  transform: scale(1.2);
+  outline : 3px solid #63cf0a !important;
+  background-color: #2f5f07;
+  transition: 0.4s;
+}
+
