@@ -8,7 +8,8 @@ const essentialColors = [
     "#FFE7B1", "#D6FF33", "#FF1F3D", "#FF9A33", "#FFD700",
     "#C0C0C0", "#A9A9A9", "#808080", "#404040", "#000000",
     "#FFFFFF", "#F5F5F5", "#DCDCDC", "#F0F8FF", "#FAEBD7",
-    "#FFE4C4", "#FFDEAD", "#FFF0F5", "#E6E6FA"
+    "#FFE4C4", "#FFDEAD", "#FFF0F5", "#E6E6FA", "#F0E68C", "#E6E6FA", "#FFFACD", "#FF69B4", "#CD5C5C",
+    "#4B0082", "#20B2AA", "#778899", "#B0C4DE", "#32CD32",
 ];
 
 
@@ -40,8 +41,17 @@ const dropper_btn = document.getElementById("dropper")
 const user_span = document.getElementById("user-span")
 let color_dropper = false
 let brush = true
+
+const mode_nav_btn = document.getElementById("mode-nav-btn")
+
 user_span.textContent = localStorage.getItem('username')
 
+
+mode_nav_btn.addEventListener("click", e => {
+    let temp_a = document.createElement("a")
+    temp_a.setAttribute("href", "/pickmode.html")
+    temp_a.click()
+})
 dropper_btn.addEventListener("click", e => {
     if (color_dropper) {
         color_dropper = false
@@ -92,7 +102,7 @@ setInterval(() => {
             time_span.innerText = "0:00"
             submit_nav_button.click()
             timed_out = true
-            
+
 
         }
 
@@ -111,12 +121,76 @@ setInterval(() => {
 }, 100)
 
 
+window.addEventListener("resize", () => {
+    if (window.innerWidth <= 768) {
+        colors.innerHTML = ""
+        for (let i = 0; i < 15; i++) {
+            let div = document.createElement("div")
+            div.classList.add("color-div", "card", "d-flex", 'align-self-center')
+            div.style.backgroundColor = essentialColors[i]
+            colors.appendChild(div)
+
+            div.addEventListener("click", e => {
+                ctx2.strokeStyle = div.style.backgroundColor
+                color_picker.value = ctx2.strokeStyle
+            })
+        }
+
+    }
+    else {
+        colors.innerHTML=""
+        for (let i = 0; i < 50; i++) {
+            let div = document.createElement("div")
+            div.classList.add("color-div", "card", "d-flex", 'align-self-center')
+            div.style.backgroundColor = essentialColors[i]
+            colors.appendChild(div)
+
+            div.addEventListener("click", e => {
+                ctx2.strokeStyle = div.style.backgroundColor
+                color_picker.value = ctx2.strokeStyle
+            })
+        }
+
+    }
+
+})
 
 
 let mode = localStorage.getItem("mode")
 let username = localStorage.getItem("username")
 
 function start() {
+
+    if (window.innerWidth <=768) {
+        colors.innerHTML = ""
+        for (let i = 0; i < 15; i++) {
+            let div = document.createElement("div")
+            div.classList.add("color-div", "card", "d-flex", 'align-self-center')
+            div.style.backgroundColor = essentialColors[i]
+            colors.appendChild(div)
+
+            div.addEventListener("click", e => {
+                ctx2.strokeStyle = div.style.backgroundColor
+                color_picker.value = ctx2.strokeStyle
+            })
+        }
+
+    } else {
+
+        for (let i = 0; i < 50; i++) {
+            let div = document.createElement("div")
+            div.classList.add("color-div", "card", "d-flex", 'align-self-center')
+            div.style.backgroundColor = essentialColors[i]
+            colors.appendChild(div)
+
+            div.addEventListener("click", e => {
+                ctx2.strokeStyle = div.style.backgroundColor
+                color_picker.value = ctx2.strokeStyle
+            })
+        }
+
+    }
+
 
     time_span.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     ctx2.strokeStyle = "black"
@@ -131,17 +205,6 @@ function start() {
     brush_range.value = 1
 
 
-    for (let i = 0; i < 40; i++) {
-        let div = document.createElement("div")
-        div.classList.add("color-div", "card", "d-flex", 'align-self-center')
-        div.style.backgroundColor = essentialColors[i]
-        colors.appendChild(div)
-
-        div.addEventListener("click", e => {
-            ctx2.strokeStyle = div.style.backgroundColor
-            color_picker.value = ctx2.strokeStyle
-        })
-    }
 
 
 
@@ -165,7 +228,7 @@ function start() {
         canvasSetup.style.display = "none"
         canvasSetup_2.width = window.innerWidth * 0.90
         canvasSetup_2.height = window.innerHeight * 0.85
-        another_btn.textContent = "Another Prompt"
+        another_btn.textContent = "next Prompt"
         let random_img = Math.floor(Math.random() * draw_prompts.length)
         Swal.fire("Draw " + draw_prompts[random_img]);
 
@@ -247,7 +310,7 @@ function postImage(accurecy) {
             cancelButtonText: "Try another image",
             confirmButtonText: "Post it on the Board"
         }).then((result) => {
-           
+
             if (result.isConfirmed) {
 
                 let temp_img = new Image();
@@ -292,7 +355,7 @@ function postImage(accurecy) {
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-                                
+
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -309,7 +372,7 @@ function postImage(accurecy) {
                                 })
                                     .then(res => res.json())
                                     .then(data => {
-                                       
+
 
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
@@ -347,7 +410,7 @@ function postImage(accurecy) {
             cancelButtonText: "Try another image",
             confirmButtonText: "Post it on the Board"
         }).then((result) => {
-           
+
             if (result.isConfirmed) {
 
                 let temp_img = new Image();
@@ -390,7 +453,7 @@ function postImage(accurecy) {
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-                                
+
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -407,7 +470,7 @@ function postImage(accurecy) {
                                 })
                                     .then(res => res.json())
                                     .then(data => {
-                                       
+
 
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
@@ -459,7 +522,7 @@ function postImage(accurecy) {
             cancelButtonText: "Try Another Prompt",
             confirmButtonText: "Post it on the Board"
         }).then((result) => {
-           
+
             if (result.isConfirmed) {
 
                 let temp_img = new Image();
@@ -498,7 +561,7 @@ function postImage(accurecy) {
                                     apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5"
                                 });
                                 const { fileUrl, filePath } = await uploadManager.upload({ data: blob });
-                                
+
                                 fetch("https://66ed37a9380821644cdbfeb4.mockapi.io/image", {
                                     method: 'POST',
                                     body: JSON.stringify({
@@ -515,7 +578,7 @@ function postImage(accurecy) {
                                 })
                                     .then(res => res.json())
                                     .then(data => {
-                                       
+
 
                                         Swal.fire({
                                             title: "Image posted To leaderboard!",
@@ -549,7 +612,7 @@ function postImage(accurecy) {
 
 function randomImg() {
     let random = Math.floor((Math.random() * 18)) + 1
-    
+
 
     img.setAttribute("src", `rand${random}.png`);
 }

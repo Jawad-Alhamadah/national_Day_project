@@ -7,15 +7,36 @@
   .canvas-container {
     display: grid !important;
   }
+
 }
-@media (max-width: 767px) {
+
+
+@media (max-width: 500px) {
   #colors {
     display: none !important;
+  }
+
+  
+}
+
+
+
+
+@media (max-width: 768px) {
+  #colors {
+     width: 20%;
+     position: absolute;
+     top: 0px;
+     left: 0px;
+     height: 0% !important;
   }
 
   .footer {
     height: 13vh !important;
   }
+
+ 
+  
 }
 
 @media (max-width: 850px) {
@@ -23,6 +44,8 @@
     width: 1.3em !important;
     height: 1.3em !important;
   }
+
+
 }
 
 @media (max-width: 1000px) {
@@ -30,7 +53,53 @@
     accent-color: rgb(73, 156, 1);
     width: 9.5em;
   }
+
+
+ 
 }
+
+
+@media (min-width: 250px) {
+
+  .button-text{
+    font-size: 0.6em !important;
+  }
+  
+}
+
+@media (min-width: 650px) {
+
+  .button-text{
+    font-size: 0.6em!important;
+  }
+  
+}
+@media (min-width: 767px) {
+
+  .button-text{
+    font-size: 0.6em!important;
+  }
+  
+}
+
+@media (min-width: 850px) {
+
+  .button-text{
+    font-size: 0.7em!important;
+  }
+}
+
+@media (min-width: 1000px) {
+
+  .button-text{
+    font-size: 0.7em!important;
+  }
+ 
+}
+
+
+
+
 
 * {
   margin: 0px;
@@ -128,22 +197,22 @@ canvas {
 }
 
 .side-btn {
-  width: 8em;
+  width: 7em;
   margin: 0.1em;
-
+  text-transform: capitalize;
   background-color: transparent;
   border: 2px solid rgb(172, 201, 12) !important;
   color: rgb(172, 201, 12) !important;
   transition: 0.5s;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.9em;
+  padding: 2px;
 }
 
 .side-btn:hover {
   transform: scale(1.2);
   color: rgb(255, 255, 255) !important;
   background-color: rgb(106, 153, 18);
-  font-weight: 500;
   z-index: 5;
 }
 
@@ -236,12 +305,27 @@ input[type="range"] {
 }
 
 .dropper-btn {
-  background-color: rgb(208, 187, 24);
-  color: black;
-  padding: 2px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  margin-left: 3px;
+  border-radius: 25px;
+  border:none
 }
+
+.dropper-btn::before{
+  font-family: FontAwesome;
+  
+  content: "\f1fb";
+}
+
+
+
 .dropper-pressed {
-  background-color: rgb(169, 93, 6);
-  color: black;
-  border: 2px solid blue;
+  background-color: rgb(220, 220, 220);
+  color: rgb(0, 0, 0);
+  box-shadow: 2px 2px 2px blue, -2px -2px 2px orange;
+ 
 }
+
+

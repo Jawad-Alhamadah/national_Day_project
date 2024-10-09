@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="paint.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <canvas
@@ -42,14 +43,15 @@
             max="25"
             class="col-1 col-sm-1 col-md-2 col-lg-3"
           />
-          <button id="dropper" class="dropper-btn">dropper</button>
+          <button id="dropper" class="dropper-btn ide-btn rounded share-button"></button>
+           
           <span class="hidden"> Size: </span>
           <span id="brush-size" class="hidden"></span>
         </div>
         <div
           class="d-flex row g-0 justify-content-center justify-content-sm-center justify-content-lg-center mt-1 mb-3"
         >
-          <button class="side-btn rounded share-button" id="leaderboard-btn">
+          <button class=" button-text side-btn rounded share-button" id="leaderboard-btn">
             Leaderboard
           </button>
           <button
@@ -58,11 +60,15 @@
           >
             Home
           </button>
-          <button class="side-btn rounded share-button" id="another-btn">
+          <button class="button-text side-btn rounded share-button" id="another-btn">
             next image
           </button>
-          <button class="side-btn rounded share-button" id="submit-nav-btn">
+          <button class=" button-text side-btn rounded share-button" id="submit-nav-btn">
             Submit
+          </button>
+
+          <button class=" button-text side-btn rounded share-button" id="mode-nav-btn">
+            modes
           </button>
 
           <img src="diskette.png" alt="" class="" id="save-icon" />
