@@ -268,7 +268,10 @@
   margin-top: 0.2em !important;
 
   background: linear-gradient(
-    135deg,
+    145deg,
+    rgb(0, 91, 14)  0%,
+    rgb(0, 91, 14)  15%,
+    rgb(0, 0, 0) 15%,
     rgb(0, 0, 0) 60%,
     rgb(0, 91, 14)  60%,
     rgb(0, 91, 14) 98%
@@ -279,7 +282,7 @@
   cursor: pointer;
 }
 body{
-  background-color: #0a1501;
+  background-color: #0d1c01;
 }
 
 
@@ -313,6 +316,9 @@ body{
 
 .card-body{
   margin-top: 1em !important;
+  border-top-left-radius: 0;
+  border-bottom-left-radius:0px;
+   box-shadow: 15px 15px rgb(0, 0, 0);
   
 }
 
