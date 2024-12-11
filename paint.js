@@ -49,7 +49,7 @@ user_span.textContent = localStorage.getItem('username')
 
 mode_nav_btn.addEventListener("click", e => {
     let temp_a = document.createElement("a")
-    temp_a.setAttribute("href", "/pickmode.html")
+    temp_a.setAttribute("href", "pickmode.html")
     temp_a.click()
 })
 dropper_btn.addEventListener("click", e => {
