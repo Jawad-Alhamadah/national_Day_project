@@ -98,12 +98,39 @@ const dropper_btn = document.getElementById("dropper");
 const user_span = document.getElementById("user-span");
 let color_dropper = false;
 let brush = true;
+let isUploading = false;  // Add upload flag
 
 const mode_nav_btn = document.getElementById("mode-nav-btn");
 
 user_span.textContent = localStorage.getItem("username");
 
+// Prevent navigation during upload
+window.addEventListener('beforeunload', (e) => {
+  if (isUploading) {
+    e.preventDefault();
+    e.returnValue = '';
+    return '';
+  }
+});
+
+// Prevent any accidental navigation during upload
+window.addEventListener('popstate', (e) => {
+  if (isUploading) {
+    e.preventDefault();
+    e.stopPropagation();
+    history.pushState(null, null, location.href);
+    return false;
+  }
+});
+
 mode_nav_btn.addEventListener("click", (e) => {
+  if (isUploading) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+  e.preventDefault();
+  e.stopPropagation();
   let temp_a = document.createElement("a");
   temp_a.setAttribute("href", "pickmode.html");
   temp_a.click();
@@ -145,7 +172,7 @@ setInterval(() => {
     time_span.innerText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
     seconds--;
-    if (minutes <= 0 && seconds <= 0 && !timed_out) {
+    if (minutes <= 0 && seconds <= 0 && !timed_out && !isUploading) {
       time_span.innerText = "0:00";
       submit_nav_button.click();
       timed_out = true;
@@ -284,9 +311,24 @@ document.getElementById("save-icon").onclick = () => {
 };
 
 document.getElementById("brush-size").textContent = brush_range.value;
-home_nav_button.onclick = () => (window.location = "index.html");
+home_nav_button.onclick = (e) => {
+  if (isUploading) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+  window.location = "index.html";
+};
 
 submit_nav_button.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  
+  // Prevent multiple submissions during upload
+  if (isUploading) {
+    return false;
+  }
+  
   let counter = 0;
 
   imgData = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
@@ -326,7 +368,7 @@ function postImage(accurecy) {
 
        
  uploadImage(accurecy, temp_img);
-
+         return false;
       }
 
       if (result.isDismissed && result.dismiss == "cancel") {
@@ -406,6 +448,7 @@ function postImage(accurecy) {
 }
 
 function uploadImage(accurecy, temp_img) {
+    isUploading = true;  // Set upload flag
     Swal.fire({
         imageUrl: "naDay.jpg",
         imageWidth: 300,
@@ -438,37 +481,73 @@ function uploadImage(accurecy, temp_img) {
 
                 const { fileUrl } = await uploadManager.upload({ data: blob });
 
-                // Make the POST request
-                const response = await fetch(
-                    "https://66ed37a9380821644cdbfeb4.mockapi.io/image",
+                 const formData = new FormData();
+                 formData.append('image', blob, 'userUpload.png');
+
+
+                 const response = await fetch(
+                    "http://localhost:8080/uploadImage",
                     {
                         method: "POST",
-                        body: JSON.stringify({
-                            username: username,
-                            message: comment,
-                            userId: 0,
-                            imgUrl: fileUrl,
-                            accurecy: accurecy,
-                            mode: mode,
-                        }),
+                        body: formData,
+                        mode: "cors",
+                        cache: 'no-cache',
                         headers: {
-                            "Content-type": "application/json; charset=UTF-8",
-                        },
+                            'Accept': 'application/json, text/plain, */*'
+                        }
                     }
-                );
+                )
+
+                // Make the POST request
+                // const response = await fetch(
+                //     "https://66ed37a9380821644cdbfeb4.mockapi.io/image",
+                //     {
+                //         method: "POST",
+                //         body: JSON.stringify({
+                //             username: username,
+                //             message: comment,
+                //             userId: 0,
+                //             imgUrl: fileUrl,
+                //             accurecy: accurecy,
+                //             mode: mode,
+                //         }),
+                //         headers: {
+                //             "Content-type": "application/json; charset=UTF-8",
+                //         },
+                //     }
+                // );
 
                 if (!response.ok) {
-                    throw new Error("Failed to post image. Image posting Is currently down");
+                    const errorText = await response.text();
+                    throw new Error(`Failed to post image: ${response.status} ${response.statusText} - ${errorText}`);
                 }
+
+                // Handle the response properly
+                const responseText = await response.text();
+                console.log('Upload successful:', responseText);
 
                 return true; // Signal success
             } catch (error) {
                 Swal.showValidationMessage(`Request failed: ${error.message}`);
+                return false; // Signal failure
             }
         },
 
         allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
+        // Clear upload flag first
+        isUploading = false;
+        
+        // Prevent any event bubbling or default actions
+        try {
+            if (window.event) {
+                window.event.preventDefault();
+                window.event.stopPropagation();
+            }
+        } catch (e) {
+            // Ignore any event handling errors
+        }
+        
         ctx2.drawImage(
             temp_img,
             0,
@@ -504,6 +583,11 @@ function uploadImage(accurecy, temp_img) {
                 icon: "success",
             });
         }
+        return false;
+    }).catch((error) => {
+        // Ensure upload flag is cleared even on errors
+        isUploading = false;
+        console.error('Upload dialog error:', error);
     });
 }
 
@@ -763,6 +847,13 @@ document.body.addEventListener(
 );
 
 leaderboard_btn.addEventListener("click", (e) => {
+  if (isUploading) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+  e.preventDefault();
+  e.stopPropagation();
   let a = document.createElement("a");
   a.setAttribute("href", "leaderboard.html");
   a.click();
@@ -804,3 +895,5 @@ function getPixel(imageData, x, y) {
     imageData.data[index + 3],
   ];
 }
+
+
