@@ -474,48 +474,47 @@ function uploadImage(accurecy, temp_img) {
                     });
                 });
 
-                // Upload the blob
-                const uploadManager = new Bytescale.UploadManager({
-                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5",
-                });
-
-                const { fileUrl } = await uploadManager.upload({ data: blob });
-
-                 const formData = new FormData();
-                 formData.append('image', blob, 'userUpload.png');
+               
+                //  const formData = new FormData();
+                //  formData.append('image', blob, 'userUpload.png');
 
 
-                 const response = await fetch(
-                    "http://localhost:8080/uploadImage",
-                    {
-                        method: "POST",
-                        body: formData,
-                        mode: "cors",
-                        cache: 'no-cache',
-                        headers: {
-                            'Accept': 'application/json, text/plain, */*'
-                        }
-                    }
-                )
-
-                // Make the POST request
-                // const response = await fetch(
-                //     "https://66ed37a9380821644cdbfeb4.mockapi.io/image",
+                //  const uploadResponse = await fetch(
+                //     "http://localhost:8080/uploadImage",
                 //     {
                 //         method: "POST",
-                //         body: JSON.stringify({
-                //             username: username,
-                //             message: comment,
-                //             userId: 0,
-                //             imgUrl: fileUrl,
-                //             accurecy: accurecy,
-                //             mode: mode,
-                //         }),
+                //         body: formData,
+                //         mode: "cors",
+                //         cache: 'no-cache',
                 //         headers: {
-                //             "Content-type": "application/json; charset=UTF-8",
-                //         },
+                //             'Accept': 'application/json, text/plain, */*'
+                //         }
                 //     }
-                // );
+                // )
+
+                
+                const jsonResponse = await uploadResponse.json()
+                const fileUrl = jsonResponse.imageUrl
+                console.log(jsonResponse)
+
+                
+                const response = await fetch(
+                    "https://66ed37a9380821644cdbfeb4.mockapi.io/image",
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            username: username,
+                            message: comment,
+                            userId: 0,
+                            imgUrl: fileUrl,
+                            accurecy: accurecy,
+                            mode: mode,
+                        }),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8",
+                        },
+                    }
+                );
 
                 if (!response.ok) {
                     const errorText = await response.text();
