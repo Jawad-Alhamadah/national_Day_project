@@ -493,9 +493,16 @@ function uploadImage(accurecy, temp_img) {
                 // )
 
                 
-                const jsonResponse = await uploadResponse.json()
-                const fileUrl = jsonResponse.imageUrl
-                console.log(jsonResponse)
+                // const jsonResponse = await uploadResponse.json()
+                // const fileUrl = jsonResponse.imageUrl
+                // console.log(jsonResponse)
+
+                
+                 const uploadManager = new Bytescale.UploadManager({
+                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5",
+                });
+
+                const { fileUrl } = await uploadManager.upload({ data: blob });
 
                 
                 const response = await fetch(
