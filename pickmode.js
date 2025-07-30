@@ -31,6 +31,7 @@ else if (localStorage.getItem("username") !== undefined) {
     nav_login.classList.add("hidden")
 }
 
+//handle logout
 logout_btn.addEventListener("click", e => {
     e.preventDefault()
     localStorage.clear()
@@ -44,6 +45,7 @@ logout_btn.addEventListener("click", e => {
 
 })
 
+ // Functions to send the user to the correct page depending button
 mirror_btn.addEventListener("click", e => {
     e.preventDefault()
     localStorage.setItem("mode", "mirror")

@@ -2,6 +2,7 @@ let signup_nav = document.getElementById("signup-nav")
 let all_content = document.getElementById("all-content-container")
 let login_nav =document.getElementById("nav-login")
  
+//create homepage
 function homePage() {
     localStorage.clear()
     localStorage.setItem("username","guest")

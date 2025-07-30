@@ -1,3 +1,4 @@
+//Default colors for  Painting application
 const essentialColors = [
   "#FF5733",
   "#FFBD33",
@@ -55,6 +56,7 @@ const essentialColors = [
   "#32CD32",
 ];
 
+//prompts list for Prompt Mode
 const draw_prompts = [
   "King Abdullah",
   "Prince Mohammed bin Salman",
@@ -77,6 +79,7 @@ const draw_prompts = [
   "Draw the Logo of your Favorite Saudi company",
 ];
 
+// Setup Variables
 const canvasSetup = document.getElementById("myCanvas");
 const canvasSetup_2 = document.getElementById("myCanvas2");
 const pixelit_canv = document.getElementById("pixelitcanvas");
@@ -98,23 +101,23 @@ const dropper_btn = document.getElementById("dropper");
 const user_span = document.getElementById("user-span");
 let color_dropper = false;
 let brush = true;
-let isUploading = false;  // Add upload flag
+let isUploading = false; // Add upload flag
 
 const mode_nav_btn = document.getElementById("mode-nav-btn");
 
 user_span.textContent = localStorage.getItem("username");
 
 // Prevent navigation during upload
-window.addEventListener('beforeunload', (e) => {
+window.addEventListener("beforeunload", (e) => {
   if (isUploading) {
     e.preventDefault();
-    e.returnValue = '';
-    return '';
+    e.returnValue = "";
+    return "";
   }
 });
 
 // Prevent any accidental navigation during upload
-window.addEventListener('popstate', (e) => {
+window.addEventListener("popstate", (e) => {
   if (isUploading) {
     e.preventDefault();
     e.stopPropagation();
@@ -123,6 +126,7 @@ window.addEventListener('popstate', (e) => {
   }
 });
 
+//relocate to mode selection
 mode_nav_btn.addEventListener("click", (e) => {
   if (isUploading) {
     e.preventDefault();
@@ -135,6 +139,8 @@ mode_nav_btn.addEventListener("click", (e) => {
   temp_a.setAttribute("href", "pickmode.html");
   temp_a.click();
 });
+
+//Event listener for the dropper tool
 dropper_btn.addEventListener("click", (e) => {
   if (color_dropper) {
     color_dropper = false;
@@ -149,6 +155,7 @@ dropper_btn.addEventListener("click", (e) => {
 
 canvasSetup.style.backgroundColor = "black";
 
+//timer
 another_btn.addEventListener("click", (e) => {
   minutes = 5;
   seconds = 0;
@@ -189,6 +196,7 @@ setInterval(() => {
   }
 }, 100);
 
+//handle the resizing of the canvas when the window width changes
 window.addEventListener("resize", () => {
   if (window.innerWidth <= 768) {
     colors.innerHTML = "";
@@ -302,6 +310,7 @@ function start() {
   drawImageScaled(img, ctx);
 }
 
+//save the image when clicked
 document.getElementById("save-icon").onclick = () => {
   let a = document.createElement("a");
   let uri = canvasSetup_2.toDataURL("image/jpeg", 1.0);
@@ -310,6 +319,7 @@ document.getElementById("save-icon").onclick = () => {
   a.click();
 };
 
+//brush size tool
 document.getElementById("brush-size").textContent = brush_range.value;
 home_nav_button.onclick = (e) => {
   if (isUploading) {
@@ -323,12 +333,12 @@ home_nav_button.onclick = (e) => {
 submit_nav_button.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
-  
+
   // Prevent multiple submissions during upload
   if (isUploading) {
     return false;
   }
-  
+
   let counter = 0;
 
   imgData = ctx.getImageData(0, 0, canvasSetup.width, canvasSetup.height);
@@ -350,6 +360,7 @@ brush_range.addEventListener("mousemove", (e) => {
   brush_size.textContent = brush_range.value;
 });
 
+//post image through sweet alerts
 function postImage(accurecy) {
   if (localStorage.getItem("mode") === "mirror") {
     Swal.fire({
@@ -366,9 +377,8 @@ function postImage(accurecy) {
         let temp_img = new Image();
         temp_img.src = canvasSetup_2.toDataURL("image/png");
 
-       
- uploadImage(accurecy, temp_img);
-         return false;
+        uploadImage(accurecy, temp_img);
+        return false;
       }
 
       if (result.isDismissed && result.dismiss == "cancel") {
@@ -391,7 +401,6 @@ function postImage(accurecy) {
       if (result.isConfirmed) {
         let temp_img = new Image();
         temp_img.src = canvasSetup_2.toDataURL("image/png");
-
 
         uploadImage(accurecy, temp_img);
       }
@@ -432,10 +441,7 @@ function postImage(accurecy) {
         let temp_img = new Image();
         temp_img.src = canvasSetup_2.toDataURL("image/png");
 
-
-
-    uploadImage(0, temp_img);
-
+        uploadImage(0, temp_img);
       }
 
       if (result.isDismissed && result.dismiss == "cancel") {
@@ -446,154 +452,148 @@ function postImage(accurecy) {
     });
   }
 }
-
+//upload function to ByteScale
 function uploadImage(accurecy, temp_img) {
-    isUploading = true;  // Set upload flag
-    Swal.fire({
-        imageUrl: "naDay.jpg",
-        imageWidth: 300,
-        imageHeight: 300,
-        title: "Write a comment: ",
-        color: "green",
-        "font-weight": "500",
-        input: "textarea",
-        inputAttributes: {
-            autocapitalize: "off",
-        },
-        showCancelButton: true,
-        confirmButtonText: "Post Art",
-        showLoaderOnConfirm: true,
+  isUploading = true; // Set upload flag
+  Swal.fire({
+    imageUrl: "naDay.jpg",
+    imageWidth: 300,
+    imageHeight: 300,
+    title: "Write a comment: ",
+    color: "green",
+    "font-weight": "500",
+    input: "textarea",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Post Art",
+    showLoaderOnConfirm: true,
 
-        preConfirm: async (comment) => {
-            try {
-                // Convert toBlob to a Promise
-                const blob = await new Promise((resolve, reject) => {
-                    canvasSetup_2.toBlob((blob) => {
-                        if (blob) resolve(blob);
-                        else reject(new Error("Failed to generate image blob"));
-                    });
-                });
+    preConfirm: async (comment) => {
+      try {
+        // Convert toBlob to a Promise
+        const blob = await new Promise((resolve, reject) => {
+          canvasSetup_2.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error("Failed to generate image blob"));
+          });
+        });
 
-               
-                //  const formData = new FormData();
-                //  formData.append('image', blob, 'userUpload.png');
+        //  const formData = new FormData();
+        //  formData.append('image', blob, 'userUpload.png');
 
+        //  const uploadResponse = await fetch(
+        //     "http://localhost:8080/uploadImage",
+        //     {
+        //         method: "POST",
+        //         body: formData,
+        //         mode: "cors",
+        //         cache: 'no-cache',
+        //         headers: {
+        //             'Accept': 'application/json, text/plain, */*'
+        //         }
+        //     }
+        // )
 
-                //  const uploadResponse = await fetch(
-                //     "http://localhost:8080/uploadImage",
-                //     {
-                //         method: "POST",
-                //         body: formData,
-                //         mode: "cors",
-                //         cache: 'no-cache',
-                //         headers: {
-                //             'Accept': 'application/json, text/plain, */*'
-                //         }
-                //     }
-                // )
+        // const jsonResponse = await uploadResponse.json()
+        // const fileUrl = jsonResponse.imageUrl
+        // console.log(jsonResponse)
 
-                
-                // const jsonResponse = await uploadResponse.json()
-                // const fileUrl = jsonResponse.imageUrl
-                // console.log(jsonResponse)
+        const uploadManager = new Bytescale.UploadManager({
+          apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5",
+        });
 
-                
-                 const uploadManager = new Bytescale.UploadManager({
-                    apiKey: "public_FW25cDF3oZ4j2gSvXHYzeUB8Pto5",
-                });
+        const { fileUrl } = await uploadManager.upload({ data: blob });
 
-                const { fileUrl } = await uploadManager.upload({ data: blob });
-
-                
-                const response = await fetch(
-                    "https://66ed37a9380821644cdbfeb4.mockapi.io/image",
-                    {
-                        method: "POST",
-                        body: JSON.stringify({
-                            username: username,
-                            message: comment,
-                            userId: 0,
-                            imgUrl: fileUrl,
-                            accurecy: accurecy,
-                            mode: mode,
-                        }),
-                        headers: {
-                            "Content-type": "application/json; charset=UTF-8",
-                        },
-                    }
-                );
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Failed to post image: ${response.status} ${response.statusText} - ${errorText}`);
-                }
-
-                // Handle the response properly
-                const responseText = await response.text();
-                console.log('Upload successful:', responseText);
-
-                return true; // Signal success
-            } catch (error) {
-                Swal.showValidationMessage(`Request failed: ${error.message}`);
-                return false; // Signal failure
-            }
-        },
-
-        allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
-        // Clear upload flag first
-        isUploading = false;
-        
-        // Prevent any event bubbling or default actions
-        try {
-            if (window.event) {
-                window.event.preventDefault();
-                window.event.stopPropagation();
-            }
-        } catch (e) {
-            // Ignore any event handling errors
-        }
-        
-        ctx2.drawImage(
-            temp_img,
-            0,
-            0,
-            canvasSetup_2.width,
-            canvasSetup_2.height
+        const response = await fetch(
+          "https://66ed37a9380821644cdbfeb4.mockapi.io/image",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              username: username,
+              message: comment,
+              userId: 0,
+              imgUrl: fileUrl,
+              accurecy: accurecy,
+              mode: mode,
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          }
         );
-        if (window.width < 400) {
-            setTimeout(
-                () => ctx2.drawImage(
-                    temp_img,
-                    0,
-                    0,
-                    canvasSetup_2.width,
-                    canvasSetup_2.height
-                ),
-                1000
-            );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(
+            `Failed to post image: ${response.status} ${response.statusText} - ${errorText}`
+          );
         }
 
-        if (result.isDismissed && result.dismiss == "cancel") {
-            Swal.fire({
-                title: "Post Cancelled",
-                icon: "error",
-                confirmButtonText: "Ok",
-            });
-        }
+        // Handle the response properly
+        const responseText = await response.text();
+        console.log("Upload successful:", responseText);
 
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: "Image posted to leaderboard!",
-                text: "Check out the leaderboard to see your post",
-                icon: "success",
-            });
+        return true; // Signal success
+      } catch (error) {
+        Swal.showValidationMessage(`Request failed: ${error.message}`);
+        return false; // Signal failure
+      }
+    },
+
+    allowOutsideClick: () => !Swal.isLoading(),
+  })
+    .then((result) => {
+      // Clear upload flag first
+      isUploading = false;
+
+      // Prevent any event bubbling or default actions
+      try {
+        if (window.event) {
+          window.event.preventDefault();
+          window.event.stopPropagation();
         }
-        return false;
-    }).catch((error) => {
-        // Ensure upload flag is cleared even on errors
-        isUploading = false;
-        console.error('Upload dialog error:', error);
+      } catch (e) {
+        // Ignore any event handling errors
+      }
+
+      ctx2.drawImage(temp_img, 0, 0, canvasSetup_2.width, canvasSetup_2.height);
+      if (window.width < 400) {
+        setTimeout(
+          () =>
+            ctx2.drawImage(
+              temp_img,
+              0,
+              0,
+              canvasSetup_2.width,
+              canvasSetup_2.height
+            ),
+          1000
+        );
+      }
+
+      if (result.isDismissed && result.dismiss == "cancel") {
+        Swal.fire({
+          title: "Post Cancelled",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
+
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Image posted to leaderboard!",
+          text: "Check out the leaderboard to see your post",
+          icon: "success",
+        });
+      }
+      return false;
+    })
+    .catch((error) => {
+      // Ensure upload flag is cleared even on errors
+      isUploading = false;
+      console.error("Upload dialog error:", error);
     });
 }
 
@@ -901,5 +901,3 @@ function getPixel(imageData, x, y) {
     imageData.data[index + 3],
   ];
 }
-
-
