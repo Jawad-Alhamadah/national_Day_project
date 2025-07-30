@@ -2,7 +2,7 @@
 
 Pure JavaScript application created to celebrate Saudi Arabia's National Day.
 
-![leaderboard](./resources/readme_6.png)
+![main_image](./resources/readme_6.png)
 
 # Overview
 
@@ -10,7 +10,7 @@ It's a picture-matching game with a twist: you have to draw the image you see as
 
 ## Modes
 
-![leaderboard](./resources/readme_4.png)
+![Modes](./resources/readme_4.png)
 
 You can pick the mode you’d like to compete in.
 
