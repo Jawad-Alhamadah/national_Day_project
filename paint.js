@@ -901,3 +901,11 @@ function getPixel(imageData, x, y) {
     imageData.data[index + 3],
   ];
 }
+
+// Add touchend handler for mobile submit
+submit_nav_button.addEventListener("touchend", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  if (isUploading) return false;
+  submit_nav_button.click(); // Triggers the click handler logic
+});
